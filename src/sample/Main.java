@@ -6,34 +6,32 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import static DataBase.SQLiteJDBCDriverConnection.connect;
-import static DataBase.createDatabase.createNewDatabase;
-import static DataBase.createDatabase.isDatabaseExist;
-
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/RegisterForm.fxml"));
+        primaryStage.setTitle("Vacation4You");
+        Scene scene=new Scene(root,350,300);
+        scene.getStylesheets().add(getClass().getResource("../View/RegisterStyle.css").toExternalForm());
+        primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
-
+/*
         if (!isDatabaseExist("Vacation4You-DB.db")) {
             createNewDatabase("Vacation4You-DB.db");
             System.out.println("[+] Database created");
         }
         else
             System.out.println("[+] Database already exist");
-
-
         connect();
-        //launch(args);
+        */
+        launch(args);
     }
 
 //
