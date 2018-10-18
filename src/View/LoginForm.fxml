@@ -25,7 +25,7 @@
             <Hyperlink fx:id="Registerlink" accessibleHelp="לחץ כדי להירשם" accessibleRole="BUTTON" layoutX="231.0" layoutY="155.0" text="הירשם" />
             <Label layoutX="283.0" layoutY="158.0" text="לא רשום עדיין" />
             <Label fx:id="erorm" layoutX="127.0" layoutY="105.0" text="*נא להכניס שדות חוקיים" textFill="#f20000" visible="false" AnchorPane.rightAnchor="160.0" />
-            <Label fx:id="erorm2" layoutX="20.0" layoutY="105.0" prefHeight="18.0" prefWidth="240.0" text="*שם משתמש או סיסמא לא נכונים" textFill="#fd0505" visible="false" AnchorPane.rightAnchor="120.0" />
+            <Label fx:id="erorm2" layoutX="20.0" layoutY="105.0" prefHeight="18.0" prefWidth="189.0" text="*שם משתמש או סיסמא לא נכונים" textFill="#fd0505" visible="false" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="80.0" />
          </children>
       </AnchorPane>
    </children>

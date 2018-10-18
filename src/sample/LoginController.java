@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 
 import java.security.PublicKey;
 
+import static Model.Query.search;
+
 
 public class LoginController {
    public Button LoginButton;
@@ -17,15 +19,25 @@ public class LoginController {
    public void Loginclicked(){
        User user =new User();
        System.out.println("Login clicked");
-       if (isFilednotempty(Usernamefield.getText(),Passwordfield.getText()))
-           System.out.println("search");
-           // user=search(Usernamefield.getText());
-           else
+       if (isFilednotempty(Usernamefield.getText(),Passwordfield.getText())) {
+           user = search(Usernamefield.getText());
+           if(user!=null) {
+               if (user.getPassword().equals(Passwordfield.getText()))
+                   System.out.println("user found");
+               else
+               {
+                   erorm.setVisible(false);
+                   erorm2.setVisible(true);
+               }
+           }
+
+       }
+       else
            erorm.setVisible(true);
-        if (user.getUserName()==null) {
-            erorm.setVisible(false);
-            erorm2.setVisible(true);
-        }
+
+
+
+
    }
 
 

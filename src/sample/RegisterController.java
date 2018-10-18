@@ -1,5 +1,6 @@
 package sample;
 
+import Model.Query;
 import Model.User;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
@@ -16,8 +17,17 @@ public class RegisterController {
     public TextField username;
     public TextField birthdate;
     public ChoiceBox city;
-
+    public CheckBox agreeSign;
     public Button sign;
+    public Label erorterms;
+    public Label erordate;
+    public Label erorcity;
+    public Label erormail;
+    public Label erorpass;
+    public Label erorusername;
+    public Label erorname;
+    public Label erorlastname;
+
 
     // regular expression for mail valid
 
@@ -52,23 +62,63 @@ public class RegisterController {
     private static boolean validatecity(String text) {
         return !text.equals("בחר");
     }
-    public void signclicked(){
-        User user =new User();
-        user.setUserName(username.getText());
-        if (validateMail(email.getText()))
-            user.setEmail(email.getText());
-        if (validateName(firstname.getText()))
-            user.setFirstName(firstname.getText());
-        if(validateName(lastname.getText()))
-            user.setLastName(lastname.getText());
-        if (validatePassword(password.getText()))
-            user.setPassword(password.getText());
-        if (validateDate(birthdate.getText()))
-            user.setBirthDate(birthdate.getText());
-        if (validatecity(city.getValue().toString()))
-            user.setCity(city.getValue().toString());
 
-        user.print();
+
+    public void signclicked() {
+        User user = new User();
+        if (!username.getText().isEmpty()) {
+            user.setUserName(username.getText());
+            erorusername.setVisible(false);
+        }
+        else
+            erorusername.setVisible(true);
+        if (validateMail(email.getText())) {
+            user.setEmail(email.getText());
+            erormail.setVisible(false);
+        }
+        else
+            erormail.setVisible(true);
+
+        if (validateName(firstname.getText())) {
+            user.setFirstName(firstname.getText());
+            erorname.setVisible(false);
+        }
+        else
+            erorname.setVisible(true);
+        if (validateName(lastname.getText())) {
+            user.setLastName(lastname.getText());
+            erorlastname.setVisible(false);
+        }
+        else
+            erorlastname.setVisible(true);
+        if (validatePassword(password.getText())) {
+            user.setPassword(password.getText());
+            erorpass.setVisible(true);
+        }
+            else
+            erorpass.setVisible(true);
+        if (validateDate(birthdate.getText())) {
+            user.setBirthDate(birthdate.getText());
+            erordate.setVisible(false);
+        }
+        else
+            erordate.setVisible(true);
+        if (validatecity(city.getValue().toString())) {
+            user.setCity(city.getValue().toString());
+            erorcity.setVisible(false);
+        }
+        else
+            erorcity.setVisible(true);
+        //user.print();
+        if ((user.getUserName() != null && user.getBirthDate() != null && user.getCity() != null && user.getEmail() != null && user.getFirstName() != null && user.getLastName() != null && user.getPassword() != null))
+        {
+            if(agreeSign.isSelected())
+                 Query.insert((user));
+            else
+                erorterms.setVisible(true);
+        }
+
+        System.out.println("next stage");
 
     }
 

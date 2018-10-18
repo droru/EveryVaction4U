@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
         primaryStage.setTitle("Vacation4You");
-        Scene scene=new Scene(root,400,300);
+        Scene scene=new Scene(root,500,450);
         scene.getStylesheets().add(getClass().getResource("../View/Loginstyle.css").toExternalForm());
         primaryStage.setScene(scene);
 
