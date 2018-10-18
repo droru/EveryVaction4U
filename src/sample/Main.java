@@ -11,10 +11,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/RegisterForm.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
         primaryStage.setTitle("Vacation4You");
-        Scene scene=new Scene(root,350,300);
-        scene.getStylesheets().add(getClass().getResource("../View/RegisterStyle.css").toExternalForm());
+        Scene scene=new Scene(root,400,300);
+        scene.getStylesheets().add(getClass().getResource("../View/Loginstyle.css").toExternalForm());
         primaryStage.setScene(scene);
 
         primaryStage.show();

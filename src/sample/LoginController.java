@@ -1,8 +1,10 @@
 package sample;
-
+import Model.Query;
+import Model.User;
 import javafx.scene.control.*;
 
 import java.security.PublicKey;
+
 
 public class LoginController {
    public Button LoginButton;
@@ -13,22 +15,25 @@ public class LoginController {
     public Label erorm2;
 
    public void Loginclicked(){
+       User user =new User();
        System.out.println("Login clicked");
        if (isFilednotempty(Usernamefield.getText(),Passwordfield.getText()))
-           System.out.println(Usernamefield.getText()+" " +Passwordfield.getText() +" Login");
+           System.out.println("search");
+           // user=search(Usernamefield.getText());
            else
-           erorm2.setVisible(true);
-
-
+           erorm.setVisible(true);
+        if (user.getUserName()==null) {
+            erorm.setVisible(false);
+            erorm2.setVisible(true);
+        }
    }
+
 
 public void openregister(){
     System.out.println("new user");
 }
    private boolean isFilednotempty(String user,String Pass){
-      if(user.isEmpty()||Pass.isEmpty())
-            return false;
-      return true;
+       return !user.isEmpty() && !Pass.isEmpty();
    }
 
 

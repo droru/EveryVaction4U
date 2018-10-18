@@ -17,15 +17,15 @@
       </AnchorPane>
       <AnchorPane prefHeight="194.0" prefWidth="448.0">
          <children>
-            <Label layoutX="245.0" layoutY="39.0" text="שם משתמש" />
-            <Label layoutX="259.0" layoutY="75.0" text="סיסמא" />
-            <PasswordField fx:id="Passwordfield" layoutX="75.0" layoutY="71.0" />
-            <TextField fx:id="Usernamefield" layoutX="75.0" layoutY="35.0" />
-            <Button fx:id="LoginButton" layoutX="166.0" layoutY="134.0" mnemonicParsing="false" onMousePressed="#Loginclicked" text="כניסה" />
-            <Hyperlink fx:id="Registerlink" accessibleHelp="לחץ כדי להירשם" accessibleRole="BUTTON" layoutX="28.0" layoutY="135.0" text="הירשם" />
-            <Label layoutX="77.0" layoutY="138.0" text="לא רשום עדיין" />
-            <Label fx:id="erorm" layoutX="127.0" layoutY="105.0" text="*נא להכניס שדות חוקיים" textFill="#f20000" visible="false" />
-            <Label fx:id="erorm2" layoutX="20.0" layoutY="105.0" prefHeight="18.0" prefWidth="240.0" text="*שם משתמש או סיסמא לא נכונים" textFill="#fd0505" visible="false" />
+            <Label layoutX="253.0" layoutY="14.0" text="שם משתמש" />
+            <Label layoutX="284.0" layoutY="48.0" text="סיסמא" />
+            <PasswordField fx:id="Passwordfield" layoutX="75.0" layoutY="44.0" />
+            <TextField fx:id="Usernamefield" layoutX="75.0" layoutY="10.0" />
+            <Button fx:id="LoginButton" layoutX="75.0" layoutY="84.0" mnemonicParsing="false" onMousePressed="#Loginclicked" text="כניסה" />
+            <Hyperlink fx:id="Registerlink" accessibleHelp="לחץ כדי להירשם" accessibleRole="BUTTON" layoutX="231.0" layoutY="155.0" text="הירשם" />
+            <Label layoutX="283.0" layoutY="158.0" text="לא רשום עדיין" />
+            <Label fx:id="erorm" layoutX="127.0" layoutY="105.0" text="*נא להכניס שדות חוקיים" textFill="#f20000" visible="false" AnchorPane.rightAnchor="160.0" />
+            <Label fx:id="erorm2" layoutX="20.0" layoutY="105.0" prefHeight="18.0" prefWidth="240.0" text="*שם משתמש או סיסמא לא נכונים" textFill="#fd0505" visible="false" AnchorPane.rightAnchor="120.0" />
          </children>
       </AnchorPane>
    </children>
