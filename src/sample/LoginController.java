@@ -2,6 +2,7 @@ package sample;
 import Model.Query;
 import Model.User;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.security.PublicKey;
 
@@ -35,15 +36,12 @@ public class LoginController {
        else
            erorm.setVisible(true);
 
-
-
-
    }
 
 
 public void openregister(){
-    System.out.println("new user");
-}
+    System.out.println("here");
+   }
    private boolean isFilednotempty(String user,String Pass){
        return !user.isEmpty() && !Pass.isEmpty();
    }
