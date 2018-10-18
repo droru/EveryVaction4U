@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Vacation4You-DB [2]" uuid="1e4a5259-81d3-4120-a136-d77045863332">
+    <data-source source="LOCAL" name="Vacation4You-DB" uuid="edb63175-faf2-43ee-a9b6-fa7961b2880a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\alina\IdeaProjects\Vacation4You\src\DataBase\Vacation4You-DB</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Dror\IdeaProjects\Vacation4Yous\src\DataBase\Vacation4You-DB.db</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>
@@ -15,9 +15,6 @@
         </library>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/sqlite-jdbc-3.25.1.jar</url>
-        </library>
-        <library>
-          <url>file://$PROJECT_DIR$/sqlite-jdbc-3.23.1.jar</url>
         </library>
       </libraries>
     </data-source>

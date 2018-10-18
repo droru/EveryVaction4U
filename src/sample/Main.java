@@ -11,27 +11,29 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../View/MainScreen.fxml"));
-        primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(root, 1000, 500);
-        scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
+        Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
+        primaryStage.setTitle("Vacation4You");
+        Scene scene=new Scene(root,400,300);
+        scene.getStylesheets().add(getClass().getResource("../View/Loginstyle.css").toExternalForm());
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
 /*
-        if (!isDatabaseExist("Vacation4You-DB")) {
-            createNewDatabase("Vacation4You-DB");
+        if (!isDatabaseExist("Vacation4You-DB.db")) {
+            createNewDatabase("Vacation4You-DB.db");
             System.out.println("[+] Database created");
         }
         else
             System.out.println("[+] Database already exist");
-
-
         connect();
-  */
+        */
         launch(args);
     }
+
+//
+
 }

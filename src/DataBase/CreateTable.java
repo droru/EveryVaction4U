@@ -20,7 +20,7 @@ public class CreateTable {
                 + "     FirstName text NOT NULL ,\n"
                 + "	    LastName text NOT NULL,\n"
                 + " 	Password text NOT NULL,\n"
-                + " 	BirthDate DATE,\n"
+                + " 	BirthDate text,\n"
                 + " 	City text NOT NULL\n"
                 + ");";
 
