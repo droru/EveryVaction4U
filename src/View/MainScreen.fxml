@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.layout.HBox?>
-
-<?import javafx.scene.Group?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainScreenController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -27,7 +27,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-       <Hyperlink visible="true" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="150" maxWidth="150" text="התחבר/הרשם" alignment="CENTER_RIGHT">
+       <Hyperlink alignment="CENTER_RIGHT" maxWidth="150" prefWidth="150" text="התחבר/הרשם" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#loginClicked">
            <VBox.margin>
                <Insets>
                    <bottom>15</bottom>
@@ -37,9 +37,9 @@
                </Insets>
            </VBox.margin>
        </Hyperlink>
-      <VBox visible="false" alignment="TOP_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="150" maxWidth="150">
+      <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
          <children>
-             <Hyperlink maxWidth="150" text="איזור אישי"  alignment="TOP_RIGHT">
+             <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" text="אזור אישי" onAction="#seeProfileClicked">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>
@@ -48,7 +48,7 @@
                      </Insets>
                  </VBox.margin>
              </Hyperlink>
-            <TextField prefWidth="100" maxWidth="150" alignment="CENTER_RIGHT" text="חפש משתמש...">
+            <TextField alignment="CENTER_RIGHT" maxWidth="150" prefWidth="100" promptText="חפש משתמש..." onKeyPressed="#userSearchPresses">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>
@@ -64,7 +64,7 @@
            <children>
                <VBox fx:id="searchBox">
                    <children>
-                       <TextField fx:id="txt_searchDestination" text="הקלד יעד לחיפוש..." onMouseClicked="#destinationSearchIn" onMouseExited="#destinationSearchOut">
+                       <TextField fx:id="txt_searchDestination" promptText="הקלד יעד לחיפוש..." onKeyPressed="#destinationSearchPressed">
                            <VBox.margin>
                                <Insets>
                                    <top>5</top>
@@ -74,7 +74,7 @@
                                </Insets>
                            </VBox.margin>
                        </TextField>
-                       <CheckBox fx:id="advanceSearchCheckbox" text="הצג אפשרויות לחיפוש מתקדם" onAction="#advanceSearchChacked">
+                       <CheckBox fx:id="advanceSearchCheckbox" onAction="#advanceSearchChacked" text="הצג אפשרויות לחיפוש מתקדם">
                            <VBox.margin>
                                <Insets>
                                    <top>5</top>
@@ -84,8 +84,8 @@
                                </Insets>
                            </VBox.margin>
                        </CheckBox>
-                       <HBox alignment="CENTER_LEFT" visible="false" managed="false" fx:id="advancedSearchBox">
-                           <CheckBox text="מהזול ליקר">
+                       <HBox fx:id="advancedSearchBox" alignment="CENTER_LEFT" managed="false" visible="false">
+                           <RadioButton text="מהזול ליקר">
                                <HBox.margin>
                                    <Insets>
                                        <top>5</top>
@@ -94,8 +94,11 @@
                                        <right>5</right>
                                    </Insets>
                                </HBox.margin>
-                           </CheckBox>
-                           <CheckBox text="הכי חם">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="advancedSearch" />
+                        </toggleGroup>
+                           </RadioButton>
+                           <RadioButton text="הכי חם" toggleGroup="$advancedSearch">
                                <HBox.margin>
                                    <Insets>
                                        <top>5</top>
@@ -104,8 +107,8 @@
                                        <right>5</right>
                                    </Insets>
                                </HBox.margin>
-                           </CheckBox>
-                           <CheckBox text="הכי קרובות">
+                           </RadioButton>
+                           <RadioButton text="הכי קרובות" toggleGroup="$advancedSearch">
                                <HBox.margin>
                                    <Insets>
                                        <top>5</top>
@@ -114,10 +117,10 @@
                                        <right>5</right>
                                    </Insets>
                                </HBox.margin>
-                           </CheckBox>
+                           </RadioButton>
                        </HBox>
                    </children>
-                   <VBox.margin><Insets right="20" left="5" top="5" bottom="5"/></VBox.margin>
+                   <VBox.margin><Insets bottom="5" left="5" right="20" top="5" /></VBox.margin>
                </VBox>
                 <TableView nodeOrientation="RIGHT_TO_LEFT">
                   <columns>
@@ -140,7 +143,7 @@
        </VBox>
 
        <!--hot flights-->
-       <Label fx:id="lbl_hotFlights" alignment="TOP_CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" text="5 הטיסות הכי חמות" prefWidth="200" maxWidth="200">
+       <Label fx:id="lbl_hotFlights" alignment="TOP_CENTER" maxWidth="200" prefWidth="200" text="5 הטיסות הכי חמות" GridPane.columnIndex="0" GridPane.rowIndex="0">
            <VBox.margin>
                <Insets>
                    <top>5</top>
@@ -150,8 +153,8 @@
                </Insets>
            </VBox.margin>
        </Label>
-       <VBox alignment="TOP_CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="200" maxWidth="200">
-           <TextArea fx:id="textArea_firstFlight" prefWidth="100.0" minHeight="80" text="1">
+       <VBox alignment="TOP_CENTER" maxWidth="200" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1">
+           <TextArea fx:id="textArea_firstFlight" minHeight="80" prefWidth="100.0" text="1" editable="false">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -161,7 +164,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_secondFlight" prefWidth="100.0" minHeight="80" text="2">
+           <TextArea fx:id="textArea_secondFlight" minHeight="80" prefWidth="100.0" text="2" editable="false">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -171,7 +174,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_thirdFlight" prefWidth="100.0" minHeight="80" text="3">
+           <TextArea fx:id="textArea_thirdFlight" minHeight="80" prefWidth="100.0" text="3" editable="false">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -181,7 +184,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_fourthFlight" prefWidth="100.0" minHeight="80" text="4">
+           <TextArea fx:id="textArea_fourthFlight" minHeight="80" prefWidth="100.0" text="4" editable="false">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -191,7 +194,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_fifthFlight" prefWidth="100.0" minHeight="80" text="5">
+           <TextArea fx:id="textArea_fifthFlight" minHeight="80" prefWidth="100.0" text="5" editable="false">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>

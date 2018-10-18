@@ -1,11 +1,11 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
 
@@ -22,36 +22,28 @@ public class MainScreenController {
     public TextArea textArea_fourthFlight;
     public TextArea textArea_fifthFlight;
 
-    public void activateEvents(){
-        System.out.println("hi");
-        /*txt_searchDestination.focusedProperty().addListener(new ChangeListener<Boolean>()
-        {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
-            {
-                if (newPropertyValue)
-                {
-                    txt_searchDestination.setText("");
-                }
-                else
-                {
-                    txt_searchDestination.setText("הקלד יעד לחיפוש...");
-                }
-            }
-        });*/
-    }
-
-    public void destinationSearchIn(){
-//        txt_searchDestination.setText("");
-    }
-    public void destinationSearchOut(){
-//        txt_searchDestination.setText("הקלד יעד לחיפוש...");
-    }
     public void advanceSearchChacked(){
         if(advanceSearchCheckbox.isSelected())
             advancedSearchBox.setVisible(true);
         else
             advancedSearchBox.setVisible(false);
         advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
+    }
+
+    public void loginClicked(){
+        System.out.println("login");
+    }
+    public void seeProfileClicked(){
+        System.out.println("profile");
+    }
+    public void destinationSearchPressed(KeyEvent keyEvent){
+        if (keyEvent.getCode().equals(KeyCode.ENTER))
+        {
+        }
+    }
+    public void userSearchPresses(KeyEvent keyEvent){
+        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+
+        }
     }
 }
