@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class CreateTable {
     public static void createNewTables() {
         // SQLite connection string
-        String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB.db";
+        String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
 
         // SQL statement for creating a new table
 

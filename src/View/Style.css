@@ -1,0 +1,17 @@
+.root{
+    -fx-background-color: #C9C9FF;
+    -fx-end-margin: 50;
+}
+Hyperlink{
+    -fx-underline: true;
+    -fx-text-fill: black;
+    -fx-border-width: 0;
+}
+#lbl_hotFlights{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
+#searchBox{
+    -fx-border-color: gray;
+}

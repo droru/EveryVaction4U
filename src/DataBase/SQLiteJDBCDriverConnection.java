@@ -10,7 +10,7 @@ public class SQLiteJDBCDriverConnection {
         Connection conn = null;
         try {
             // db parameters
-            String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB.db";
+            String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 

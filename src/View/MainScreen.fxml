@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.Group?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainScreenController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+       <Hyperlink visible="true" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="150" maxWidth="150" text="התחבר/הרשם" alignment="CENTER_RIGHT">
+           <VBox.margin>
+               <Insets>
+                   <bottom>15</bottom>
+                   <right>5</right>
+                   <left>20</left>
+                   <top>5</top>
+               </Insets>
+           </VBox.margin>
+       </Hyperlink>
+      <VBox visible="false" alignment="TOP_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="0" prefWidth="150" maxWidth="150">
+         <children>
+             <Hyperlink maxWidth="150" text="איזור אישי"  alignment="TOP_RIGHT">
+                 <VBox.margin>
+                     <Insets>
+                         <bottom>5</bottom>
+                         <right>5</right>
+                         <left>20</left>
+                     </Insets>
+                 </VBox.margin>
+             </Hyperlink>
+            <TextField prefWidth="100" maxWidth="150" alignment="CENTER_RIGHT" text="חפש משתמש...">
+                 <VBox.margin>
+                     <Insets>
+                         <bottom>5</bottom>
+                         <right>5</right>
+                         <left>20</left>
+                     </Insets>
+                 </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+
+       <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+           <children>
+               <VBox fx:id="searchBox">
+                   <children>
+                       <TextField fx:id="txt_searchDestination" text="הקלד יעד לחיפוש..." onMouseClicked="#destinationSearchIn" onMouseExited="#destinationSearchOut">
+                           <VBox.margin>
+                               <Insets>
+                                   <top>5</top>
+                                   <bottom>5</bottom>
+                                   <right>5</right>
+                                   <left>5</left>
+                               </Insets>
+                           </VBox.margin>
+                       </TextField>
+                       <CheckBox fx:id="advanceSearchCheckbox" text="הצג אפשרויות לחיפוש מתקדם" onAction="#advanceSearchChacked">
+                           <VBox.margin>
+                               <Insets>
+                                   <top>5</top>
+                                   <bottom>5</bottom>
+                                   <left>5</left>
+                                   <right>5</right>
+                               </Insets>
+                           </VBox.margin>
+                       </CheckBox>
+                       <HBox alignment="CENTER_LEFT" visible="false" managed="false" fx:id="advancedSearchBox">
+                           <CheckBox text="מהזול ליקר">
+                               <HBox.margin>
+                                   <Insets>
+                                       <top>5</top>
+                                       <bottom>5</bottom>
+                                       <left>5</left>
+                                       <right>5</right>
+                                   </Insets>
+                               </HBox.margin>
+                           </CheckBox>
+                           <CheckBox text="הכי חם">
+                               <HBox.margin>
+                                   <Insets>
+                                       <top>5</top>
+                                       <bottom>5</bottom>
+                                       <left>5</left>
+                                       <right>5</right>
+                                   </Insets>
+                               </HBox.margin>
+                           </CheckBox>
+                           <CheckBox text="הכי קרובות">
+                               <HBox.margin>
+                                   <Insets>
+                                       <top>5</top>
+                                       <bottom>5</bottom>
+                                       <left>5</left>
+                                       <right>5</right>
+                                   </Insets>
+                               </HBox.margin>
+                           </CheckBox>
+                       </HBox>
+                   </children>
+                   <VBox.margin><Insets right="20" left="5" top="5" bottom="5"/></VBox.margin>
+               </VBox>
+                <TableView nodeOrientation="RIGHT_TO_LEFT">
+                  <columns>
+                    <TableColumn prefWidth="75.0" text="מספר טיסה" />
+                    <TableColumn prefWidth="75.0" text="יעד" />
+                    <TableColumn prefWidth="75.0" text="תאריך הלוך" />
+                    <TableColumn prefWidth="75.0" text="תאריך חזרה" />
+                    <TableColumn prefWidth="75.0" text="מוכר" />
+                  </columns>
+                    <VBox.margin>
+                        <Insets>
+                            <top>5</top>
+                            <bottom>5</bottom>
+                            <right>20</right>
+                            <left>5</left>
+                        </Insets>
+                    </VBox.margin>
+                </TableView>
+           </children>
+       </VBox>
+
+       <!--hot flights-->
+       <Label fx:id="lbl_hotFlights" alignment="TOP_CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" text="5 הטיסות הכי חמות" prefWidth="200" maxWidth="200">
+           <VBox.margin>
+               <Insets>
+                   <top>5</top>
+                   <bottom>5</bottom>
+                   <right>5</right>
+                   <left>5</left>
+               </Insets>
+           </VBox.margin>
+       </Label>
+       <VBox alignment="TOP_CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="200" maxWidth="200">
+           <TextArea fx:id="textArea_firstFlight" prefWidth="100.0" minHeight="80" text="1">
+               <VBox.margin>
+                   <Insets>
+                       <bottom>5</bottom>
+                       <right>5</right>
+                       <left>5</left>
+                       <top>5</top>
+                   </Insets>
+               </VBox.margin>
+           </TextArea>
+           <TextArea fx:id="textArea_secondFlight" prefWidth="100.0" minHeight="80" text="2">
+               <VBox.margin>
+                   <Insets>
+                       <bottom>5</bottom>
+                       <right>5</right>
+                       <left>5</left>
+                       <top>5</top>
+                   </Insets>
+               </VBox.margin>
+           </TextArea>
+           <TextArea fx:id="textArea_thirdFlight" prefWidth="100.0" minHeight="80" text="3">
+               <VBox.margin>
+                   <Insets>
+                       <bottom>5</bottom>
+                       <right>5</right>
+                       <left>5</left>
+                       <top>5</top>
+                   </Insets>
+               </VBox.margin>
+           </TextArea>
+           <TextArea fx:id="textArea_fourthFlight" prefWidth="100.0" minHeight="80" text="4">
+               <VBox.margin>
+                   <Insets>
+                       <bottom>5</bottom>
+                       <right>5</right>
+                       <left>5</left>
+                       <top>5</top>
+                   </Insets>
+               </VBox.margin>
+           </TextArea>
+           <TextArea fx:id="textArea_fifthFlight" prefWidth="100.0" minHeight="80" text="5">
+               <VBox.margin>
+                   <Insets>
+                       <bottom>5</bottom>
+                       <right>5</right>
+                       <left>5</left>
+                       <top>5</top>
+                   </Insets>
+               </VBox.margin>
+           </TextArea>
+       </VBox>
+
+   </children>
+</GridPane>
