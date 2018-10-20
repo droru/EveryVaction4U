@@ -2,7 +2,6 @@ package sample;
 
 import Model.Query;
 import Model.User;
-import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
