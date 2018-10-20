@@ -19,6 +19,7 @@ public class Main extends Application {
     private static Stage stage;
     private static Parent root;
     public static User user=new User();
+    public static User loggedUser;
     public static boolean editable=false ;
 
     @Override

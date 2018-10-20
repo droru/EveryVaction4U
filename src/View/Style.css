@@ -17,11 +17,6 @@ Hyperlink{
 Hyperlink:hover{
     -fx-font-weight: bold;
 }
-#lbl_hotFlights{
-    -fx-font-size: 18;
-    -fx-font-weight: bold;
-    -fx-text-fill: red;
-}
 #searchBox{
     -fx-border-color: gray;
 }

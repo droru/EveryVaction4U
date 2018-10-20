@@ -216,11 +216,9 @@
     <ImageView fx:id="img_profile" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true"
                GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.rowSpan="5" GridPane.valignment="TOP">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
-        <image>
-          <Image url="@Mickey.png"/>
-        </image>
+        <Image url="@Mickey.png"/>
     </ImageView>
     <HBox alignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="7">
         <Button fx:id="deleteButton" onAction="#deleteClicked" prefWidth="100" text="מחק">

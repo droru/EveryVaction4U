@@ -76,7 +76,7 @@ public class UserDetailsScreenController {
     }
 
     public void deleteClicked(){}
-    public void updateClicked() throws InterruptedException {
+    public void updateClicked() {
         if (validateMail(lbl_email.getText())) {
             Main.user.setEmail(lbl_email.getText());
             erormail.setVisible(false);

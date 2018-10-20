@@ -23,7 +23,8 @@ public class LoginController {
                if (user.getPassword().equals(Passwordfield.getText()))
                {
                    System.out.println("user found");
-                   Main.switchScene("../View/MainScreen.fxml", (Stage) LoginButton.getScene().getWindow(), 720,500);
+                   Main.loggedUser = user;
+                   Main.switchScene("../View/MainScreen.fxml", (Stage) LoginButton.getScene().getWindow(), 1000,500);
 
                }
                else

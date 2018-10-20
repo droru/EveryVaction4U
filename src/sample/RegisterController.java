@@ -125,7 +125,7 @@ public class RegisterController {
 
     }
 
-   private void regmsg() throws InterruptedException {
+   private void regmsg() {
         Alert alert=new Alert(Alert.AlertType.NONE);
         alert.setContentText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
         alert.showAndWait();
