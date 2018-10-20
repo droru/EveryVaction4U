@@ -37,7 +37,7 @@
                </Insets>
            </VBox.margin>
        </Hyperlink>
-      <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
+      <VBox visible="false" alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
          <children>
              <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" onAction="#seeProfileClicked" text="אזור אישי" visible="false">
                  <VBox.margin>

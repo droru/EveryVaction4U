@@ -33,9 +33,9 @@ public class Main extends Application {
 
             primaryStage.setTitle("Vacation4You");
             fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("../View/LoginForm.fxml").openStream());
-            Scene scene = new Scene(root, 750, 600);
-            scene.getStylesheets().add(getClass().getResource("../View/style.css").toExternalForm());
+            root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
+            Scene scene = new Scene(root, 1000, 500);
+            scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
             primaryStage.setScene(scene);
             //SetStageCloseEvent(primaryStage);
             stage = primaryStage;
