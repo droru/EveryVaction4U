@@ -27,7 +27,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-       <Hyperlink alignment="CENTER_RIGHT" maxWidth="150" prefWidth="150" text="התחבר/הרשם" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="0" onAction="#loginClicked">
+       <Hyperlink fx:id="LoginRegister" accessibleRole="BUTTON" alignment="CENTER_RIGHT" maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
            <VBox.margin>
                <Insets>
                    <bottom>15</bottom>
@@ -39,7 +39,7 @@
        </Hyperlink>
       <VBox alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
          <children>
-             <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" text="אזור אישי" onAction="#seeProfileClicked">
+             <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" onAction="#seeProfileClicked" text="אזור אישי" visible="false">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>
@@ -48,7 +48,7 @@
                      </Insets>
                  </VBox.margin>
              </Hyperlink>
-            <TextField alignment="CENTER_RIGHT" maxWidth="150" prefWidth="100" promptText="חפש משתמש..." onKeyPressed="#userSearchPresses">
+            <TextField alignment="CENTER_RIGHT" maxWidth="150" onKeyPressed="#userSearchPresses" prefWidth="100" promptText="חפש משתמש...">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>
@@ -64,7 +64,7 @@
            <children>
                <VBox fx:id="searchBox">
                    <children>
-                       <TextField fx:id="txt_searchDestination" promptText="הקלד יעד לחיפוש..." onKeyPressed="#destinationSearchPressed">
+                       <TextField fx:id="txt_searchDestination" onKeyPressed="#destinationSearchPressed" promptText="הקלד יעד לחיפוש...">
                            <VBox.margin>
                                <Insets>
                                    <top>5</top>
@@ -154,7 +154,7 @@
            </VBox.margin>
        </Label>
        <VBox alignment="TOP_CENTER" maxWidth="200" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1">
-           <TextArea fx:id="textArea_firstFlight" minHeight="80" prefWidth="100.0" text="1" editable="false">
+           <TextArea fx:id="textArea_firstFlight" editable="false" minHeight="80" prefWidth="100.0" text="1">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -164,7 +164,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_secondFlight" minHeight="80" prefWidth="100.0" text="2" editable="false">
+           <TextArea fx:id="textArea_secondFlight" editable="false" minHeight="80" prefWidth="100.0" text="2">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -174,7 +174,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_thirdFlight" minHeight="80" prefWidth="100.0" text="3" editable="false">
+           <TextArea fx:id="textArea_thirdFlight" editable="false" minHeight="80" prefWidth="100.0" text="3">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -184,7 +184,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_fourthFlight" minHeight="80" prefWidth="100.0" text="4" editable="false">
+           <TextArea fx:id="textArea_fourthFlight" editable="false" minHeight="80" prefWidth="100.0" text="4">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>
@@ -194,7 +194,7 @@
                    </Insets>
                </VBox.margin>
            </TextArea>
-           <TextArea fx:id="textArea_fifthFlight" minHeight="80" prefWidth="100.0" text="5" editable="false">
+           <TextArea fx:id="textArea_fifthFlight" editable="false" minHeight="80" prefWidth="100.0" text="5">
                <VBox.margin>
                    <Insets>
                        <bottom>5</bottom>

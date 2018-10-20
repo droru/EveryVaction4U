@@ -2,8 +2,10 @@ package sample;
 
 import Model.Query;
 import Model.User;
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,7 +66,7 @@ public class RegisterController {
     }
 
 
-    public void signclicked() {
+    public void signclicked() throws InterruptedException {
         User user = new User();
         if (!username.getText().isEmpty()) {
             user.setUserName(username.getText());
@@ -93,7 +95,7 @@ public class RegisterController {
             erorlastname.setVisible(true);
         if (validatePassword(password.getText())) {
             user.setPassword(password.getText());
-            erorpass.setVisible(true);
+            erorpass.setVisible(false);
         }
             else
             erorpass.setVisible(true);
@@ -112,15 +114,23 @@ public class RegisterController {
         //user.print();
         if ((user.getUserName() != null && user.getBirthDate() != null && user.getCity() != null && user.getEmail() != null && user.getFirstName() != null && user.getLastName() != null && user.getPassword() != null))
         {
-            if(agreeSign.isSelected())
-                 Query.insert((user));
+            if(agreeSign.isSelected()) {
+                Query.insert((user));
+                regmsg();
+                Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 720, 500);
+            }
             else
                 erorterms.setVisible(true);
         }
 
-        System.out.println("next stage");
 
     }
 
+   private void regmsg() throws InterruptedException {
+        Alert alert=new Alert(Alert.AlertType.NONE);
+        alert.setContentText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
+        alert.showAndWait();
+
+    }
 
 }

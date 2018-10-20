@@ -2,11 +2,13 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 
 public class MainScreenController {
@@ -15,7 +17,7 @@ public class MainScreenController {
     public TextField txt_searchDestination;
     public HBox advancedSearchBox;
     public CheckBox advanceSearchCheckbox;
-
+    public Hyperlink LoginRegister;
     public TextArea textArea_firstFlight;
     public TextArea textArea_secondFlight;
     public TextArea textArea_thirdFlight;
@@ -31,7 +33,7 @@ public class MainScreenController {
     }
 
     public void loginClicked(){
-        System.out.println("login");
+        Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginRegister.getScene().getWindow(), 720,500);
     }
     public void seeProfileClicked(){
         System.out.println("profile");

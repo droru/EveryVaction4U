@@ -10,9 +10,9 @@ import static Model.Query.search;
 
 
 public class LoginController {
-   public Button LoginButton;
-   public TextField Usernamefield;
-   public PasswordField Passwordfield;
+    public Button LoginButton;
+    public TextField Usernamefield;
+    public PasswordField Passwordfield;
     public Hyperlink Registerlink;
     public Label erorm;
     public Label erorm2;
@@ -24,7 +24,11 @@ public class LoginController {
            user = search(Usernamefield.getText());
            if(user!=null) {
                if (user.getPassword().equals(Passwordfield.getText()))
+               {
                    System.out.println("user found");
+                   Main.switchScene("../View/MainScreen.fxml", (Stage) LoginButton.getScene().getWindow(), 720,500);
+
+               }
                else
                {
                    erorm.setVisible(false);
@@ -40,7 +44,7 @@ public class LoginController {
 
 
 public void openregister(){
-    System.out.println("here");
+    Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginButton.getScene().getWindow(), 720,500);
    }
    private boolean isFilednotempty(String user,String Pass){
        return !user.isEmpty() && !Pass.isEmpty();
