@@ -34,7 +34,7 @@ public class Main extends Application {
 
             primaryStage.setTitle("Vacation4You");
             fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("../View/LoginForm.fxml").openStream());
+            root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
             //Scene scene = new Scene(root, 400, 300);//login form
             Scene scene = new Scene(root, 1000, 500);//main screen
             scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
@@ -73,6 +73,9 @@ public class Main extends Application {
                     break;
                 case "../View/RegisterForm.fxml":
                     stage.setResizable(true);
+                    break;
+                case "../View/UserDetailsScreen.fxml":
+                    stage.setResizable(false);
                     break;
             }
 

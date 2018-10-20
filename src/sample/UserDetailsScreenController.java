@@ -37,16 +37,14 @@ public class UserDetailsScreenController {
             lbl_lastName.setText(Main.user.getLastName());
             lbl_birthDate.setText(Main.user.getBirthDate());
             lbl_city.setText(Main.user.getCity());
-            lbl_email.setText(Main.user.getEmail());
+           lbl_email.setText(Main.user.getEmail());
             disableEdit();
             if (!Main.editable) {
-                title.setText("פרופיל משתמש");
-
-            }
-            else {
                 title.setText("אזור אישי");
                 makeEdit.setVisible(true);
-
+            }
+            else {
+                title.setText("פרופיל משתמש");
             }
     }
     public void disableEdit(){
@@ -113,6 +111,6 @@ public class UserDetailsScreenController {
     public void delUser(){
         delete(Main.user.getUserName());
         Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
-        
+
     }
 }

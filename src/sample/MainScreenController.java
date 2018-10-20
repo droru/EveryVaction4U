@@ -39,7 +39,9 @@ public class MainScreenController {
         Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginRegister.getScene().getWindow(), 720,500);
     }
     public void seeProfileClicked(){
-        System.out.println("profile");
+        Main.editable=false;
+        Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) LoginRegister.getScene().getWindow(), 720,500);
+
     }
     public void destinationSearchPressed(KeyEvent keyEvent){
         if (keyEvent.getCode().equals(KeyCode.ENTER))
