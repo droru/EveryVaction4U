@@ -81,6 +81,7 @@ public class User
         System.out.println(Password);
         System.out.println(BirthDate);
         System.out.println(City);
+        System.out.println(Email);
 
 
 

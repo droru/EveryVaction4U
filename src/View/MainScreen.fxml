@@ -27,7 +27,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-       <Hyperlink fx:id="LoginRegister" accessibleRole="BUTTON" alignment="CENTER_RIGHT" maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
+       <Hyperlink fx:id="LoginRegister" accessibleRole="BUTTON" alignment="CENTER_RIGHT" maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="0">
            <VBox.margin>
                <Insets>
                    <bottom>15</bottom>
@@ -37,9 +37,9 @@
                </Insets>
            </VBox.margin>
        </Hyperlink>
-      <VBox visible="false" alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
+      <VBox visible="true" alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
          <children>
-             <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" onAction="#seeProfileClicked" text="אזור אישי" visible="false">
+             <Hyperlink alignment="BASELINE_CENTER" maxWidth="150" onAction="#seeProfileClicked" text="אזור אישי" visible="true">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>
@@ -48,7 +48,7 @@
                      </Insets>
                  </VBox.margin>
              </Hyperlink>
-            <TextField alignment="CENTER_RIGHT" maxWidth="150" onKeyPressed="#userSearchPresses" prefWidth="100" promptText="חפש משתמש...">
+            <TextField fx:id="txt_searchUser" alignment="CENTER_RIGHT" maxWidth="150" onKeyPressed="#userSearchPresses" prefWidth="100" promptText="חפש משתמש...">
                  <VBox.margin>
                      <Insets>
                          <bottom>5</bottom>

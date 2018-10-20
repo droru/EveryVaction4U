@@ -5,6 +5,13 @@ import java.sql.*;
 
 public class Query
 {
+    private static String UserName;
+    private  static  String FirstName;
+    private  static String LastName;
+    private  static String Password;
+    private  static String BirthDate;
+    private  static String City;
+    private  static String Email;
 
     private static Connection connect()
     {
@@ -23,13 +30,7 @@ public class Query
 
     public static int insert(User user)
     {
-        String UserName=user.getUserName();
-        String FirstName=user.getFirstName();
-        String LastName=user.getLastName();
-        String Password=user.getPassword();
-        String BirthDate=user.getBirthDate();
-        String City=user.getCity();
-        String Email=user.getEmail();
+        InitUser(user);
 
         String sql = "INSERT INTO Users(UserName,FirstName,LastName,Password,BirthDate,City,Email) VALUES(?,?,?,?,?,?,?)";
         try (
@@ -51,10 +52,20 @@ public class Query
         }
     }
 
+    private static void InitUser(User user) {
+        UserName=user.getUserName();
+        FirstName=user.getFirstName();
+        LastName=user.getLastName();
+        Password=user.getPassword();
+        BirthDate=user.getBirthDate();
+        City=user.getCity();
+        Email=user.getEmail();
+    }
+
 
     public static  User search(String username)
     {
-        String sql = "SELECT UserName ,FirstName,LastName,Password,BirthDate,City,Email "
+        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
                 + "FROM Users WHERE UserName = ?";
 
         try (Connection conn = connect();
@@ -105,12 +116,14 @@ public class Query
 
     // return: 0 if the update succeed else 1 (One or more fields are not valid or the connection to db  doesn't succeed )
 
-public static int update(String userName_old , String userName_new ,String firstName,String lastName,String password,String birthDate,String city,String email) {
+public static int update(User user) {
     {
-        User user=new User(userName_new,firstName,lastName,password,birthDate,city,email);
-        if(search(userName_old)!= null && search(userName_new)== null )
+        InitUser(user);
+
+        // User user_new=new User(userName_new,firstName,lastName,password,birthDate,city,email);
+        if(search(UserName)!= null )
         {
-            delete(userName_old);
+            delete(UserName);
             insert(user);
             return 0;
         }

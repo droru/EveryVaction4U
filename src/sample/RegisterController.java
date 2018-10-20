@@ -33,35 +33,35 @@ public class RegisterController {
 
     // regular expression for mail valid
 
-    private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern VALID_USER_NAME_LAST_REGEX =
+    public static final Pattern VALID_USER_NAME_LAST_REGEX =
             Pattern.compile("(?<=\\s|^)[a-zA-Z][a-zA-Z]*(?=[.,;:]?\\s|$)",Pattern.UNICODE_CASE);
 
-    private static final Pattern VALID_Date =
+    public static final Pattern VALID_Date =
             Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9])?[0-9][0-9]$",Pattern.CASE_INSENSITIVE);
     public FlowPane Pane;
 
 
-    private static boolean validateDate(String emailStr) {
+    public static boolean validateDate(String emailStr) {
         Matcher matcher = VALID_Date .matcher(emailStr);
         return matcher.find();
     }
 
-    private static boolean validateMail(String emailStr) {
+    public static boolean validateMail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
         return matcher.find();
     }
 
-    private static boolean validateName(String value) {
+    public static boolean validateName(String value) {
         Matcher matcher = VALID_USER_NAME_LAST_REGEX .matcher(value);
         return matcher.find();
     }
-    private static boolean validatePassword(String text) {
+    public static boolean validatePassword(String text) {
         return text.length() > 3 && text.length() < 9 && !text.contains(" ");
     }
-    private static boolean validatecity(String text) {
+    public static boolean validatecity(String text) {
         return !text.equals("בחר");
     }
 

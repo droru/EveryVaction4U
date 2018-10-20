@@ -1,5 +1,6 @@
 package sample;
 
+import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,8 @@ public class Main extends Application {
     private static FXMLLoader fxmlLoader;
     private static Stage stage;
     private static Parent root;
-
-
+    public static User user=new User();
+    public static boolean editable=true ;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -77,6 +78,16 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void  setUser(User u){
+        user.setCity(u.getCity());
+        user.setBirthDate(u.getBirthDate());
+        user.setPassword(u.getPassword());
+        user.setLastName(u.getLastName());
+        user.setFirstName(u.getFirstName());
+        user.setUserName(u.getUserName());
+        user.setEmail(u.getEmail());
     }
 
 }

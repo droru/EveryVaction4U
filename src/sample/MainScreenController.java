@@ -1,5 +1,6 @@
 package sample;
 
+import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
@@ -9,6 +10,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import static Model.Query.search;
 
 
 public class MainScreenController {
@@ -44,8 +47,18 @@ public class MainScreenController {
         }
     }
     public void userSearchPresses(KeyEvent keyEvent){
+        User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER)){
+            userSerach=search(txt_searchUser.getText());
+            if (userSerach!=null) {
+                userSerach.print();
+                Main.setUser(userSerach);
+                Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) txt_searchUser.getScene().getWindow(), 720,500);
 
+            }
+            else
+                System.out.println("not found");
         }
     }
 }
+
