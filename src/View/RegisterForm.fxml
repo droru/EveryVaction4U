@@ -33,8 +33,8 @@
                   <RowConstraints maxHeight="45.599981689453124" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
               <children>
-                  <PasswordField fx:id="password" GridPane.rowIndex="2" />
                   <TextField fx:id="username" prefHeight="26.0" prefWidth="83.0" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="password" GridPane.rowIndex="2" />
                   <TextField fx:id="firstname" GridPane.rowIndex="3" />
                   <TextField fx:id="lastname" GridPane.rowIndex="4" />
                   <ChoiceBox fx:id="city" prefHeight="26.0" prefWidth="159.0" value="בחר" GridPane.rowIndex="6">
@@ -165,9 +165,7 @@
                       </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                      <children>
-                          <Label layoutX="44.0" layoutY="4.0" text="שם פרטי" />
-                      </children>
+                      <Label layoutX="44.0" layoutY="4.0" text="שם פרטי"/>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                       <Label layoutX="44.0" layoutY="4.0" text="שם משפחה" />
@@ -186,18 +184,17 @@
                   <TextField fx:id="birthdate" promptText="dd/mm/yyyy" GridPane.rowIndex="5" />
               </children>
           </GridPane>
-          <Label layoutX="321.0" layoutY="44.0" prefHeight="18.0" prefWidth="158.0" text="משתמש חדש" />
-          <Button fx:id="sign" layoutX="153.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#signclicked" text="הירשם" />
-         <CheckBox fx:id="agreeSign" layoutX="423.0" layoutY="293.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="10.0" />
-         <Label layoutX="265.0" layoutY="293.0" text="קראתי ואני מאשר את התנאים" />
-         <Label fx:id="erorterms" layoutX="321.0" layoutY="318.0" text="*נא אשר את התנאים" textFill="RED" visible="false" />
-         <Label fx:id="erormail" layoutX="136.0" layoutY="264.0" text="*הקלד מייל תקין" visible="false"/>
-         <Label fx:id="erorcity" layoutX="136.0" layoutY="237.0" text="*בחר עיר מגורים" visible="false" />
-         <Label fx:id="erordate" layoutX="14.0" layoutY="210.0" text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" visible="false" />
-         <Label fx:id="erorpass" layoutX="83.0" layoutY="130.0" text="*הקלד סיסמא בין 4-8 תווים" visible="false"  />
-         <Label fx:id="erorusername" layoutX="114.0" layoutY="106.0" text="*עליך למלא שדה זה " visible="false" />
-         <Label fx:id="erorname" layoutX="114.0" layoutY="154.0" text="*עליך למלא שדה זה " visible="false" />
-         <Label fx:id="erorlastname" layoutX="114.0" layoutY="181.0" text="*עליך למלא שדה זה " visible="false" />
+          <Label layoutX="321.0" layoutY="44.0" prefHeight="18.0" prefWidth="158.0" text="משתמש חדש" styleClass="title"/>
+          <Button fx:id="sign" layoutX="230.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#signclicked" text="הירשם" />
+         <CheckBox fx:id="agreeSign" layoutX="330.0" layoutY="292.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="קראתי ואני מאשר את התנאים" />
+         <Label fx:id="erorterms" layoutX="321.0" layoutY="318.0" styleClass="erorMes" text="*נא אשר את התנאים" textFill="RED" visible="false" />
+         <Label fx:id="erormail" layoutX="136.0" layoutY="264.0" styleClass="erorMes" text="*הקלד מייל תקין" visible="false" />
+         <Label fx:id="erorcity" layoutX="136.0" layoutY="237.0" styleClass="erorMes" text="*בחר עיר מגורים" visible="false" />
+         <Label fx:id="erordate" layoutX="14.0" layoutY="210.0" styleClass="erorMes" text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" visible="false" />
+         <Label fx:id="erorpass" layoutX="83.0" layoutY="130.0" styleClass="erorMes" text="*הקלד סיסמא בין 4-8 תווים" visible="false" />
+         <Label fx:id="erorusername" layoutX="114.0" layoutY="106.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
+         <Label fx:id="erorname" layoutX="114.0" layoutY="154.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
+         <Label fx:id="erorlastname" layoutX="114.0" layoutY="181.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
         </children>
     </AnchorPane>
 </FlowPane>

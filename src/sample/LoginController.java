@@ -1,10 +1,7 @@
 package sample;
-import Model.Query;
 import Model.User;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
-import java.security.PublicKey;
 
 import static Model.Query.search;
 
