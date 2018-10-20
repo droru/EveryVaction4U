@@ -19,7 +19,7 @@ public class Main extends Application {
     private static Stage stage;
     private static Parent root;
     public static User user=new User();
-    public static boolean editable=true ;
+    public static boolean editable=false ;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,7 +41,7 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             //SetStageCloseEvent(primaryStage);
             stage = primaryStage;
-            stage.setResizable(false);
+            //stage.setResizable(false);
             primaryStage.centerOnScreen();
             primaryStage.show();
 

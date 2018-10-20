@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import jdk.jfr.Enabled;
 
 import static Model.Query.delete;
 import static Model.Query.update;

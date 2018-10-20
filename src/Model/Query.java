@@ -119,8 +119,6 @@ public class Query
 public static int update(User user) {
     {
         InitUser(user);
-
-        // User user_new=new User(userName_new,firstName,lastName,password,birthDate,city,email);
         if(search(UserName)!= null )
         {
             delete(UserName);
