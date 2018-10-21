@@ -36,13 +36,6 @@ public class Main extends Application {
         primaryStage.show();
          */
 
-
-
-
-
-
-
-
             primaryStage.setTitle("Vacation4You");
             fxmlLoader = new FXMLLoader();
             root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());

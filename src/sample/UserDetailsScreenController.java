@@ -103,7 +103,7 @@ public class UserDetailsScreenController {
         lbl_lastName.setVisible(true);
         lbl_birthDate.setVisible(true);
         lbl_city.setVisible(true);
-        lbl_email.setVisible(true);
+        lbl_email.setVisible(false);
 
 
         lbl_firstName.setText(Main.loggedUser.getFirstName());

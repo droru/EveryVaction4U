@@ -5,9 +5,10 @@ import Model.User;
 import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Alert;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 
 public class RegisterController {
@@ -29,8 +30,7 @@ public class RegisterController {
     public Label erorname;
     public Label erorlastname;
 
-
-    // regular expression for mail valid
+// regular expression for mail valid
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -125,10 +125,13 @@ public class RegisterController {
 
     }
 
-   private void regmsg() {
-        Alert alert=new Alert(Alert.AlertType.NONE);
-        alert.setContentText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
+   private void regmsg() throws InterruptedException {
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
+
         alert.showAndWait();
+      //  alert.wait(1);
+        alert.close();
 
     }
 
