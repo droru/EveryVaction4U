@@ -22,8 +22,7 @@ public class Main extends Application {
     private static Parent root;
     public static User user=new User();
     public static User loggedUser;
-    public static boolean editable=false ;
-
+    public static boolean isProfile=false;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -43,18 +42,18 @@ public class Main extends Application {
 
 
 
-            primaryStage.setTitle("Vacation4You");
-            fxmlLoader = new FXMLLoader();
-            root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
-            //Scene scene = new Scene(root, 400, 300);//login form
-            Scene scene = new Scene(root, 1000, 500);//main screen
-            scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
-            primaryStage.setScene(scene);
-            //SetStageCloseEvent(primaryStage);
-            stage = primaryStage;
-            //stage.setResizable(false);
-            primaryStage.centerOnScreen();
-            primaryStage.show();
+        primaryStage.setTitle("Vacation4You");
+        fxmlLoader = new FXMLLoader();
+        root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
+        //Scene scene = new Scene(root, 400, 300);//login form
+        Scene scene = new Scene(root, 1000, 500);//main screen
+        scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        //SetStageCloseEvent(primaryStage);
+        stage = primaryStage;
+        //stage.setResizable(false);
+        primaryStage.centerOnScreen();
+        primaryStage.show();
 
 
 
