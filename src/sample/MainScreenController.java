@@ -13,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -64,7 +65,7 @@ public class MainScreenController {
     public void loginClicked() throws IOException {
         Stage stage=new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
-        StageLoginDetail(stage, root);
+        StageDetail(stage, root, 400, 300, "Login/register");
         LoginRegister.setDisable(true);
         //Main.switchScene("../View/LoginForm.fxml",(Stage) LoginRegister.getScene().getWindow(), 400,300);
     }
@@ -83,7 +84,7 @@ public class MainScreenController {
     }
     public void seeProfileClicked(){
         Main.isProfile=true;
-        Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) LoginRegister.getScene().getWindow(), 720,500);
+        Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) LoginRegister.getScene().getWindow(), 1000,500);
 
     }
     public void destinationSearchPressed(KeyEvent keyEvent){
@@ -104,7 +105,7 @@ public class MainScreenController {
                 //Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) txt_searchUser.getScene().getWindow(), 720,500);
                 Stage stage=new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserDetailsScreen.fxml"));
-                StageLoginDetail(stage, root);
+                StageDetail(stage, root, 750, 250, "User profile");
             }
             else {
                 System.out.println("not found");
@@ -116,11 +117,14 @@ public class MainScreenController {
         }
     }
 
-    private void StageLoginDetail(Stage stage, Parent root) {
-        stage.setTitle("Login/register");
-        Scene scene=new Scene(root,500,450);
+    private void StageDetail(Stage stage, Parent root, int width, int height, String title) {
+        stage.setTitle(title);
+        Scene scene=new Scene(root,width,height);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner((Stage)txt_searchUser.getScene().getWindow());
         stage.show();
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override

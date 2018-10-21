@@ -76,9 +76,7 @@
             </TextField>
             <Button prefWidth="150" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="טיסה חדשה">
                 <graphic>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                        <!--<Image url="@../../res/add.png" />-->
-                    </ImageView>
+                    <ImageView fx:id="img_add" fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true"/>
                 </graphic>
                 <VBox.margin>
                     <Insets>
