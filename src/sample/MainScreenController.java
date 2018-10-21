@@ -20,7 +20,6 @@ import static Model.Query.search;
 
 public class MainScreenController {
     @FXML
-    //asdfsd
     public TextField txt_searchUser;
     public TextField txt_searchDestination;
     public HBox advancedSearchBox;
@@ -74,7 +73,7 @@ public class MainScreenController {
         }
     }
     public void seeProfileClicked(){
-        Main.editable=false;
+        Main.isProfile=true;
         Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) LoginRegister.getScene().getWindow(), 720,500);
 
     }
@@ -86,11 +85,13 @@ public class MainScreenController {
     }
     public void userSearchPresses(KeyEvent keyEvent) throws SQLException {
         User userSerach;
-        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+        if(keyEvent.getCode().equals(KeyCode.ENTER))
+        {
             userSerach=search(txt_searchUser.getText());
             if (userSerach!=null) {
                 userSerach.print();
                 Main.setUser(userSerach);
+                Main.isProfile = false;
                 Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) txt_searchUser.getScene().getWindow(), 720,500);
 
             }
