@@ -10,12 +10,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserDetailsScreenController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.UserDetailsScreenController">
     <columnConstraints>
         <ColumnConstraints hgrow="NEVER" />
         <ColumnConstraints hgrow="NEVER" />
@@ -66,22 +67,22 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </Label>
-    <TextField fx:id="lbl_firstName" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
+    <TextField fx:id="txt_firstName" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="lbl_lastName" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="2">
+    <TextField fx:id="txt_lastName" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="lbl_birthDate" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="3">
+    <TextField fx:id="txt_birthDate" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <ChoiceBox fx:id="lbl_city" prefWidth="200" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+    <ChoiceBox fx:id="Cb_city" prefWidth="200" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="בחר" />
@@ -200,7 +201,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </ChoiceBox>
-    <TextField fx:id="lbl_email" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="5">
+    <TextField fx:id="txt_email" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
@@ -212,30 +213,24 @@
         <Image url="@Mickey.png" />
     </ImageView>
     <HBox alignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="7">
-        <Button fx:id="returnMain" onAction="#returnClick" prefWidth="100" text="בית">
-            <HBox.margin>
-                <Insets bottom="5" left="5" right="5" top="5" />
-            </HBox.margin>
-        </Button>
-        <Button fx:id="updateButtokn" onAction="#updateClicked" onMouseClicked="#updateClicked" prefWidth="100" text="עדכן">
-            <HBox.margin>
-                <Insets bottom="5" left="5" right="5" top="5" />
-            </HBox.margin>
-        </Button>
+       <Hyperlink fx:id="changePass" onMouseClicked="#changepass" text="שנה סיסמא" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+           <!--<Label fx:id="lbl_email1" prefHeight="23.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            -->
+            <Button fx:id="updateButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" onAction="#updateClicked" onMouseClicked="#updateClicked" prefWidth="100" text="עדכן" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
     </HBox>
     <Hyperlink fx:id="makeEdit" onMousePressed="#enableEdit" prefHeight="23.0" prefWidth="90.0" text="עדכון פרטים" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-    <Hyperlink fx:id="changePass" text="שנה סיסמא" GridPane.rowIndex="6"  onMouseClicked="#changepass"/>
     <Hyperlink fx:id="deleteuser" onMousePressed="#delUser" text="מחק משתמש" visible="false" GridPane.rowIndex="6" />
     <Label fx:id="erorfirstname" text="*עליך למלא שדה זה" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
     <Label fx:id="erorlastname" text="*עליך למלא שדה זה" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
     <Label fx:id="errordate" text="&quot;*הקלד תאריך תקין בפורמט dd/mm/yyyy&quot;" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
     <Label fx:id="erorcity" text="*בחר עיר מגורים" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
     <Label fx:id="erormail" text="*הקלד מייל תקין" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-
-    <Label fx:id="lbl_firstName1" prefHeight="22.0" prefWidth="154.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-    <Label fx:id="lbl_lastName1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-    <Label fx:id="lbl_birthDate1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-    <Label fx:id="lbl_city1" prefHeight="24.0" prefWidth="150.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-    <Label fx:id="lbl_email1" prefHeight="23.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-     <Button fx:id="updateButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" onAction="#updateClicked" onMouseClicked="#updateClicked" prefWidth="100" text="עדכן" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-</GridPane>
+    <!--
+        <Label fx:id="lbl_firstName1" prefHeight="22.0" prefWidth="154.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label fx:id="lbl_lastName1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        <Label fx:id="lbl_birthDate1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+       -->
+        <Label fx:id="lbl_city1" prefHeight="24.0" prefWidth="150.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+     <Button fx:id="returnMain" onAction="#returnClick" prefHeight="26.0" prefWidth="126.0" text="בית" GridPane.rowIndex="9" />
+    </GridPane>

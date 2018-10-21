@@ -1,14 +1,9 @@
 package sample;
 import Model.User;
 
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.sql.SQLException;
-import java.util.Optional;
-
 import static Model.Query.search;
 
 

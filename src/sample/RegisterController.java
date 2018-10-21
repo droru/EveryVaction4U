@@ -29,6 +29,7 @@ public class RegisterController {
     public Label erorusername;
     public Label erorname;
     public Label erorlastname;
+    public FlowPane Pane;
 
 // regular expression for mail valid
 
@@ -40,7 +41,6 @@ public class RegisterController {
 
     public static final Pattern VALID_Date =
             Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9])?[0-9][0-9]$",Pattern.CASE_INSENSITIVE);
-    public FlowPane Pane;
 
 
     public static boolean validateDate(String emailStr) {
@@ -125,12 +125,10 @@ public class RegisterController {
 
     }
 
-   private void regmsg() throws InterruptedException {
+   private void regmsg(){
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
-
         alert.showAndWait();
-      //  alert.wait(1);
         alert.close();
 
     }
