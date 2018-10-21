@@ -210,7 +210,7 @@
         <Image url="@Mickey.png" />
     </ImageView>
     <HBox alignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="7">
-        <Button fx:id="deleteButton" onAction="#deleteClicked" prefWidth="100" text="מחק">
+        <Button fx:id="returnMain" onAction="#returnClick" prefWidth="100" text="בית">
             <HBox.margin>
                 <Insets bottom="5" left="5" right="5" top="5" />
             </HBox.margin>

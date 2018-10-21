@@ -1,5 +1,6 @@
 package sample;
 
+import Model.Query;
 import Model.User;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class Main extends Application {
@@ -26,32 +28,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
-        primaryStage.setTitle("Vacation4You");
-        Scene scene=new Scene(root,500,450);
-        scene.getStylesheets().add(getClass().getResource("../View/Loginstyle.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-         */
-
-
-
-
-
-
-
-
         primaryStage.setTitle("Vacation4You");
         fxmlLoader = new FXMLLoader();
         root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
-        //Scene scene = new Scene(root, 400, 300);//login form
         Scene scene = new Scene(root, 1000, 500);//main screen
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
         primaryStage.setScene(scene);
-        //SetStageCloseEvent(primaryStage);
         stage = primaryStage;
-        //stage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();
 
@@ -61,7 +44,18 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
         launch(args);
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    Query.conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public static void switchScene(String fxmlFile, Stage stage, int width, int height) {

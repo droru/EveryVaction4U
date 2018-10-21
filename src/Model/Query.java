@@ -12,6 +12,7 @@ public class Query
     private  static String BirthDate;
     private  static String City;
     private  static String Email;
+    public static Connection conn;
 
     private static Connection connect() throws SQLException {
         // SQLite connection string
@@ -51,6 +52,8 @@ public class Query
             pstmt.setString(7,Email);
 
             pstmt.executeUpdate();
+            //conn.close();
+
             return 0 ;
         } catch (SQLException e) {
             return 1 ;
@@ -74,6 +77,10 @@ public class Query
         String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
                 + "FROM Users WHERE UserName = ?";
 
+        return SearcByValue(username, sql);
+    }
+
+    private static User SearcByValue(String username, String sql) {
         try (Connection conn = connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
@@ -82,9 +89,11 @@ public class Query
             //
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
+               // conn.close();
                 return new User(rs.getString("UserName"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Password"), rs.getString("BirthDate"), rs.getString("City"),rs.getString("Email"));
             }
             else {
+                //conn.close();
                 return null;
             }
             // loop through the result set
@@ -103,25 +112,7 @@ public class Query
         String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
                 + "FROM Users WHERE Password = ?";
 
-        try (Connection conn = connect();
-             PreparedStatement pstmt  = conn.prepareStatement(sql)){
-
-            // set the value
-            pstmt.setString(1 , password);
-            //
-            ResultSet rs  = pstmt.executeQuery();
-            if (rs.next()) {
-                return new User(rs.getString("UserName"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Password"), rs.getString("BirthDate"), rs.getString("City"),rs.getString("Email"));
-            }
-            else {
-                return null;
-            }
-            // loop through the result set
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        return SearcByValue(password, sql);
     }
 
     // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
@@ -140,6 +131,7 @@ public class Query
             pstmt.setString(1, user);
             // execute the delete statement
             pstmt.executeUpdate();
+            //conn.close();
             return 0;
         } catch (SQLException e)
         {

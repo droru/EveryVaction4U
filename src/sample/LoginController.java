@@ -23,7 +23,7 @@ public class LoginController {
 
 
     public void Loginclicked() throws SQLException {
-        User user = new User();
+        User user;
         //System.out.println("Login clicked");
         if (isFilednotempty(Usernamefield.getText(), Passwordfield.getText())) {
             user = search(Usernamefield.getText());
@@ -31,8 +31,8 @@ public class LoginController {
                 if (user.getPassword().equals(Passwordfield.getText())) {
                     System.out.println("user found");
                     Main.loggedUser = user;
-                    Main.switchScene("../View/MainScreen.fxml", (Stage) LoginButton.getScene().getWindow(), 1000, 500);
-
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+                    ((Stage) LoginButton.getScene().getWindow()).close();
                 } else {
                     erorm.setVisible(false);
                     erorm2.setVisible(true);

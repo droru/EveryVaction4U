@@ -23,7 +23,7 @@ public class UserDetailsScreenController {
     public ChoiceBox lbl_city;
     public TextField lbl_email;
     public Button updateButton;
-    public Button deleteButton;
+    public Button returnMain;
     public Hyperlink makeEdit;
     public Hyperlink changePass;
     public Hyperlink deleteuser;
@@ -76,7 +76,7 @@ public class UserDetailsScreenController {
         lbl_city.setDisable(true);
         lbl_lastName.setDisable(true);
         updateButton.setVisible(false);
-        deleteButton.setVisible(false);
+        returnMain.setVisible(false);
         makeEdit.setVisible(false);
         changePass.setVisible(false);
     }
@@ -106,7 +106,7 @@ public class UserDetailsScreenController {
         lbl_lastName.setVisible(true);
         lbl_birthDate.setVisible(true);
         lbl_city.setVisible(true);
-        lbl_email.setVisible(false);
+        lbl_email.setVisible(true);
 
 
         lbl_firstName.setText(Main.loggedUser.getFirstName());
@@ -118,24 +118,26 @@ public class UserDetailsScreenController {
 
     }
 
-    public void deleteClicked(){}
+    public void returnClick(){
+        Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+    }
     public void updateClicked() throws SQLException {
 
 
         if (validateMail(lbl_email.getText())) {
-            Main.user.setEmail(lbl_email.getText());
+            Main.loggedUser.setEmail(lbl_email.getText());
             erormail.setVisible(false);
         }
         else
             erormail.setVisible(true);
         if (validateName(lbl_firstName.getText())) {
-            Main.user.setFirstName(lbl_firstName.getText());
+            Main.loggedUser.setFirstName(lbl_firstName.getText());
             erorfirstname.setVisible(false);
         }
         else
             erorfirstname.setVisible(true);
         if (validateName(lbl_lastName.getText())) {
-            Main.user.setLastName(lbl_lastName.getText());
+            Main.loggedUser.setLastName(lbl_lastName.getText());
             erorlastname.setVisible(false);
         }
         else
@@ -143,12 +145,12 @@ public class UserDetailsScreenController {
 
         if(!erormail.isVisible()&&!erorlastname.isVisible()&&!erorfirstname.isVisible())
         {
-            Main.user.setEmail(lbl_email.getText());
-            Main.user.setFirstName(lbl_firstName.getText());
-            Main.user.setLastName(lbl_lastName.getText());
+            Main.loggedUser.setEmail(lbl_email.getText());
+            Main.loggedUser.setFirstName(lbl_firstName.getText());
+            Main.loggedUser.setLastName(lbl_lastName.getText());
             //Main.user.setCity(_city.getValue().toString());
             update(Main.loggedUser);
-            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
+            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 720,500);
         }
 
     }
