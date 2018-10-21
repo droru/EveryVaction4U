@@ -35,9 +35,6 @@
            GridPane.rowIndex="0"/>
     <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="שם פרטי:"
            GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <opaqueInsets>
-         <Insets/>
-        </opaqueInsets>
         <GridPane.margin>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
@@ -66,28 +63,23 @@
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
-    <TextField fx:id="lbl_firstName" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="1">
+    <TextField fx:id="lbl_firstName" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="lbl_lastName" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="2">
+    <TextField fx:id="lbl_lastName" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="2">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="lbl_birthDate" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="3">
+    <TextField fx:id="lbl_birthDate" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="3">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="lbl_city" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-               GridPane.columnIndex="2" GridPane.rowIndex="4" visible="false">
-        <ChoiceBox fx:id="_city" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                   GridPane.columnIndex="2" GridPane.rowIndex="4" visible="false">
+    <TextField fx:id="lbl_city" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="4" visible="false">
+        <ChoiceBox fx:id="_city" GridPane.columnIndex="2" GridPane.rowIndex="4" visible="false">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="בחר"/>
@@ -207,8 +199,7 @@
             </GridPane.margin>
         </ChoiceBox>
     </TextField>
-    <TextField fx:id="lbl_email" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-               maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.rowIndex="5">
+    <TextField fx:id="lbl_email" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="5">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
@@ -221,12 +212,12 @@
         <Image url="@Mickey.png"/>
     </ImageView>
     <HBox alignment="CENTER" GridPane.columnSpan="3" GridPane.rowIndex="7">
-        <Button fx:id="deleteButton" onAction="#deleteClicked" prefWidth="100" text="מחק">
+        <Button fx:id="deleteButton" prefWidth="100" text="מחק">
             <HBox.margin>
                 <Insets bottom="5" left="5" right="5" top="5"/>
             </HBox.margin>
         </Button>
-        <Button fx:id="updateButton" onAction="#updateClicked" onMouseClicked="#updateClicked" prefWidth="100"
+        <Button fx:id="updateButton" onAction="#updateClicked" prefWidth="100"
                 text="עדכן">
             <HBox.margin>
                 <Insets bottom="5" left="5" right="5" top="5"/>

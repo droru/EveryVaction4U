@@ -39,7 +39,7 @@
                 </Insets>
             </VBox.margin>
         </Label>
-        <Hyperlink fx:id="LoginRegister" managed="true" alignment="CENTER_RIGHT" accessibleRole="BUTTON"  maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <Hyperlink fx:id="LoginRegister" accessibleRole="BUTTON" alignment="CENTER_RIGHT" managed="true" maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" GridPane.columnIndex="2" GridPane.rowIndex="0">
             <VBox.margin>
                 <Insets>
                     <bottom>5</bottom>
@@ -69,11 +69,16 @@
                     </Insets>
                 </VBox.margin>
             </TextField>
-            <Button prefWidth="150" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="טיסה חדשה">
+            <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150">
                 <graphic>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                        <!--<Image url="@../../res/add.png" />-->
-                    </ImageView>
+                    <HBox>
+                        <children>
+                            <Label text="טיסה" />
+                        <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                            <!--<Image url="@../../res/add.png"/>-->
+                        </ImageView>
+                        </children>
+                    </HBox>
                 </graphic>
                 <VBox.margin>
                     <Insets>
@@ -97,7 +102,7 @@
     </VBox>
 
     <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <VBox>
+        <VBox fx:id="searchBox">
             <VBox.margin>
                 <Insets bottom="5" left="5" right="20" top="5" />
             </VBox.margin>

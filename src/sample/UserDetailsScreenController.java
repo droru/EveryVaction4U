@@ -70,12 +70,6 @@ public class UserDetailsScreenController {
 
     }
 
-    public void setUserDetails(User user){
-        lbl_firstName.setText("test");
-
-    }
-
-    public void deleteClicked(){}
     public void updateClicked() {
         if (validateMail(lbl_email.getText())) {
             Main.user.setEmail(lbl_email.getText());
