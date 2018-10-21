@@ -20,7 +20,7 @@ public class UserDetailsScreenController {
     public TextField lbl_firstName;
     public TextField lbl_lastName;
     public TextField lbl_birthDate;
-    public TextField lbl_city;
+    public ChoiceBox lbl_city;
     public TextField lbl_email;
     public Button updateButton;
     public Button deleteButton;
@@ -42,28 +42,31 @@ public class UserDetailsScreenController {
     public Label lbl_email1;
 
     public void initialize(){
-        lbl_firstName1.setText(Main.loggedUser.getFirstName());
+        if(Main.isProfile) {
+            title.setText("אזור אישי");
+            lbl_firstName1.setText(Main.loggedUser.getFirstName());
             lbl_lastName1.setText(Main.loggedUser.getLastName());
             lbl_birthDate1.setText(Main.loggedUser.getBirthDate());
             lbl_city1.setText(Main.loggedUser.getCity());
-           lbl_email1.setText(Main.loggedUser.getEmail());
+            lbl_email1.setText(Main.loggedUser.getEmail());
+        }
+        else{
+            title.setText("פרופיל משתמש");
+            lbl_firstName1.setText(Main.user.getFirstName());
+            lbl_lastName1.setText(Main.user.getLastName());
+            lbl_birthDate1.setText(Main.user.getBirthDate());
+            lbl_city1.setText(Main.user.getCity());
+            lbl_email1.setText(Main.user.getEmail());
+        }
         updateButton.setVisible(false);
 
-          lbl_firstName.setVisible(false);
-          lbl_lastName.setVisible(false);
-         lbl_birthDate.setVisible(false);
-          lbl_city.setVisible(false);
-          lbl_email.setVisible(false);
+        lbl_firstName.setVisible(false);
+        lbl_lastName.setVisible(false);
+        lbl_birthDate.setVisible(false);
         lbl_city.setVisible(false);
+        lbl_email.setVisible(false);
 
-           // disableEdit();
-            if (!Main.editable) {
-                title.setText("אזור אישי");
-                makeEdit.setVisible(true);
-            }
-            else {
-                title.setText("פרופיל משתמש");
-            }
+        // disableEdit();
     }
 
     public void disableEdit(){
@@ -109,14 +112,9 @@ public class UserDetailsScreenController {
         lbl_firstName.setText(Main.loggedUser.getFirstName());
         lbl_lastName.setText(Main.loggedUser.getLastName());
         lbl_birthDate.setText(Main.loggedUser.getBirthDate());
-        lbl_city.setText(Main.loggedUser.getCity());
+        lbl_city.setValue(Main.loggedUser.getCity());
         lbl_email.setText(Main.loggedUser.getEmail());
         updateButton.setVisible(true);
-
-    }
-
-    public void setUserDetails(User user){
-        lbl_firstName.setText("test");
 
     }
 
@@ -149,7 +147,7 @@ public class UserDetailsScreenController {
             Main.user.setFirstName(lbl_firstName.getText());
             Main.user.setLastName(lbl_lastName.getText());
             //Main.user.setCity(_city.getValue().toString());
-            update(Main.user);
+            update(Main.loggedUser);
             Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
         }
 
