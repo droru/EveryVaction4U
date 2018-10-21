@@ -7,6 +7,7 @@ import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -22,7 +23,7 @@ public class MainScreenController {
     @FXML
     public TextField txt_searchUser;
     public TextField txt_searchDestination;
-    public HBox advancedSearchBox;
+    public GridPane advancedSearchBox;
     public CheckBox advanceSearchCheckbox;
     public Hyperlink LoginRegister;
     public VBox loggedUserBox;
