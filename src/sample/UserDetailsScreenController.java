@@ -1,13 +1,11 @@
 package sample;
 
-import Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.sql.SQLException;
 
 import static Model.Query.delete;
@@ -42,13 +40,23 @@ public class UserDetailsScreenController {
     public Label lbl_email1;
 
     public void initialize(){
-        if(Main.isProfile) {
+        if(Main.isProfile)
+        {
             title.setText("אזור אישי");
             lbl_firstName1.setText(Main.loggedUser.getFirstName());
             lbl_lastName1.setText(Main.loggedUser.getLastName());
             lbl_birthDate1.setText(Main.loggedUser.getBirthDate());
             lbl_city1.setText(Main.loggedUser.getCity());
             lbl_email1.setText(Main.loggedUser.getEmail());
+
+
+
+
+            updateButton.setVisible(true);
+            makeEdit.setVisible(true);
+            changePass.setVisible(true);
+            deleteuser.setVisible(true);
+            deleteButton.setVisible(true);
         }
         else{
             title.setText("פרופיל משתמש");
@@ -57,6 +65,12 @@ public class UserDetailsScreenController {
             lbl_birthDate1.setText(Main.user.getBirthDate());
             lbl_city1.setText(Main.user.getCity());
             lbl_email1.setText(Main.user.getEmail());
+
+            updateButton.setVisible(false);
+            makeEdit.setVisible(false);
+            changePass.setVisible(false);
+            deleteuser.setVisible(false);
+            deleteButton.setVisible(false);
         }
         updateButton.setVisible(false);
 
@@ -83,18 +97,6 @@ public class UserDetailsScreenController {
 
     public void enableEdit()
     {
-
-
-        /*
-        lbl_firstName.setDisable(false);
-        lbl_email.setDisable(false);
-        lbl_city.setDisable(false);
-        lbl_lastName.setDisable(false);
-        changePass.setVisible(true);
-        updateButton.setVisible(true);
-        lbl_city.setVisible(false);
-        _city.setVisible(true);
-         */
         lbl_firstName1.setVisible(false);
         lbl_lastName1.setVisible(false);
         lbl_birthDate1.setVisible(false);

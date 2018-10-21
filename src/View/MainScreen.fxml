@@ -19,6 +19,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.DatePicker?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainScreenController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -29,6 +33,7 @@
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
     </rowConstraints>
+    <!--left side bar-->
     <VBox alignment="TOP_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
         <Label fx:id="lbl_welcome" alignment="CENTER_RIGHT">
             <VBox.margin>
@@ -96,8 +101,9 @@
         </VBox>
     </VBox>
 
+    <!--flights and advanced search-->
     <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <VBox>
+        <VBox fx:id="searchBox">
             <VBox.margin>
                 <Insets bottom="5" left="5" right="20" top="5" />
             </VBox.margin>
@@ -121,41 +127,68 @@
                     </Insets>
                 </VBox.margin>
             </CheckBox>
-            <HBox fx:id="advancedSearchBox" alignment="CENTER_LEFT" managed="false" visible="false">
-                <RadioButton text="מהזול ליקר">
-                    <HBox.margin>
-                        <Insets>
-                            <top>5</top>
-                            <bottom>5</bottom>
-                            <left>5</left>
-                            <right>5</right>
-                        </Insets>
-                    </HBox.margin>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="advancedSearch" />
-                    </toggleGroup>
-                </RadioButton>
-                <RadioButton text="הכי חם" toggleGroup="$advancedSearch">
-                    <HBox.margin>
-                        <Insets>
-                            <top>5</top>
-                            <bottom>5</bottom>
-                            <left>5</left>
-                            <right>5</right>
-                        </Insets>
-                    </HBox.margin>
-                </RadioButton>
-                <RadioButton text="הכי קרובות" toggleGroup="$advancedSearch">
-                    <HBox.margin>
-                        <Insets>
-                            <top>5</top>
-                            <bottom>5</bottom>
-                            <left>5</left>
-                            <right>5</right>
-                        </Insets>
-                    </HBox.margin>
-                </RadioButton>
-            </HBox>
+
+            <GridPane fx:id="advancedSearchBox"  alignment="CENTER_LEFT" managed="false" visible="false">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180"/>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0" />
+                </rowConstraints>
+
+                <ComboBox promptText="סינון לפי" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="מהזול ליקר" />
+                            <String fx:value="מהיקר לזול" />
+                            <String fx:value="הכי חם" />
+                        </FXCollections>
+                    </items>
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <ComboBox promptText="חברת תעופה" GridPane.rowIndex="1" GridPane.columnIndex="0" prefWidth="150">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <HBox GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER_LEFT">
+                    <Label text="מ " textAlignment="CENTER"/>
+                    <DatePicker prefWidth="150">
+                        <GridPane.margin>
+                            <Insets top="5" bottom="5" right="5" left="5"/>
+                        </GridPane.margin>
+                    </DatePicker>
+                    <Label text=" עד " textAlignment="CENTER"/>
+                    <DatePicker prefWidth="150">
+                        <GridPane.margin>
+                            <Insets top="5" bottom="5" right="5" left="5"/>
+                        </GridPane.margin>
+                    </DatePicker>
+                </HBox>
+                <CheckBox text="ישיר/קונקשיין" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </CheckBox>
+                <ComboBox promptText="סוג כבודה" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <CheckBox text="קניית כרטיסים בנפרד" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </CheckBox>
+            </GridPane>
+
         </VBox>
         <TableView nodeOrientation="RIGHT_TO_LEFT">
             <columns>
