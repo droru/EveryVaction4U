@@ -86,7 +86,8 @@ public class MainScreenController {
     }
     public void userSearchPresses(KeyEvent keyEvent) throws SQLException {
         User userSerach;
-        if(keyEvent.getCode().equals(KeyCode.ENTER)){
+        if(keyEvent.getCode().equals(KeyCode.ENTER))
+        {
             userSerach=search(txt_searchUser.getText());
             if (userSerach!=null) {
                 userSerach.print();

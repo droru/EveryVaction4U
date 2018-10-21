@@ -20,7 +20,7 @@ public class Main extends Application {
     private static FXMLLoader fxmlLoader;
     private static Stage stage;
     private static Parent root;
-    public static User user=new User();
+    public static User user=new User();         //The user that we want to search!
     public static User loggedUser;
     public static boolean isProfile=false;
 
