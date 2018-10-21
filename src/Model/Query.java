@@ -13,9 +13,14 @@ public class Query
     private  static String City;
     private  static String Email;
 
-    private static Connection connect()
-    {
+    private static Connection connect() throws SQLException {
         // SQLite connection string
+      //  DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
         Connection conn = null;
         try {
@@ -63,8 +68,9 @@ public class Query
     }
 
 
-    public static  User search(String username)
-    {
+    public static  User search(String username) throws SQLException {
+       // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
+
         String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
                 + "FROM Users WHERE UserName = ?";
 
@@ -89,9 +95,38 @@ public class Query
         }
     }
 
+
+    public static  User search_by_pass(String password) throws SQLException
+    {
+        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
+
+        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
+                + "FROM Users WHERE Password = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+            // set the value
+            pstmt.setString(1 , password);
+            //
+            ResultSet rs  = pstmt.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getString("UserName"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Password"), rs.getString("BirthDate"), rs.getString("City"),rs.getString("Email"));
+            }
+            else {
+                return null;
+            }
+            // loop through the result set
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
 
-    public static int delete(String user) {
+    public static int delete(String user) throws SQLException {
         String sql = "DELETE FROM Users WHERE UserName = ?";
 
         User u = search(user);
@@ -116,7 +151,7 @@ public class Query
 
     // return: 0 if the update succeed else 1 (One or more fields are not valid or the connection to db  doesn't succeed )
 
-public static int update(User user) {
+public static int update(User user) throws SQLException {
     {
         InitUser(user);
         if(search(UserName)!= null )

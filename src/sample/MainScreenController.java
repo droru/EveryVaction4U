@@ -1,6 +1,7 @@
 package sample;
 
 import Model.User;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
@@ -9,6 +10,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.sql.SQLException;
+import java.util.Optional;
 
 import static Model.Query.search;
 
@@ -28,7 +33,7 @@ public class MainScreenController {
     public TextArea textArea_fifthFlight;
     public Label lbl_welcome;
 
-    public void initialize(){
+    public  void initialize(){
         if(Main.loggedUser == null) {
             lbl_welcome.setText("שלום אורח");
             LoginRegister.setVisible(true);
@@ -52,7 +57,7 @@ public class MainScreenController {
     }
 
     public void loginClicked(){
-        Main.switchScene("../View/LoginForm.fxml", (Stage) LoginRegister.getScene().getWindow(), 400,300);
+        Main.switchScene("../View/LoginForm.fxml",(Stage) LoginRegister.getScene().getWindow(), 400,300);
     }
     public void logOutClicked(){
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
@@ -78,7 +83,7 @@ public class MainScreenController {
             System.out.println("do search");
         }
     }
-    public void userSearchPresses(KeyEvent keyEvent){
+    public void userSearchPresses(KeyEvent keyEvent) throws SQLException {
         User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER)){
             userSerach=search(txt_searchUser.getText());
@@ -97,5 +102,8 @@ public class MainScreenController {
             }
         }
     }
+
+
+
 }
 

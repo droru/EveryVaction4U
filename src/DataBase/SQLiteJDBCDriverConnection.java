@@ -5,7 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteJDBCDriverConnection {
-    public static void connect() {
+    public static void connect() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+       // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
         Connection conn = null;
         try {
             // db parameters
@@ -32,7 +38,7 @@ public class SQLiteJDBCDriverConnection {
      */
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         connect();
     }
 }

@@ -2,10 +2,12 @@ package sample;
 
 import Model.User;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
@@ -22,6 +24,7 @@ public class Main extends Application {
     public static User loggedUser;
     public static boolean editable=false ;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         /*
@@ -31,7 +34,14 @@ public class Main extends Application {
         scene.getStylesheets().add(getClass().getResource("../View/Loginstyle.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-           */
+         */
+
+
+
+
+
+
+
 
             primaryStage.setTitle("Vacation4You");
             fxmlLoader = new FXMLLoader();
@@ -54,34 +64,40 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    public static void switchScene(String fxmlFile, Stage stage, int width, int height)
-    {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource(fxmlFile));
-            Parent root = (Parent) loader.load();
-            loader.getController();
-            Scene scene = new Scene(root, width, height);
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.getScene().getStylesheets().add(Main.class.getResource("../View/Style.css").toExternalForm());
-            switch (fxmlFile){
-                case "../View/MainScreen.fxml":
-                    stage.setResizable(true);
-                    break;
-                case "../View/LoginForm.fxml":
-                    stage.setResizable(false);
-                    break;
-                case "../View/RegisterForm.fxml":
-                    stage.setResizable(true);
-                    break;
-                case "../View/UserDetailsScreen.fxml":
-                    stage.setResizable(false);
-                    break;
-            }
 
+    public static void switchScene(String fxmlFile, Stage stage, int width, int height) {
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource(fxmlFile));
+        Parent root = null;
+        try {
+            root = (Parent) loader.load();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        loader.getController();
+        Scene scene = new Scene(root, width, height);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.getScene().getStylesheets().add(Main.class.getResource("../View/Style.css").toExternalForm());
+
+        switch (fxmlFile) {
+            case "../View/MainScreen.fxml":
+                stage.setResizable(false);
+                break;
+            case "../View/LoginForm.fxml":
+                break;
+            case "../View/RegisterForm.fxml":
+                stage.setResizable(false);
+                break;
+            case "../View/UserDetailsScreen.fxml":
+                stage.setResizable(false);
+                break;
+            case "../View/SwitchPassword.fxml":
+                stage.setResizable(false);
+                break;
+
+
         }
     }
 
