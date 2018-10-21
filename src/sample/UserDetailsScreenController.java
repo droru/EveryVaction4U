@@ -103,7 +103,7 @@ public class UserDetailsScreenController {
         txt_email.setDisable(false);
         lbl_city1.setVisible(false);
 
-       txt_firstName.setText(Main.loggedUser.getFirstName());
+        txt_firstName.setText(Main.loggedUser.getFirstName());
         txt_lastName.setText(Main.loggedUser.getLastName());
         txt_birthDate.setText(Main.loggedUser.getBirthDate());
         Cb_city.setValue(Main.loggedUser.getCity());
