@@ -1,11 +1,17 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static Model.Query.delete;
@@ -15,6 +21,7 @@ import static sample.RegisterController.*;
 public class UserDetailsScreenController {
     @FXML
     public ImageView img_profile;
+    public TextField txt_userName;
     public TextField txt_firstName;
     public TextField txt_lastName;
     public TextField txt_birthDate;
@@ -44,19 +51,13 @@ public class UserDetailsScreenController {
         if(Main.isProfile)
         {
             title.setText("אזור אישי");
+            txt_userName.setText(Main.loggedUser.getUserName());
             txt_firstName.setText(Main.loggedUser.getFirstName());
             txt_lastName.setText(Main.loggedUser.getLastName());
             txt_birthDate.setText(Main.loggedUser.getBirthDate());
             lbl_city1.setText(Main.loggedUser.getCity());
             txt_email.setText(Main.loggedUser.getEmail());
 
-            /*
-            lbl_firstName1.setText(Main.loggedUser.getFirstName());
-            lbl_lastName1.setText(Main.loggedUser.getLastName());
-            lbl_birthDate1.setText(Main.loggedUser.getBirthDate());
-            lbl_city1.setText(Main.loggedUser.getCity());
-            lbl_email1.setText(Main.loggedUser.getEmail());
-            */
             updateButton.setVisible(true);
             makeEdit.setVisible(true);
             changePass.setVisible(true);
@@ -66,6 +67,7 @@ public class UserDetailsScreenController {
         else{
             title.setText("פרופיל משתמש");
 
+            txt_userName.setText(Main.user.getUserName());
             txt_firstName.setText(Main.user.getFirstName());
             txt_lastName.setText(Main.user.getLastName());
             txt_birthDate.setText(Main.user.getBirthDate());
@@ -79,6 +81,7 @@ public class UserDetailsScreenController {
             returnMain.setVisible(false);
         }
         updateButton.setVisible(false);
+        txt_userName.setVisible(true);
         txt_firstName.setVisible(true);
         txt_lastName.setVisible(true);
         txt_birthDate.setVisible(true);
@@ -88,14 +91,7 @@ public class UserDetailsScreenController {
     }
     public void enableEdit()
     {
-        /*
-        lbl_firstName1.setVisible(false);
-        lbl_lastName1.setVisible(false);
-        lbl_birthDate1.setVisible(false);
-        lbl_city1.setVisible(false);
-        lbl_email1.setVisible(false);
-*/
-
+        txt_userName.setDisable(false);
         txt_firstName.setDisable(false);
         txt_lastName.setDisable(false);
         txt_birthDate.setDisable(false);
@@ -104,6 +100,8 @@ public class UserDetailsScreenController {
         lbl_city1.setVisible(false);
 
         txt_firstName.setText(Main.loggedUser.getFirstName());
+        txt_userName.setText(Main.loggedUser.getUserName());
+       txt_firstName.setText(Main.loggedUser.getFirstName());
         txt_lastName.setText(Main.loggedUser.getLastName());
         txt_birthDate.setText(Main.loggedUser.getBirthDate());
         Cb_city.setValue(Main.loggedUser.getCity());
@@ -149,14 +147,30 @@ public class UserDetailsScreenController {
 
     }
     public void delUser() throws SQLException {
-        delete(Main.user.getUserName());
-        Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
-
+        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("האם אתה בטוח שאתה רוצה למחוק את המשתמש שלך?");
+        alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            delete(Main.user.getUserName());
+            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
+        }
+        else{
+            alert.close();
+        }
     }
 
-    public void changepass(MouseEvent mouseEvent)
-    {
-
-        Main.switchScene("../View/SwitchPassword.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
+    public void changepass() throws IOException {
+        Stage stage=new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("../View/SwitchPassword.fxml"));
+        Scene scene=new Scene(root,550,300);
+        scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
+        stage.setTitle("Change password");
+        stage.setScene(scene);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner((Stage)txt_firstName.getScene().getWindow());
+        stage.setResizable(false);
+        stage.show();
+        //Main.switchScene("../View/SwitchPassword.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
     }
 }

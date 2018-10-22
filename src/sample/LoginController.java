@@ -41,7 +41,7 @@ public class LoginController {
 
 
     public void openregister() {
-        Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginButton.getScene().getWindow(), 720, 500);
+        Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginButton.getScene().getWindow(), 680, 400);
     }
 
     private boolean isFilednotempty(String user, String Pass) {
