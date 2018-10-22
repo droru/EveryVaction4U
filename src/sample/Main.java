@@ -76,7 +76,6 @@ public class Main extends Application {
 
         switch (fxmlFile) {
             case "../View/MainScreen.fxml":
-                stage.setResizable(false);
                 break;
             case "../View/LoginForm.fxml":
                 break;
@@ -84,7 +83,6 @@ public class Main extends Application {
                 stage.setResizable(false);
                 break;
             case "../View/UserDetailsScreen.fxml":
-                stage.setResizable(false);
                 break;
             case "../View/SwitchPassword.fxml":
                 stage.setResizable(false);

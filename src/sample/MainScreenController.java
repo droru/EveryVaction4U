@@ -105,7 +105,7 @@ public class MainScreenController {
                 //Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) txt_searchUser.getScene().getWindow(), 720,500);
                 Stage stage=new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserDetailsScreen.fxml"));
-                StageDetail(stage, root, 750, 250, "User profile");
+                StageDetail(stage, root, 750, 400, "User profile");
             }
             else {
                 System.out.println("not found");
