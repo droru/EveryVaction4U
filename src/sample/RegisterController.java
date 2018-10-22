@@ -3,9 +3,18 @@ package sample;
 import Model.Query;
 import Model.User;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +39,10 @@ public class RegisterController {
     public Label erorname;
     public Label erorlastname;
     public FlowPane Pane;
+    public Button temp;
+    public ImageView profilePic;
+    private String cwd = System.getProperty("user.dir");
+
 
 // regular expression for mail valid
 
@@ -131,6 +144,34 @@ public class RegisterController {
         alert.showAndWait();
         alert.close();
 
+    }
+
+
+    public void OpenfileChoose() throws IOException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("View Pictures");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        File file=fileChooser.showOpenDialog(new Stage());
+        if (file!=null) {
+            uploadPic(file,file.toPath());
+            profilePic.setImage(new Image(new FileInputStream(cwd+"/src/userRes/"+file.getName())));
+        }
+    }
+
+
+private void uploadPic(File file,Path sourceDirectory) throws IOException {
+    Path targetDirectory = Paths.get(cwd+"/src/userRes/"+file.getName());
+   if(!new File(cwd+"/src/userRes/"+file.getName()).exists())
+        Files.copy(sourceDirectory, targetDirectory);
+        else
+       System.out.println("already exist");
     }
 
 }

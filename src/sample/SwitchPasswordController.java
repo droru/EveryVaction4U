@@ -23,66 +23,52 @@ public class SwitchPasswordController
     public Label lbl_newpass;
     public Label repat_pass;
 
+    private boolean changePass=true;
+
 
     public void update_pass() throws SQLException {
-        boolean flag = true;
+        lbl_pass.setVisible(false);
+        repat_pass.setVisible(false);
+        lbl_newpass.setVisible(false);
        User u =  search(Main.loggedUser.getUserName());
-       if(u.getPassword().equals(curpass.getText()) == false ) {
-           lbl_pass.setVisible(true);
-           flag=false;
-       }
-       else
-           lbl_pass.setVisible(false);
-
-         u =  search_by_pass(newpass.getText());
-        if(u != null|| newpass.getText().equals(""))
-        {
-            if(newpass.getText().equals(""))
-                lbl_newpass.setText("שדה ריק אינו חוקי!");
-            else
-                lbl_newpass.setText("הסיסמא תפוסה!");
-            lbl_newpass.setVisible(true);
-            flag=false;
-        }
-        else
-            {
-                System.out.println(newpass.getText().length());
-                if(newpass.getText().length()>8 || newpass.getText().length()<4 )
-                {
-                    lbl_newpass.setText("הסיסמא חייבת להכיל 4-8 תווים!");
-                    lbl_newpass.setVisible(true);
-                    flag = false;
-                }
-                else
-                    lbl_newpass.setVisible(false);
-
-        }
-
-        if(repeat.getText().equals(newpass.getText()) == false) {
-            repat_pass.setVisible(true);
-            flag=false;
-        }
-        else
-            {
-            repat_pass.setVisible(false);
-        }
-
-        if(flag == true)
-        {
-            Main.loggedUser.setPassword(newpass.getText());
-            update(Main.loggedUser);
-
-            Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("עדכון ססמא בוצע!");
-            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                Main.switchScene("../View/MainScreen.fxml", (Stage) curpass.getScene().getWindow(), 720,500);
-
+            if(!u.getPassword().equals(curpass.getText())) {
+                lbl_pass.setText("*סיסמא ישנה אינה נכונה");
+                lbl_pass.setVisible(true);
             }
 
+            else if(newpass.getText().length()<4||newpass.getText().length()>8||repeat.getText().length()<4||repeat.getText().length()>8) {
+                lbl_pass.setVisible(false);
+                lbl_newpass.setText("*הכנס סיסמא בין 4-8 תווים");
+                lbl_newpass.setVisible(true);
+                repat_pass.setText("*הכנס סיסמא בין 4-8 תווים");
+                repat_pass.setVisible(true);
+                changePass=false;
+            }
+            else {
+                lbl_pass.setVisible(false);
+                lbl_newpass.setVisible(false);
+                repat_pass.setVisible(false);
+                changePass=true;
+            }
+
+
+            if (repeat.getText().equals(newpass.getText())&&u.getPassword().equals(curpass.getText())&&changePass) {
+                u.setPassword(newpass.getText());
+                update(u);
+                Alert alert=new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("עדכון ססמא בוצע!");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 720, 500);
+                    ((Stage) repat_pass.getScene().getWindow()).close();
+                }
+            }
+
+            else if (!repeat.getText().equals(newpass.getText())){
+                repat_pass.setText("סיסמאות לא תואמות");
+                repat_pass.setVisible(true);
+            }
         }
     }
 
-
-}

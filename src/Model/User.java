@@ -1,5 +1,7 @@
 package Model;
 
+import javax.imageio.stream.ImageInputStream;
+
 public class User
 {
     private String UserName;
@@ -11,8 +13,13 @@ public class User
     private String Email;
 
 
+
+    private String ProfilePicPath;
+
+
     public User(){}
-    public User(String userName, String firstName, String lastName, String password, String birthDate, String city, String email) {
+
+    public User(String userName, String firstName, String lastName, String password, String birthDate, String city, String email,String ProfilePicpath) {
         UserName = userName;
         FirstName = firstName;
         LastName = lastName;
@@ -20,8 +27,18 @@ public class User
         BirthDate = birthDate;
         City = city;
         Email=email;
+        ProfilePicPath=ProfilePicpath;
+
     }
 
+
+    public String getProfilePicPath() {
+        return ProfilePicPath;
+    }
+
+    public void setProfilePicPath(String profilePicPath) {
+        ProfilePicPath = profilePicPath;
+    }
     public String getEmail(){return Email;}
     public void setEmail(String email){Email=email; }
 
@@ -82,7 +99,7 @@ public class User
         System.out.println(BirthDate);
         System.out.println(City);
         System.out.println(Email);
-
+        System.out.println(ProfilePicPath);
 
 
     }

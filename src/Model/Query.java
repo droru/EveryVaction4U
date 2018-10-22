@@ -90,7 +90,7 @@ public class Query
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
                // conn.close();
-                return new User(rs.getString("UserName"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Password"), rs.getString("BirthDate"), rs.getString("City"),rs.getString("Email"));
+                return new User(rs.getString("UserName"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Password"), rs.getString("BirthDate"), rs.getString("City"),rs.getString("Email"),rs.getString("Picture"));
             }
             else {
                 //conn.close();

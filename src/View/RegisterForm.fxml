@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
@@ -16,190 +17,179 @@
 
 <FlowPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterController">
     <AnchorPane prefHeight="402.0" prefWidth="658.0">
-        <GridPane layoutX="347.0" layoutY="98.0" prefHeight="183.0" prefWidth="232.0"
-                  AnchorPane.bottomAnchor="120.40000000000003" AnchorPane.leftAnchor="230.0"
-                  AnchorPane.rightAnchor="110.0">
+        <GridPane layoutX="347.0" layoutY="98.0" prefHeight="183.0" prefWidth="232.0" AnchorPane.bottomAnchor="120.40000000000003" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="110.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="45.599981689453124" minHeight="10.0" prefHeight="29.599981689453124"
-                                vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="45.599981689453124" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="45.599981689453124" minHeight="10.0" prefHeight="29.599981689453124" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="45.599981689453124" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-            <TextField fx:id="username" prefHeight="26.0" prefWidth="83.0" GridPane.rowIndex="1"/>
-            <PasswordField fx:id="password" GridPane.rowIndex="2"/>
-            <TextField fx:id="firstname" GridPane.rowIndex="3"/>
-            <TextField fx:id="lastname" GridPane.rowIndex="4"/>
+            <TextField fx:id="username" prefHeight="26.0" prefWidth="83.0" GridPane.rowIndex="1" />
+            <PasswordField fx:id="password" GridPane.rowIndex="2" />
+            <TextField fx:id="firstname" GridPane.rowIndex="3" />
+            <TextField fx:id="lastname" GridPane.rowIndex="4" />
             <ChoiceBox fx:id="city" prefHeight="26.0" prefWidth="159.0" value="בחר" GridPane.rowIndex="6">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="בחר"/>
-                        <String fx:value=" אבן יהודה"/>
-                        <String fx:value="אופקים"/>
-                        <String fx:value="אור יהודה"/>
-                        <String fx:value="אילת"/>
-                        <String fx:value="אזור"/>
-                        <String fx:value="אמירים"/>
-                        <String fx:value="אפרת"/>
-                        <String fx:value="אריאל"/>
-                        <String fx:value="אשדוד"/>
-                        <String fx:value="אשקלון"/>
-                        <String fx:value="באר יעקב"/>
-                        <String fx:value="באר שבע"/>
-                        <String fx:value="בית דגן"/>
-                        <String fx:value="בית שאן"/>
-                        <String fx:value="בית שמש"/>
-                        <String fx:value="בית שערים"/>
-                        <String fx:value="בני ברק"/>
-                        <String fx:value="בנימינה"/>
-                        <String fx:value="בת ים"/>
-                        <String fx:value="גבעת סביון"/>
-                        <String fx:value="גבעת שמואל"/>
-                        <String fx:value="גבעתיים"/>
-                        <String fx:value="גדרה"/>
-                        <String fx:value="גלעד"/>
-                        <String fx:value="גן יבנה"/>
-                        <String fx:value="גני תקוה"/>
-                        <String fx:value="הוד השרון"/>
-                        <String fx:value="הרצליה"/>
-                        <String fx:value="זכרון יעקב"/>
-                        <String fx:value="חדרה"/>
-                        <String fx:value="חולון"/>
-                        <String fx:value="חיפה"/>
-                        <String fx:value="חצור הגלילית"/>
-                        <String fx:value="טבעון"/>
-                        <String fx:value="טבריה"/>
-                        <String fx:value="טירת הכרמל"/>
-                        <String fx:value="יבנה"/>
-                        <String fx:value="יהוד"/>
-                        <String fx:value="ים המלח"/>
-                        <String fx:value="יפו"/>
-                        <String fx:value="יקנעם עילית"/>
-                        <String fx:value="ירוחם"/>
-                        <String fx:value="ירושלים"/>
-                        <String fx:value="כוכב יאיר"/>
-                        <String fx:value="כפר אזר"/>
-                        <String fx:value="כפר ורדים"/>
-                        <String fx:value="כפר מלל"/>
-                        <String fx:value="כפר סבא"/>
-                        <String fx:value="כפר שמריהו"/>
-                        <String fx:value="כפר תבור"/>
-                        <String fx:value="כרכור"/>
-                        <String fx:value="כרמיאל"/>
-                        <String fx:value="לוד"/>
-                        <String fx:value="לפיד"/>
-                        <String fx:value="מבשרת ציון"/>
-                        <String fx:value="מגדל"/>
-                        <String fx:value="מגדל העמק"/>
-                        <String fx:value="מודיעין"/>
-                        <String fx:value="מטולה"/>
-                        <String fx:value="מכבים"/>
-                        <String fx:value="מכמורת"/>
-                        <String fx:value="מפלסים"/>
-                        <String fx:value="מצפה רמון"/>
-                        <String fx:value="מקווה ישראל"/>
-                        <String fx:value="נהריה"/>
-                        <String fx:value="נווה אור"/>
-                        <String fx:value="נווה איתן"/>
-                        <String fx:value="נס ציונה"/>
-                        <String fx:value="נען"/>
-                        <String fx:value="נצרת"/>
-                        <String fx:value="נצרת עילית"/>
-                        <String fx:value="נתניה"/>
-                        <String fx:value="סביון"/>
-                        <String fx:value="עכו"/>
-                        <String fx:value="עפולה"/>
-                        <String fx:value="ערד"/>
-                        <String fx:value="עתלית"/>
-                        <String fx:value="פרדס חנה"/>
-                        <String fx:value="פתח-תקוה"/>
-                        <String fx:value="צור הדסה"/>
-                        <String fx:value="צורעה"/>
-                        <String fx:value="צפת"/>
-                        <String fx:value="קדימה"/>
-                        <String fx:value="קיבוץ אורטל"/>
-                        <String fx:value="קיבוץ נחל עוז"/>
-                        <String fx:value="קיבוץ עלומים"/>
-                        <String fx:value="קיסריה"/>
-                        <String fx:value="קצרין"/>
-                        <String fx:value="קרית אונו"/>
-                        <String fx:value="קרית אתא"/>
-                        <String fx:value="קרית ביאליק"/>
-                        <String fx:value="קרית גת"/>
-                        <String fx:value="קרית מוצקין"/>
-                        <String fx:value="קרית שמונה"/>
-                        <String fx:value="ראש העין"/>
-                        <String fx:value="ראש פינה"/>
-                        <String fx:value="ראשון לציון"/>
-                        <String fx:value="רחובות"/>
-                        <String fx:value="רמלה"/>
-                        <String fx:value="רמת אפעל"/>
-                        <String fx:value="רמת השרון"/>
-                        <String fx:value="רמת ישי"/>
-                        <String fx:value="רמת רזיאל"/>
-                        <String fx:value="רמת-גן"/>
-                        <String fx:value="רעננה"/>
-                        <String fx:value="שדרות"/>
-                        <String fx:value="שוהם"/>
-                        <String fx:value="שילה"/>
-                        <String fx:value="תל-אביב"/>
+                        <String fx:value="בחר" />
+                        <String fx:value=" אבן יהודה" />
+                        <String fx:value="אופקים" />
+                        <String fx:value="אור יהודה" />
+                        <String fx:value="אילת" />
+                        <String fx:value="אזור" />
+                        <String fx:value="אמירים" />
+                        <String fx:value="אפרת" />
+                        <String fx:value="אריאל" />
+                        <String fx:value="אשדוד" />
+                        <String fx:value="אשקלון" />
+                        <String fx:value="באר יעקב" />
+                        <String fx:value="באר שבע" />
+                        <String fx:value="בית דגן" />
+                        <String fx:value="בית שאן" />
+                        <String fx:value="בית שמש" />
+                        <String fx:value="בית שערים" />
+                        <String fx:value="בני ברק" />
+                        <String fx:value="בנימינה" />
+                        <String fx:value="בת ים" />
+                        <String fx:value="גבעת סביון" />
+                        <String fx:value="גבעת שמואל" />
+                        <String fx:value="גבעתיים" />
+                        <String fx:value="גדרה" />
+                        <String fx:value="גלעד" />
+                        <String fx:value="גן יבנה" />
+                        <String fx:value="גני תקוה" />
+                        <String fx:value="הוד השרון" />
+                        <String fx:value="הרצליה" />
+                        <String fx:value="זכרון יעקב" />
+                        <String fx:value="חדרה" />
+                        <String fx:value="חולון" />
+                        <String fx:value="חיפה" />
+                        <String fx:value="חצור הגלילית" />
+                        <String fx:value="טבעון" />
+                        <String fx:value="טבריה" />
+                        <String fx:value="טירת הכרמל" />
+                        <String fx:value="יבנה" />
+                        <String fx:value="יהוד" />
+                        <String fx:value="ים המלח" />
+                        <String fx:value="יפו" />
+                        <String fx:value="יקנעם עילית" />
+                        <String fx:value="ירוחם" />
+                        <String fx:value="ירושלים" />
+                        <String fx:value="כוכב יאיר" />
+                        <String fx:value="כפר אזר" />
+                        <String fx:value="כפר ורדים" />
+                        <String fx:value="כפר מלל" />
+                        <String fx:value="כפר סבא" />
+                        <String fx:value="כפר שמריהו" />
+                        <String fx:value="כפר תבור" />
+                        <String fx:value="כרכור" />
+                        <String fx:value="כרמיאל" />
+                        <String fx:value="לוד" />
+                        <String fx:value="לפיד" />
+                        <String fx:value="מבשרת ציון" />
+                        <String fx:value="מגדל" />
+                        <String fx:value="מגדל העמק" />
+                        <String fx:value="מודיעין" />
+                        <String fx:value="מטולה" />
+                        <String fx:value="מכבים" />
+                        <String fx:value="מכמורת" />
+                        <String fx:value="מפלסים" />
+                        <String fx:value="מצפה רמון" />
+                        <String fx:value="מקווה ישראל" />
+                        <String fx:value="נהריה" />
+                        <String fx:value="נווה אור" />
+                        <String fx:value="נווה איתן" />
+                        <String fx:value="נס ציונה" />
+                        <String fx:value="נען" />
+                        <String fx:value="נצרת" />
+                        <String fx:value="נצרת עילית" />
+                        <String fx:value="נתניה" />
+                        <String fx:value="סביון" />
+                        <String fx:value="עכו" />
+                        <String fx:value="עפולה" />
+                        <String fx:value="ערד" />
+                        <String fx:value="עתלית" />
+                        <String fx:value="פרדס חנה" />
+                        <String fx:value="פתח-תקוה" />
+                        <String fx:value="צור הדסה" />
+                        <String fx:value="צורעה" />
+                        <String fx:value="צפת" />
+                        <String fx:value="קדימה" />
+                        <String fx:value="קיבוץ אורטל" />
+                        <String fx:value="קיבוץ נחל עוז" />
+                        <String fx:value="קיבוץ עלומים" />
+                        <String fx:value="קיסריה" />
+                        <String fx:value="קצרין" />
+                        <String fx:value="קרית אונו" />
+                        <String fx:value="קרית אתא" />
+                        <String fx:value="קרית ביאליק" />
+                        <String fx:value="קרית גת" />
+                        <String fx:value="קרית מוצקין" />
+                        <String fx:value="קרית שמונה" />
+                        <String fx:value="ראש העין" />
+                        <String fx:value="ראש פינה" />
+                        <String fx:value="ראשון לציון" />
+                        <String fx:value="רחובות" />
+                        <String fx:value="רמלה" />
+                        <String fx:value="רמת אפעל" />
+                        <String fx:value="רמת השרון" />
+                        <String fx:value="רמת ישי" />
+                        <String fx:value="רמת רזיאל" />
+                        <String fx:value="רמת-גן" />
+                        <String fx:value="רעננה" />
+                        <String fx:value="שדרות" />
+                        <String fx:value="שוהם" />
+                        <String fx:value="שילה" />
+                        <String fx:value="תל-אביב" />
                     </FXCollections>
                 </items>
             </ChoiceBox>
-            <TextField fx:id="email" promptText="example@example.com" GridPane.rowIndex="7"/>
+            <TextField fx:id="email" promptText="example@example.com" GridPane.rowIndex="7" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <Label layoutX="44.0" layoutY="4.0" text="שם משתמש"/>
+                <Label layoutX="44.0" layoutY="4.0" text="שם משתמש" />
             </AnchorPane>
             <AnchorPane prefHeight="26.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                <Label layoutX="44.0" layoutY="4.0" text="סיסמא"/>
+                <Label layoutX="44.0" layoutY="4.0" text="סיסמא" />
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <Label layoutX="44.0" layoutY="4.0" text="שם פרטי"/>
+                <Label layoutX="44.0" layoutY="4.0" text="שם פרטי" />
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                <Label layoutX="44.0" layoutY="4.0" text="שם משפחה"/>
+                <Label layoutX="44.0" layoutY="4.0" text="שם משפחה" />
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                <Label layoutX="44.0" layoutY="4.0" text="תאריך לידה"/>
+                <Label layoutX="44.0" layoutY="4.0" text="תאריך לידה" />
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                 <children>
-                    <Label layoutX="44.0" layoutY="4.0" text="עיר מגורים"/>
+                    <Label layoutX="44.0" layoutY="4.0" text="עיר מגורים" />
                 </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                <Label layoutX="44.0" layoutY="4.0" text="אימייל"/>
+                <Label layoutX="44.0" layoutY="4.0" text="אימייל" />
             </AnchorPane>
-            <TextField fx:id="birthdate" promptText="dd/mm/yyyy" GridPane.rowIndex="5"/>
+            <TextField fx:id="birthdate" promptText="dd/mm/yyyy" GridPane.rowIndex="5" />
         </GridPane>
-        <Label layoutX="321.0" layoutY="44.0" prefHeight="18.0" prefWidth="158.0" text="משתמש חדש" styleClass="title"/>
-        <Button fx:id="sign" layoutX="230.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#signclicked"
-                text="הירשם"/>
-        <CheckBox fx:id="agreeSign" layoutX="330.0" layoutY="292.0" mnemonicParsing="false"
-                  nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="קראתי ואני מאשר את התנאים"/>
-        <Label fx:id="erorterms" layoutX="321.0" layoutY="318.0" styleClass="erorMes" text="*נא אשר את התנאים"
-               textFill="RED" visible="false"/>
-        <Label fx:id="erormail" layoutX="136.0" layoutY="264.0" styleClass="erorMes" text="*הקלד מייל תקין"
-               visible="false"/>
-        <Label fx:id="erorcity" layoutX="136.0" layoutY="237.0" styleClass="erorMes" text="*בחר עיר מגורים"
-               visible="false"/>
-        <Label fx:id="erordate" layoutX="14.0" layoutY="210.0" styleClass="erorMes"
-               text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" visible="false"/>
-        <Label fx:id="erorpass" layoutX="83.0" layoutY="130.0" styleClass="erorMes" text="*הקלד סיסמא בין 4-8 תווים"
-               visible="false"/>
-        <Label fx:id="erorusername" layoutX="114.0" layoutY="106.0" styleClass="erorMes" text="*עליך למלא שדה זה "
-               visible="false"/>
-        <Label fx:id="erorname" layoutX="114.0" layoutY="154.0" styleClass="erorMes" text="*עליך למלא שדה זה "
-               visible="false"/>
-        <Label fx:id="erorlastname" layoutX="114.0" layoutY="181.0" styleClass="erorMes" text="*עליך למלא שדה זה "
-               visible="false"/>
+        <Label layoutX="321.0" layoutY="44.0" prefHeight="18.0" prefWidth="158.0" styleClass="title" text="משתמש חדש" />
+        <Button fx:id="sign" layoutX="230.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#signclicked" text="הירשם" />
+        <CheckBox fx:id="agreeSign" layoutX="330.0" layoutY="292.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="18.0" text="קראתי ואני מאשר את התנאים" />
+        <Label fx:id="erorterms" layoutX="321.0" layoutY="318.0" styleClass="erorMes" text="*נא אשר את התנאים" textFill="RED" visible="false" />
+        <Label fx:id="erormail" layoutX="136.0" layoutY="264.0" styleClass="erorMes" text="*הקלד מייל תקין" visible="false" />
+        <Label fx:id="erorcity" layoutX="136.0" layoutY="237.0" styleClass="erorMes" text="*בחר עיר מגורים" visible="false" />
+        <Label fx:id="erordate" layoutX="14.0" layoutY="210.0" styleClass="erorMes" text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" visible="false" />
+        <Label fx:id="erorpass" layoutX="83.0" layoutY="130.0" styleClass="erorMes" text="*הקלד סיסמא בין 4-8 תווים" visible="false" />
+        <Label fx:id="erorusername" layoutX="114.0" layoutY="106.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
+        <Label fx:id="erorname" layoutX="114.0" layoutY="154.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
+        <Label fx:id="erorlastname" layoutX="114.0" layoutY="181.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
+      <Button fx:id="temp" layoutX="83.0" layoutY="206.0" mnemonicParsing="false" onAction="#OpenfileChoose" text="Button" />
+      <ImageView fx:id="profilePic" fitHeight="129.0" fitWidth="169.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
     </AnchorPane>
 </FlowPane>

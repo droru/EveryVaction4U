@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -16,7 +15,8 @@ import java.sql.SQLException;
 
 import static Model.Query.delete;
 import static Model.Query.update;
-import static sample.RegisterController.*;
+import static sample.RegisterController.validateMail;
+import static sample.RegisterController.validateName;
 
 public class UserDetailsScreenController {
     @FXML
@@ -51,10 +51,7 @@ public class UserDetailsScreenController {
         if(Main.isProfile)
         {
             title.setText("אזור אישי");
-            txt_userName.setText(Main.loggedUser.getUserName());
-            txt_firstName.setText(Main.loggedUser.getFirstName());
-            txt_lastName.setText(Main.loggedUser.getLastName());
-            txt_birthDate.setText(Main.loggedUser.getBirthDate());
+            setTextInDetail();
             lbl_city1.setText(Main.loggedUser.getCity());
             txt_email.setText(Main.loggedUser.getEmail());
 
@@ -100,14 +97,18 @@ public class UserDetailsScreenController {
         lbl_city1.setVisible(false);
 
         txt_firstName.setText(Main.loggedUser.getFirstName());
-        txt_userName.setText(Main.loggedUser.getUserName());
-       txt_firstName.setText(Main.loggedUser.getFirstName());
-        txt_lastName.setText(Main.loggedUser.getLastName());
-        txt_birthDate.setText(Main.loggedUser.getBirthDate());
+        setTextInDetail();
         Cb_city.setValue(Main.loggedUser.getCity());
         txt_email.setText(Main.loggedUser.getEmail());
         updateButton.setVisible(true);
 
+    }
+
+    private void setTextInDetail() {
+        txt_userName.setText(Main.loggedUser.getUserName());
+        txt_firstName.setText(Main.loggedUser.getFirstName());
+        txt_lastName.setText(Main.loggedUser.getLastName());
+        txt_birthDate.setText(Main.loggedUser.getBirthDate());
     }
 
     public void returnClick(){
