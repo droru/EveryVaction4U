@@ -39,7 +39,7 @@ public class RegisterController {
     public Label erorname;
     public Label erorlastname;
     public FlowPane Pane;
-    public Button temp;
+    public Button chooseFile;
     public ImageView profilePic;
     private String cwd = System.getProperty("user.dir");
 
@@ -161,14 +161,14 @@ public class RegisterController {
         File file=fileChooser.showOpenDialog(new Stage());
         if (file!=null) {
             uploadPic(file,file.toPath());
-            profilePic.setImage(new Image(new FileInputStream(cwd+"/src/userRes/"+file.getName())));
+            profilePic.setImage(new Image(new FileInputStream(cwd+"/res/userRes/"+file.getName())));
         }
     }
 
 
 private void uploadPic(File file,Path sourceDirectory) throws IOException {
-    Path targetDirectory = Paths.get(cwd+"/src/userRes/"+file.getName());
-   if(!new File(cwd+"/src/userRes/"+file.getName()).exists())
+    Path targetDirectory = Paths.get(cwd+"/res/userRes/"+file.getName());
+   if(!new File(cwd+"/res/userRes/"+file.getName()).exists())
         Files.copy(sourceDirectory, targetDirectory);
         else
        System.out.println("already exist");
