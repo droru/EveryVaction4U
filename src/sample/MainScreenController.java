@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -19,7 +18,6 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Optional;
 
 import static Model.Query.search;
 
@@ -84,7 +82,7 @@ public class MainScreenController {
     }
     public void seeProfileClicked(){
         Main.isProfile=true;
-        Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) LoginRegister.getScene().getWindow(), 1000,500);
+        Main.switchScene("../View/UserDetailsScreen.fxml", Main.getStage(), 1000,500);
 
     }
     public void destinationSearchPressed(KeyEvent keyEvent){

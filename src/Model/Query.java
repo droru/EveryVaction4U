@@ -12,6 +12,7 @@ public class Query
     private  static String BirthDate;
     private  static String City;
     private  static String Email;
+    private static String Picture;
     public static Connection conn;
 
     private static Connection connect() throws SQLException {
@@ -38,7 +39,7 @@ public class Query
     {
         InitUser(user);
 
-        String sql = "INSERT INTO Users(UserName,FirstName,LastName,Password,BirthDate,City,Email) VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Users(UserName,FirstName,LastName,Password,BirthDate,City,Email,Picture) VALUES(?,?,?,?,?,?,?,?)";
         try (
                 Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql))
@@ -50,6 +51,7 @@ public class Query
             pstmt.setString(5,BirthDate);
             pstmt.setString(6,City);
             pstmt.setString(7,Email);
+            pstmt.setString(8,Picture);
 
             pstmt.executeUpdate();
             //conn.close();
@@ -68,13 +70,14 @@ public class Query
         BirthDate=user.getBirthDate();
         City=user.getCity();
         Email=user.getEmail();
+        Picture=user.getProfilePicPath();
     }
 
 
     public static  User search(String username) throws SQLException {
        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
-        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
+        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email,Picture "
                 + "FROM Users WHERE UserName = ?";
 
         return SearcByValue(username, sql);
@@ -109,7 +112,7 @@ public class Query
     {
         // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
-        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email "
+        String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email,Picture "
                 + "FROM Users WHERE Password = ?";
 
         return SearcByValue(password, sql);

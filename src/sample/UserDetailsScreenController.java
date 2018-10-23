@@ -6,10 +6,13 @@ import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -46,7 +49,7 @@ public class UserDetailsScreenController {
     public Label lbl_birthDate1;
     public Label lbl_email1;
 */
-    public void initialize(){
+    public void initialize() throws FileNotFoundException {
 
         if(Main.isProfile)
         {
@@ -54,6 +57,7 @@ public class UserDetailsScreenController {
             setTextInDetail();
             lbl_city1.setText(Main.loggedUser.getCity());
             txt_email.setText(Main.loggedUser.getEmail());
+            img_profile.setImage(new Image(new FileInputStream(Main.loggedUser.getProfilePicPath())));
 
             updateButton.setVisible(true);
             makeEdit.setVisible(true);
@@ -63,13 +67,13 @@ public class UserDetailsScreenController {
         }
         else{
             title.setText("פרופיל משתמש");
-
             txt_userName.setText(Main.user.getUserName());
             txt_firstName.setText(Main.user.getFirstName());
             txt_lastName.setText(Main.user.getLastName());
             txt_birthDate.setText(Main.user.getBirthDate());
             lbl_city1.setText(Main.user.getCity());
             txt_email.setText(Main.user.getEmail());
+            img_profile.setImage(new Image(new FileInputStream(Main.user.getProfilePicPath())));
 
             updateButton.setVisible(false);
             makeEdit.setVisible(false);

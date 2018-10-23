@@ -100,6 +100,7 @@ public class Main extends Application {
         user.setFirstName(u.getFirstName());
         user.setUserName(u.getUserName());
         user.setEmail(u.getEmail());
+        user.setProfilePicPath(u.getProfilePicPath());
     }
 
 }

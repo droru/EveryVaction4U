@@ -43,7 +43,8 @@ public class RegisterController {
     public ImageView profilePic;
     private String cwd = System.getProperty("user.dir");
 
-
+    protected   User user = new User();
+    protected  File file;
 // regular expression for mail valid
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -79,7 +80,6 @@ public class RegisterController {
 
 
     public void signclicked() throws InterruptedException {
-        User user = new User();
         if (!username.getText().isEmpty()) {
             user.setUserName(username.getText());
             erorusername.setVisible(false);
@@ -126,14 +126,25 @@ public class RegisterController {
         //user.print();
         if ((user.getUserName() != null && user.getBirthDate() != null && user.getCity() != null && user.getEmail() != null && user.getFirstName() != null && user.getLastName() != null && user.getPassword() != null))
         {
-            if(agreeSign.isSelected()) {
+            if(agreeSign.isSelected()&&file!=null) {
+                user.print();
                 Query.insert((user));
                 regmsg();
-                Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 720, 500);
+                Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 400, 300);
             }
-            else
-                erorterms.setVisible(true);
-        }
+            else {
+                if (file==null)
+                {
+                    erorterms.setText("*אנא העלה תמונה");
+                    erorterms.setVisible(true);
+                }
+                else
+                {
+                    erorterms.setText("*אנא אשר את התנאים");
+                    erorterms.setVisible(true);
+                }
+                }
+            }
 
 
     }
@@ -158,18 +169,20 @@ public class RegisterController {
                 new FileChooser.ExtensionFilter("GIF", "*.gif"),
                 new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                 new FileChooser.ExtensionFilter("PNG", "*.png"));
-        File file=fileChooser.showOpenDialog(new Stage());
+         file=fileChooser.showOpenDialog(new Stage());
         if (file!=null) {
             uploadPic(file,file.toPath());
-            profilePic.setImage(new Image(new FileInputStream(cwd+"/res/userRes/"+file.getName())));
+            profilePic.setImage(new Image(new FileInputStream(cwd+"/src/"+file.getName())));
         }
     }
 
 
 private void uploadPic(File file,Path sourceDirectory) throws IOException {
-    Path targetDirectory = Paths.get(cwd+"/res/userRes/"+file.getName());
-   if(!new File(cwd+"/res/userRes/"+file.getName()).exists())
-        Files.copy(sourceDirectory, targetDirectory);
+    Path targetDirectory = Paths.get(cwd+"/src/"+file.getName());
+   if(!new File(cwd+"/src/"+file.getName()).exists()) {
+       Files.copy(sourceDirectory, targetDirectory);
+       user.setProfilePicPath(targetDirectory.toString());
+   }
         else
        System.out.println("already exist");
     }

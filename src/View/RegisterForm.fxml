@@ -189,7 +189,7 @@
         <Label fx:id="erorusername" layoutX="114.0" layoutY="106.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
         <Label fx:id="erorname" layoutX="114.0" layoutY="154.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
         <Label fx:id="erorlastname" layoutX="114.0" layoutY="181.0" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" />
-      <Button fx:id="chooseFile" layoutX="83.0" layoutY="206.0" mnemonicParsing="false" onAction="#OpenfileChoose" text="Button" />
-      <ImageView fx:id="profilePic" fitHeight="129.0" fitWidth="169.0" layoutX="14.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="chooseFile" layoutX="575.0" layoutY="186.0" mnemonicParsing="false" onAction="#OpenfileChoose" text="העלה תמונה" />
+      <ImageView fx:id="profilePic" fitHeight="87.0" fitWidth="119.0" layoutX="539.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true" />
     </AnchorPane>
 </FlowPane>
