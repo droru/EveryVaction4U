@@ -215,8 +215,9 @@
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
-        <Image url="@Mickey.png" />
+        <!--<Image url="@.png" />-->
     </ImageView>
+    <Button fx:id="changeProfilePic" visible="false" onAction="#changeProfilePic" prefHeight="26.0" prefWidth="120.0" text="שנה תמונה" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
 
     <!--side links-->
     <Hyperlink fx:id="changePass" onMouseClicked="#changepass" text="שנה סיסמא" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

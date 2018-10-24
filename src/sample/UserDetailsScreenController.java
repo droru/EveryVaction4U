@@ -11,9 +11,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import static Model.Query.delete;
@@ -32,6 +36,7 @@ public class UserDetailsScreenController {
     public TextField txt_email;
     public Button updateButton;
     public Button returnMain;
+    public Button changeProfilePic;
     public Hyperlink makeEdit;
     public Hyperlink changePass;
     public Hyperlink deleteuser;
@@ -42,6 +47,7 @@ public class UserDetailsScreenController {
     public Label erormail;
     public Label lbl_city1;
 
+    private File file;
 
     /*
     public Label lbl_firstName1;
@@ -105,6 +111,7 @@ public class UserDetailsScreenController {
         Cb_city.setValue(Main.loggedUser.getCity());
         txt_email.setText(Main.loggedUser.getEmail());
         updateButton.setVisible(true);
+        changeProfilePic.setVisible(true);
 
     }
 
@@ -146,22 +153,57 @@ public class UserDetailsScreenController {
             Main.loggedUser.setFirstName(txt_firstName.getText());
             Main.loggedUser.setLastName(txt_lastName.getText());
             //Main.user.setCity(_city.getValue().toString());
-            update(Main.loggedUser);
-            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 720,500);
+
+            try {
+                uploadPic(file,file.toPath());
+                update(Main.loggedUser);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000,500);
         }
 
     }
+    private void uploadPic(File file,Path sourceDirectory) throws IOException {
+        //the name of the picture that uploaded is the username
+        Path targetDirectory = Paths.get(Main.imageDBPath + txt_userName.getText() + "." + Main.getExtention(file));
+        if(!new File(Main.imageDBPath + file.getName()).exists()) {
+            Files.copy(sourceDirectory, targetDirectory);
+            Main.loggedUser.setProfilePicPath(targetDirectory.toString());
+        }
+        else
+            System.out.println("already exist");
+    }
+
     public void delUser() throws SQLException {
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("האם אתה בטוח שאתה רוצה למחוק את המשתמש שלך?");
         alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
-            delete(Main.user.getUserName());
-            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
+            delete(Main.loggedUser.getUserName());
+            img_profile.imageProperty().set(null);
+            img_profile.setImage(null);
+            System.gc();
+            deleteProfilePic(Main.loggedUser.getProfilePicPath());
+            Main.loggedUser = null;
+            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 1000,500);
         }
         else{
             alert.close();
+        }
+    }
+
+    private void deleteProfilePic(String profilePicPath) {
+        if(Main.loggedUser.getProfilePicPath() != null &&
+                !profilePicPath.equals(Main.defaultProfilePicPath)){
+            File file = new File(profilePicPath);
+            try {
+                Files.delete(file.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Main.loggedUser.setProfilePicPath(null);
         }
     }
 
@@ -177,5 +219,20 @@ public class UserDetailsScreenController {
         stage.setResizable(false);
         stage.show();
         //Main.switchScene("../View/SwitchPassword.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
+    }
+
+    public void changeProfilePic() throws FileNotFoundException {
+        file = Main.openFileExplorer();
+        if (file!=null) {
+            if(Main.loggedUser.getProfilePicPath() != null) {
+                File oldPic = new File(Main.loggedUser.getProfilePicPath());
+                img_profile.imageProperty().set(null);
+                img_profile.setImage(null);
+                System.gc();
+                deleteProfilePic(oldPic.getPath());
+            }
+
+            img_profile.setImage(new Image(new FileInputStream(file)));
+        }
     }
 }

@@ -7,9 +7,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -25,6 +27,15 @@ public class Main extends Application {
     public static User user=new User();         //The user that we want to search!
     public static User loggedUser;
     public static boolean isProfile=false;
+    public static final String imageDBPath = "src\\DataBase\\ProfilePics\\";
+    public static final String defaultProfilePicPath = Main.imageDBPath + "defaultProfilePic.jpg";
+
+    public static String getExtention(File file) {
+            String fileName = file.getName();
+            if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+                return fileName.substring(fileName.lastIndexOf(".")+1);
+            else return "";
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -101,6 +112,19 @@ public class Main extends Application {
         user.setUserName(u.getUserName());
         user.setEmail(u.getEmail());
         user.setProfilePicPath(u.getProfilePicPath());
+    }
+
+    public static File openFileExplorer(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("View Pictures");
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("GIF", "*.gif"),
+                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                new FileChooser.ExtensionFilter("PNG", "*.png"));
+        return fileChooser.showOpenDialog(new Stage());
     }
 
 }

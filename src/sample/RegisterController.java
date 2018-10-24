@@ -11,10 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,10 +47,18 @@ public class RegisterController {
     public FlowPane Pane;
     public Button chooseFile;
     public ImageView profilePic;
-    private String cwd = System.getProperty("user.dir");
+    //private String cwd = System.getProperty("user.dir");
+    private static final String imageDBPath = Main.imageDBPath;
 
     protected   User user = new User();
     protected  File file;
+
+    public void initialize() throws FileNotFoundException {
+        file = new File(Main.defaultProfilePicPath);
+        profilePic.setImage(new Image(new FileInputStream(file)));
+        user.setProfilePicPath(file.getPath());
+    }
+
 // regular expression for mail valid
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -78,6 +92,20 @@ public class RegisterController {
         return !text.equals("בחר");
     }
 
+    public int validateAge( ) {
+        Date user_date = new Date();           //the date that the user enter.
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            user_date = formatter.parse(birthdate.getText());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        LocalDate start = LocalDate.of(user_date.getYear() + 1900, user_date.getMonth() + 1, user_date.getDate());
+        LocalDate end = LocalDate.now();
+        long years = ChronoUnit.YEARS.between(start, end);
+
+        return (int) years;
+    }
 
     public void signclicked() throws InterruptedException {
         if (!username.getText().isEmpty()) {
@@ -111,7 +139,7 @@ public class RegisterController {
         }
             else
             erorpass.setVisible(true);
-        if (validateDate(birthdate.getText())) {
+        if (validateDate(birthdate.getText()) && validateAge( )>17) {
             user.setBirthDate(birthdate.getText());
             erordate.setVisible(false);
         }
@@ -128,7 +156,12 @@ public class RegisterController {
         {
             if(agreeSign.isSelected()&&file!=null) {
                 user.print();
-                Query.insert((user));
+                try {
+                    uploadPic(file,file.toPath());
+                    Query.insert((user));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 regmsg();
                 Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 400, 300);
             }
@@ -160,31 +193,31 @@ public class RegisterController {
 
     public void OpenfileChoose() throws IOException {
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("View Pictures");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("GIF", "*.gif"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"));
-         file=fileChooser.showOpenDialog(new Stage());
+        file = Main.openFileExplorer();
         if (file!=null) {
-            uploadPic(file,file.toPath());
-            profilePic.setImage(new Image(new FileInputStream(cwd+"/src/"+file.getName())));
+            //uploadPic(file,file.toPath());
+            //profilePic.setImage(new Image(new FileInputStream(imageDBPath+file.getName())));//cwd+"/src/"+file.getName())));
+            profilePic.setImage(new Image(new FileInputStream(file)));
         }
     }
 
 
-private void uploadPic(File file,Path sourceDirectory) throws IOException {
-    Path targetDirectory = Paths.get(cwd+"/src/"+file.getName());
-   if(!new File(cwd+"/src/"+file.getName()).exists()) {
-       Files.copy(sourceDirectory, targetDirectory);
-       user.setProfilePicPath(targetDirectory.toString());
-   }
+    private void uploadPic(File file,Path sourceDirectory) throws IOException {
+        if (username != null) {
+            //the name of the picture that uploaded is the username
+            Path targetDirectory = Paths.get(imageDBPath + username.getText() + "." + Main.getExtention(file));
+            if (!new File(imageDBPath + file.getName()).exists()) {
+                Files.copy(sourceDirectory, targetDirectory);
+                user.setProfilePicPath(targetDirectory.toString());
+            } else
+                System.out.println("already exist");
+        }
         else
-       System.out.println("already exist");
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("נא מלא קודם את שם המשתמש");
+            alert.showAndWait();
+        }
     }
 
 }
