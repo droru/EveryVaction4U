@@ -23,26 +23,26 @@ public class SwitchPasswordController
     public Label lbl_newpass;
     public Label repat_pass;
 
-    private boolean changePass=true;
+    private boolean changePass=false;
 
 
     public void update_pass() throws SQLException {
         lbl_pass.setVisible(false);
         repat_pass.setVisible(false);
         lbl_newpass.setVisible(false);
-       User u =  search(Main.loggedUser.getUserName());
+        User u =  search(Main.loggedUser.getUserName());
             if(!u.getPassword().equals(curpass.getText())) {
                 lbl_pass.setText("*סיסמא ישנה אינה נכונה");
                 lbl_pass.setVisible(true);
             }
-
-            else if(newpass.getText().length()<4||newpass.getText().length()>8||repeat.getText().length()<4||repeat.getText().length()>8) {
-                lbl_pass.setVisible(false);
+            else if(newpass.getText().length()<4 || newpass.getText().length()>8) {
+                //lbl_pass.setVisible(false);
                 lbl_newpass.setText("*הכנס סיסמא בין 4-8 תווים");
                 lbl_newpass.setVisible(true);
-                repat_pass.setText("*הכנס סיסמא בין 4-8 תווים");
-                repat_pass.setVisible(true);
-                changePass=false;
+                if(repeat.getText().length()<4 || repeat.getText().length()>8) {
+                    repat_pass.setText("*הכנס סיסמא בין 4-8 תווים");
+                    repat_pass.setVisible(true);
+                }
             }
             else {
                 lbl_pass.setVisible(false);
@@ -60,13 +60,12 @@ public class SwitchPasswordController
                 alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
                 alert.showAndWait();
                 if (alert.getResult() == ButtonType.OK) {
-                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 720, 500);
                     ((Stage) repat_pass.getScene().getWindow()).close();
                 }
             }
 
             else if (!repeat.getText().equals(newpass.getText())){
-                repat_pass.setText("סיסמאות לא תואמות");
+                repat_pass.setText("*סיסמאות לא תואמות");
                 repat_pass.setVisible(true);
             }
         }

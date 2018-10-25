@@ -45,15 +45,14 @@ public class UserDetailsScreenController {
     public Label erorfirstname;
     public Label erorlastname;
     public Label erormail;
-    public Label lbl_city1;
 
     private File file;
-
     /*
     public Label lbl_firstName1;
     public Label lbl_lastName1;
     public Label lbl_birthDate1;
     public Label lbl_email1;
+    public Label lbl_city1;
 */
     public void initialize() throws FileNotFoundException {
 
@@ -61,11 +60,10 @@ public class UserDetailsScreenController {
         {
             title.setText("אזור אישי");
             setTextInDetail();
-            lbl_city1.setText(Main.loggedUser.getCity());
+            Cb_city.setValue(Main.loggedUser.getCity());
             txt_email.setText(Main.loggedUser.getEmail());
             img_profile.setImage(new Image(new FileInputStream(Main.loggedUser.getProfilePicPath())));
 
-            updateButton.setVisible(true);
             makeEdit.setVisible(true);
             changePass.setVisible(true);
             deleteuser.setVisible(true);
@@ -77,23 +75,16 @@ public class UserDetailsScreenController {
             txt_firstName.setText(Main.user.getFirstName());
             txt_lastName.setText(Main.user.getLastName());
             txt_birthDate.setText(Main.user.getBirthDate());
-            lbl_city1.setText(Main.user.getCity());
+            Cb_city.setValue(Main.user.getCity());
             txt_email.setText(Main.user.getEmail());
             img_profile.setImage(new Image(new FileInputStream(Main.user.getProfilePicPath())));
 
-            updateButton.setVisible(false);
             makeEdit.setVisible(false);
             changePass.setVisible(false);
             deleteuser.setVisible(false);
             returnMain.setVisible(false);
         }
         updateButton.setVisible(false);
-        txt_userName.setVisible(true);
-        txt_firstName.setVisible(true);
-        txt_lastName.setVisible(true);
-        txt_birthDate.setVisible(true);
-        Cb_city.setVisible(false);
-        txt_email.setVisible(true);
 
     }
     public void enableEdit()
@@ -102,9 +93,8 @@ public class UserDetailsScreenController {
         txt_firstName.setDisable(false);
         txt_lastName.setDisable(false);
         txt_birthDate.setDisable(false);
-        Cb_city.setVisible(true);
+        Cb_city.setDisable(false);
         txt_email.setDisable(false);
-        lbl_city1.setVisible(false);
 
         txt_firstName.setText(Main.loggedUser.getFirstName());
         setTextInDetail();
@@ -218,7 +208,6 @@ public class UserDetailsScreenController {
         stage.initOwner((Stage)txt_firstName.getScene().getWindow());
         stage.setResizable(false);
         stage.show();
-        //Main.switchScene("../View/SwitchPassword.fxml", (Stage) updateButton.getScene().getWindow(), 720,500);
     }
 
     public void changeProfilePic() throws FileNotFoundException {

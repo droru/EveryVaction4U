@@ -87,7 +87,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <ChoiceBox fx:id="Cb_city" prefWidth="200" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
+    <ChoiceBox fx:id="Cb_city" prefWidth="200" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="בחר" />
@@ -234,9 +234,8 @@
         <Label fx:id="lbl_firstName1" prefHeight="22.0" prefWidth="154.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label fx:id="lbl_lastName1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
         <Label fx:id="lbl_birthDate1" prefHeight="25.0" prefWidth="152.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-       -->
-    <Label fx:id="lbl_city1" prefHeight="24.0" prefWidth="150.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-
+        <Label fx:id="lbl_city1" prefHeight="24.0" prefWidth="150.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+    -->
     <Button fx:id="updateButton" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" onAction="#updateClicked" onMouseClicked="#updateClicked" prefHeight="26.0" prefWidth="80.0" text="עדכן" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
     <Button fx:id="returnMain" onAction="#returnClick" prefHeight="26.0" prefWidth="126.0" text="חזרה למסך הבית" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
     </GridPane>
