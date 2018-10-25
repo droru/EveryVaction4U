@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,7 +18,7 @@
         <ColumnConstraints hgrow="ALWAYS" />
         <ColumnConstraints hgrow="NEVER" />
         <ColumnConstraints hgrow="NEVER" maxWidth="210.0" minWidth="192.0" prefWidth="210.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="118.0" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
     <rowConstraints>
@@ -62,7 +61,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </Label>
-    <Label alignment="BOTTOM_LEFT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="אימייל:" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <Label alignment="BASELINE_LEFT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="אימייל:" GridPane.columnIndex="1" GridPane.rowIndex="6">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
@@ -87,7 +86,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <ChoiceBox fx:id="Cb_city" prefWidth="200" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+    <ChoiceBox fx:id="Cb_city" disable="true" prefWidth="200" GridPane.columnIndex="2" GridPane.rowIndex="5">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="בחר" />
@@ -206,7 +205,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </ChoiceBox>
-    <TextField fx:id="txt_email" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+    <TextField fx:id="txt_email" alignment="CENTER_LEFT" disable="true" promptText="example@example.com" GridPane.columnIndex="2" GridPane.rowIndex="6">
         <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
@@ -217,7 +216,7 @@
         </GridPane.margin>
         <!--<Image url="@.png" />-->
     </ImageView>
-    <Button fx:id="changeProfilePic" visible="false" onAction="#changeProfilePic" prefHeight="26.0" prefWidth="120.0" text="שנה תמונה" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+    <Button fx:id="changeProfilePic" onAction="#changeProfilePic" prefHeight="26.0" prefWidth="120.0" text="שנה תמונה" visible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
 
     <!--side links-->
     <Hyperlink fx:id="changePass" onMouseClicked="#changepass" text="שנה סיסמא" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
@@ -225,7 +224,7 @@
     <Hyperlink fx:id="deleteuser" onMousePressed="#delUser" text="מחק משתמש" visible="false" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
 
     <!--error messages-->
-    <Label fx:id="erorfirstname" styleClass="erorMes" text="*עליך למלא שדה זה" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+    <Label fx:id="erorfirstname" prefHeight="18.0" prefWidth="110.0" styleClass="erorMes" text="*עליך למלא שדה זה" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
     <Label fx:id="erorlastname" styleClass="erorMes" text="*עליך למלא שדה זה" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
     <Label fx:id="errordate" styleClass="erorMes" text="&quot;*הקלד תאריך תקין בפורמט dd/mm/yyyy&quot;" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
     <Label fx:id="erorcity" styleClass="erorMes" text="*בחר עיר מגורים" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />

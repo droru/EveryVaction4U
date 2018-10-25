@@ -22,8 +22,6 @@ import java.sql.SQLException;
 
 import static Model.Query.delete;
 import static Model.Query.update;
-import static sample.RegisterController.validateMail;
-import static sample.RegisterController.validateName;
 
 public class UserDetailsScreenController {
     @FXML
@@ -45,7 +43,7 @@ public class UserDetailsScreenController {
     public Label erorfirstname;
     public Label erorlastname;
     public Label erormail;
-
+    public Label erorcity;
     private File file;
     /*
     public Label lbl_firstName1;
@@ -89,10 +87,10 @@ public class UserDetailsScreenController {
     }
     public void enableEdit()
     {
-        txt_userName.setDisable(false);
+        txt_userName.setDisable(true);
         txt_firstName.setDisable(false);
         txt_lastName.setDisable(false);
-        txt_birthDate.setDisable(false);
+        txt_birthDate.setDisable(true);
         Cb_city.setDisable(false);
         txt_email.setDisable(false);
 
@@ -113,45 +111,112 @@ public class UserDetailsScreenController {
     }
 
     public void returnClick(){
-        Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+        if(Main.isProfile && isDataNotSaved()){
+            Alert alert=new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("השינויים לא נשמרו");
+            alert.setContentText("האם אתה בטוח שאתה רוצה לחזור למסך הבית ללא שמירה?");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK)
+                Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+            else
+                alert.close();
+        }
+        else
+            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
     }
+    private boolean isDataNotSaved() {
+        if(!txt_firstName.getText().equals(Main.loggedUser.getFirstName()))
+            return true;
+        if(!txt_lastName.getText().equals(Main.loggedUser.getLastName()))
+            return true;
+        if(!Cb_city.getValue().toString().equals(Main.loggedUser.getCity()))
+            return true;
+        if(!txt_email.getText().equals(Main.loggedUser.getEmail()))
+            return true;
+        if(file != null)
+            return true;
+        return false;
+    }
+
     public void updateClicked() throws SQLException {
-
-
-        if (validateMail(txt_email.getText())) {
+        if (Validation.validateMail(txt_email.getText())) {
             Main.loggedUser.setEmail(txt_email.getText());
             erormail.setVisible(false);
         }
         else
             erormail.setVisible(true);
-        if (validateName(txt_firstName.getText())) {
+        if (Validation.validateName(txt_firstName.getText())) {
             Main.loggedUser.setFirstName(txt_firstName.getText());
             erorfirstname.setVisible(false);
         }
-        else
+        else{
             erorfirstname.setVisible(true);
-        if (validateName(txt_lastName.getText())) {
+            if(txt_firstName.getText().isEmpty())
+                erorfirstname.setText("*עליך למלא שדה זה");
+            else
+                erorfirstname.setText("*ערך השדה אינו חוקי");
+        }
+        if (Validation.validateName(txt_lastName.getText())) {
             Main.loggedUser.setLastName(txt_lastName.getText());
             erorlastname.setVisible(false);
         }
-        else
+        else{
             erorlastname.setVisible(true);
+            if(txt_lastName.getText().isEmpty())
+                erorlastname.setText("*עליך למלא שדה זה");
+            else
+                erorlastname.setText("*ערך השדה אינו חוקי");
+        }
+        if (Validation.validatecity(Cb_city.getValue().toString())) {
+            Main.loggedUser.setCity(Cb_city.getValue().toString());
+            erorcity.setVisible(false);
+        }
+        else
+            erorcity.setVisible(true);
 
-        if(!erormail.isVisible()&&!erorlastname.isVisible()&&!erorfirstname.isVisible())
+        if(!erormail.isVisible()&&!erorlastname.isVisible()&&!erorfirstname.isVisible() && !erorcity.isVisible())
         {
             Main.loggedUser.setEmail(txt_email.getText());
             Main.loggedUser.setFirstName(txt_firstName.getText());
             Main.loggedUser.setLastName(txt_lastName.getText());
-            //Main.user.setCity(_city.getValue().toString());
+            Main.user.setCity(Cb_city.getValue().toString());
 
             try {
-                uploadPic(file,file.toPath());
-                update(Main.loggedUser);
+                if(file != null)//if file is null the pic didn't updated
+                {
+                    img_profile.imageProperty().set(null);
+                    img_profile.setImage(null);
+                    System.gc();
+                    deleteProfilePic(new File(Main.loggedUser.getProfilePicPath()).getPath());
+                    uploadPic(file, file.toPath());
+                }
+                int result = update(Main.loggedUser);
+                if (result == 0){
+                    sucsses();
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000,500);
+                }
+                else
+                    errormsg();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000,500);
         }
+
+    }
+    //alert about successful registration
+    private void sucsses(){
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("העדכון בוצע בהצלחה \n הינך מועבר למסך הבית ");
+        alert.showAndWait();
+        alert.close();
+    }
+    //alert about bad registration, username already exists
+    private void errormsg(){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("ארעה שגיאה בעת העדכון");
+        alert.showAndWait();
+        alert.close();
 
     }
     private void uploadPic(File file,Path sourceDirectory) throws IOException {
@@ -213,14 +278,6 @@ public class UserDetailsScreenController {
     public void changeProfilePic() throws FileNotFoundException {
         file = Main.openFileExplorer();
         if (file!=null) {
-            if(Main.loggedUser.getProfilePicPath() != null) {
-                File oldPic = new File(Main.loggedUser.getProfilePicPath());
-                img_profile.imageProperty().set(null);
-                img_profile.setImage(null);
-                System.gc();
-                deleteProfilePic(oldPic.getPath());
-            }
-
             img_profile.setImage(new Image(new FileInputStream(file)));
         }
     }

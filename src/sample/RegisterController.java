@@ -59,53 +59,6 @@ public class RegisterController {
         user.setProfilePicPath(file.getPath());
     }
 
-// regular expression for validation
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
-            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
-    public static final Pattern VALID_USER_NAME_LAST_REGEX =
-            Pattern.compile("(?<=\\s|^)[a-zA-Z][a-zA-Z]*(?=[.,;:]?\\s|$)",Pattern.UNICODE_CASE);
-
-    public static final Pattern VALID_Date =
-            Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9][0-9][0-9])$",Pattern.CASE_INSENSITIVE);
-
-
-    public static boolean validateDate(String emailStr) {
-        Matcher matcher = VALID_Date .matcher(emailStr);
-        return matcher.find();
-    }
-
-    public static boolean validateMail(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return matcher.find();
-    }
-
-    public static boolean validateName(String value) {
-        Matcher matcher = VALID_USER_NAME_LAST_REGEX .matcher(value);
-        return matcher.find();
-    }
-    public static boolean validatePassword(String text) {
-        return text.length() > 3 && text.length() < 9 && !text.contains(" ");
-    }
-    public static boolean validatecity(String text) {
-        return !text.equals("בחר");
-    }
-
-    public int validateAge( ) {
-        Date user_date = new Date();           //the date that the user enter.
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            user_date = formatter.parse(birthdate.getText());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        LocalDate start = LocalDate.of(user_date.getYear() + 1900, user_date.getMonth() + 1, user_date.getDate());
-        LocalDate end = LocalDate.now();
-        long years = ChronoUnit.YEARS.between(start, end);
-
-        return (int) years;
-    }
-
     public void signclicked() throws InterruptedException {
         if (!username.getText().isEmpty()) {
             user.setUserName(username.getText());
@@ -113,14 +66,14 @@ public class RegisterController {
         }
         else
             erorusername.setVisible(true);
-        if (validateMail(email.getText())) {
+        if (Validation.validateMail(email.getText())) {
             user.setEmail(email.getText());
             erormail.setVisible(false);
         }
         else
             erormail.setVisible(true);
 
-        if (validateName(firstname.getText())) {
+        if (Validation.validateName(firstname.getText())) {
             user.setFirstName(firstname.getText());
             erorname.setVisible(false);
         }
@@ -131,7 +84,7 @@ public class RegisterController {
             else
                 erorname.setText("*ערך השדה אינו חוקי");
         }
-        if (validateName(lastname.getText())) {
+        if (Validation.validateName(lastname.getText())) {
             user.setLastName(lastname.getText());
             erorlastname.setVisible(false);
         }
@@ -142,14 +95,14 @@ public class RegisterController {
             else
                 erorlastname.setText("*ערך השדה אינו חוקי");
         }
-        if (validatePassword(password.getText())) {
+        if (Validation.validatePassword(password.getText())) {
             user.setPassword(password.getText());
             erorpass.setVisible(false);
         }
             else
             erorpass.setVisible(true);
-        if (validateDate(birthdate.getText())) {
-            if(validateAge( )>17) {
+        if (Validation.validateDate(birthdate.getText())) {
+            if(Validation.validateAge(birthdate.getText())>17) {
                 user.setBirthDate(birthdate.getText());
                 erordate.setVisible(false);
             }
@@ -162,7 +115,7 @@ public class RegisterController {
             erordate.setVisible(true);
             erordate.setText("*הקלד תאריך תקין בפורמט dd/mm/yyyy");
         }
-        if (validatecity(city.getValue().toString())) {
+        if (Validation.validatecity(city.getValue().toString())) {
             user.setCity(city.getValue().toString());
             erorcity.setVisible(false);
         }
