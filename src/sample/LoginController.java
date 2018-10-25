@@ -12,7 +12,7 @@ public class LoginController {
     public TextField Usernamefield;
     public PasswordField Passwordfield;
     public Hyperlink Registerlink;
-    public Label erorm;
+    //public Label erorm;
     public Label erorm2;
 
 
@@ -25,18 +25,19 @@ public class LoginController {
             if (user != null) {
                 if (user.getPassword().equals(Passwordfield.getText())) {
                     System.out.println("user found");
+                    erorm2.setText("");
                     Main.loggedUser = user;
                     Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
                     ((Stage) LoginButton.getScene().getWindow()).close();
                 } else {
-                    erorm.setVisible(false);
-                    erorm2.setVisible(true);
+                    erorm2.setText("*שם משתמש או סיסמא לא נכונים");
                 }
             }
+            else
+                erorm2.setText("*שם משתמש לא קיים");
 
         } else
-            erorm.setVisible(true);
-
+            erorm2.setText("*נא להכניס שדות חוקיים");
     }
 
 
