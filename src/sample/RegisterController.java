@@ -59,8 +59,7 @@ public class RegisterController {
         user.setProfilePicPath(file.getPath());
     }
 
-// regular expression for mail valid
-
+// regular expression for validation
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
@@ -68,7 +67,7 @@ public class RegisterController {
             Pattern.compile("(?<=\\s|^)[a-zA-Z][a-zA-Z]*(?=[.,;:]?\\s|$)",Pattern.UNICODE_CASE);
 
     public static final Pattern VALID_Date =
-            Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9])?[0-9][0-9]$",Pattern.CASE_INSENSITIVE);
+            Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9][0-9][0-9])$",Pattern.CASE_INSENSITIVE);
 
 
     public static boolean validateDate(String emailStr) {
@@ -125,26 +124,44 @@ public class RegisterController {
             user.setFirstName(firstname.getText());
             erorname.setVisible(false);
         }
-        else
+        else {
             erorname.setVisible(true);
+            if(firstname.getText().isEmpty())
+                erorname.setText("*עליך למלא שדה זה");
+            else
+                erorname.setText("*ערך השדה אינו חוקי");
+        }
         if (validateName(lastname.getText())) {
             user.setLastName(lastname.getText());
             erorlastname.setVisible(false);
         }
-        else
+        else {
             erorlastname.setVisible(true);
+            if(lastname.getText().isEmpty())
+                erorlastname.setText("*עליך למלא שדה זה");
+            else
+                erorlastname.setText("*ערך השדה אינו חוקי");
+        }
         if (validatePassword(password.getText())) {
             user.setPassword(password.getText());
             erorpass.setVisible(false);
         }
             else
             erorpass.setVisible(true);
-        if (validateDate(birthdate.getText()) && validateAge( )>17) {
-            user.setBirthDate(birthdate.getText());
-            erordate.setVisible(false);
+        if (validateDate(birthdate.getText())) {
+            if(validateAge( )>17) {
+                user.setBirthDate(birthdate.getText());
+                erordate.setVisible(false);
+            }
+            else{
+                erordate.setVisible(true);
+                erordate.setText("*גיל המשתמש חייב להיות מעל 18");
+            }
         }
-        else
+        else {
             erordate.setVisible(true);
+            erordate.setText("*הקלד תאריך תקין בפורמט dd/mm/yyyy");
+        }
         if (validatecity(city.getValue().toString())) {
             user.setCity(city.getValue().toString());
             erorcity.setVisible(false);
@@ -158,12 +175,16 @@ public class RegisterController {
                 user.print();
                 try {
                     uploadPic(file,file.toPath());
-                    Query.insert((user));
+                    int result = Query.insert((user));
+                    if (result == 0) {
+                        regmsg();
+                        Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 400, 300);
+                    }
+                    else if (result == 1)
+                        errorregmsg();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                regmsg();
-                Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 400, 300);
             }
             else {
                 if (file==null)
@@ -182,9 +203,18 @@ public class RegisterController {
 
     }
 
+    //alert about successful registration
    private void regmsg(){
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText("תודה שנרשמת \n הינך מועבר לדף ההתחברות ");
+        alert.showAndWait();
+        alert.close();
+    }
+    //alert about bad registration, username already exists
+    private void errorregmsg(){
+        Alert alert=new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("ארעה שגיאה בעת ההרשמה");
+        alert.setContentText("שם המשתמש שנבחר קיים כבר במערכת");
         alert.showAndWait();
         alert.close();
 
