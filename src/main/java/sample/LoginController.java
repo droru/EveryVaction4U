@@ -27,7 +27,7 @@ public class LoginController {
                     System.out.println("user found");
                     erorm2.setText("");
                     Main.loggedUser = user;
-                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainWidth);
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
                     ((Stage) LoginButton.getScene().getWindow()).close();
                 } else {
                     erorm2.setText("*שם משתמש או סיסמא לא נכונים");

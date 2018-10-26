@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -34,6 +35,7 @@ public class UserDetailsScreenController {
     public TextField txt_email;
     public Button updateButton;
     public Button returnMain;
+    public Button close;
     public Button changeProfilePic;
     public Hyperlink makeEdit;
     public Hyperlink changePass;
@@ -66,6 +68,7 @@ public class UserDetailsScreenController {
             changePass.setVisible(true);
             deleteuser.setVisible(true);
             returnMain.setVisible(true);
+            close.setVisible(false);
         }
         else{
             title.setText("פרופיל משתמש");
@@ -81,6 +84,7 @@ public class UserDetailsScreenController {
             changePass.setVisible(false);
             deleteuser.setVisible(false);
             returnMain.setVisible(false);
+            close.setVisible(true);
         }
         updateButton.setVisible(false);
 
@@ -280,5 +284,9 @@ public class UserDetailsScreenController {
         if (file!=null) {
             img_profile.setImage(new Image(new FileInputStream(file)));
         }
+    }
+
+    public void close(ActionEvent actionEvent) {
+        ((Stage) close.getScene().getWindow()).close();
     }
 }

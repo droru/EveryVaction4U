@@ -87,7 +87,7 @@ public class RegisterController {
             user.setPassword(password.getText());
             erorpass.setVisible(false);
         }
-            else
+        else
             erorpass.setVisible(true);
         if (Validation.validateDate(birthdate.getText())) {
             if(Validation.validateAge(birthdate.getText())>17) {
@@ -167,7 +167,6 @@ public class RegisterController {
         file = Main.openFileExplorer();
         if (file!=null) {
             //uploadPic(file,file.toPath());
-            //profilePic.setImage(new Image(new FileInputStream(imageDBPath+file.getName())));//cwd+"/src/"+file.getName())));
             profilePic.setImage(new Image(new FileInputStream(file)));
         }
     }

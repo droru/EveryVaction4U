@@ -20,7 +20,6 @@
       <Button fx:id="LoginButton" layoutX="75.0" layoutY="84.0" mnemonicParsing="false" onMousePressed="#Loginclicked" text="כניסה" />
       <Hyperlink fx:id="Registerlink" accessibleHelp="לחץ כדי להירשם" accessibleRole="BUTTON" layoutX="200.0" layoutY="120.0" onMouseClicked="#openregister" text="הירשם" />
       <Label layoutX="259.0" layoutY="124.0" text="לא רשום עדיין?" />
-      <!--<Label fx:id="erorm" layoutX="127.0" layoutY="105.0" styleClass="erorMes" text="*נא להכניס שדות חוקיים" textFill="#f20000" visible="false" AnchorPane.rightAnchor="160.0" />-->
-      <Label fx:id="erorm2" alignment="CENTER_RIGHT" layoutX="134.0" layoutY="100.0" prefHeight="18.0" prefWidth="189.0" styleClass="erorMes" textFill="#fd0505" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="126.0" />
+      <Label fx:id="erorm2" alignment="CENTER_RIGHT" layoutX="136.0" layoutY="105.0" prefHeight="21.0" prefWidth="220.0" styleClass="erorMes" textFill="#fd0505" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="92.0" />
    </AnchorPane>
 </FlowPane>

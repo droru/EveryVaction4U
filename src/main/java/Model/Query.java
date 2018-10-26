@@ -23,7 +23,7 @@ public class Query
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
+        String url = "jdbc:sqlite:src/main/java/DataBase/Vacation4You-DB";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
