@@ -1,7 +1,6 @@
 package sample;
 
 import Model.User;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -14,11 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.io.IOException;
 import java.sql.SQLException;
-
 import static Model.Query.search;
 
 
@@ -90,7 +86,7 @@ public class MainScreenController {
             System.out.println("do search");
         }
     }
-    public void userSearchPresses(KeyEvent keyEvent) throws SQLException, IOException {
+    public void userSearchPresses(KeyEvent keyEvent) throws IOException {
         User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER))
         {
@@ -120,14 +116,9 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner((Stage)txt_searchUser.getScene().getWindow());
+        stage.initOwner(txt_searchUser.getScene().getWindow());
         stage.show();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                LoginRegister.setDisable(false);
-            }
-        });
+        stage.setOnCloseRequest(event -> LoginRegister.setDisable(false));
     }
 
 

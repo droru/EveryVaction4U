@@ -47,7 +47,7 @@ public class RegisterController {
         user.setProfilePicPath(file.getPath());
     }
 
-    public void signclicked() throws InterruptedException {
+    public void signclicked() {
         if (!username.getText().isEmpty()) {
             user.setUserName(username.getText());
             erorusername.setVisible(false);

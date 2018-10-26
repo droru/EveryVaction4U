@@ -274,7 +274,7 @@ public class UserDetailsScreenController {
         stage.setTitle("Change password");
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner((Stage)txt_firstName.getScene().getWindow());
+        stage.initOwner(txt_firstName.getScene().getWindow());
         stage.setResizable(false);
         stage.show();
     }

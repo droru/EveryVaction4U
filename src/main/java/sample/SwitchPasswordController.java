@@ -1,23 +1,19 @@
 package sample;
 
-
 import Model.User;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
-
 import static Model.Query.search;
-import static Model.Query.search_by_pass;
 import static Model.Query.update;
 
 
 public class SwitchPasswordController
 {
-    public TextField curpass;
-    public TextField newpass;
-    public TextField repeat;
+    public PasswordField curpass;
+    public PasswordField newpass;
+    public PasswordField repeat;
 
     public Label lbl_pass;
     public Label lbl_newpass;

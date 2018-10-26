@@ -227,10 +227,10 @@
     <Button fx:id="chooseFile" onAction="#OpenfileChoose" prefHeight="26.0" prefWidth="120.0" text="העלה תמונה" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="TOP" />
 
     <!--error messages-->
-    <Label fx:id="erorterms" alignment="CENTER_LEFT" styleClass="erorMes" text="*נא אשר את התנאים" visible="false" textAlignment="RIGHT" textFill="RED" GridPane.columnIndex="1" GridPane.rowIndex="9" GridPane.valignment="TOP" />
+    <Label fx:id="erorterms" alignment="CENTER_LEFT" styleClass="erorMes" text="*נא אשר את התנאים" textAlignment="RIGHT" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="9" GridPane.valignment="TOP" />
     <Label fx:id="erormail" alignment="CENTER_RIGHT" styleClass="erorMes" text="*הקלד מייל תקין" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="7" />
     <Label fx:id="erorcity" alignment="CENTER_RIGHT" styleClass="erorMes" text="*בחר עיר מגורים" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-    <Label fx:id="erordate" alignment="CENTER_RIGHT" prefWidth="270.0" styleClass="erorMes" text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" textAlignment="RIGHT" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+    <Label fx:id="erordate" prefWidth="270.0" styleClass="erorMes" text="*הקלד תאריך תקין בפורמט dd/mm/yyyy" textAlignment="LEFT" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
     <Label fx:id="erorpass" alignment="CENTER_RIGHT" styleClass="erorMes" text="*הקלד סיסמא בין 4-8 תווים" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
     <Label fx:id="erorusername" alignment="CENTER_RIGHT" styleClass="erorMes" text="*עליך למלא שדה זה " visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
     <Label fx:id="erorname" alignment="CENTER_RIGHT" styleClass="erorMes" text="*עליך למלא שדה זה " textAlignment="RIGHT" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
