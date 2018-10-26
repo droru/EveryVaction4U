@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<FlowPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterController">
+<FlowPane fx:id="Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="684.0" xmlns="http://javafx.com/javafx/8.0.192 xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RegisterController">
     <AnchorPane prefHeight="402.0" prefWidth="658.0">
         <GridPane layoutX="347.0" layoutY="98.0" prefHeight="183.0" prefWidth="232.0" AnchorPane.bottomAnchor="120.40000000000003" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="110.0">
             <columnConstraints>
