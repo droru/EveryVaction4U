@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.DatePicker?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainScreenController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    </rowConstraints>
+    <!--left side bar-->
+    <VBox alignment="TOP_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
+        <Label fx:id="lbl_welcome" alignment="CENTER_RIGHT">
+            <VBox.margin>
+                <Insets>
+                    <right>8</right>
+                    <left>20</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </Label>
+        <Hyperlink fx:id="LoginRegister" managed="true" alignment="CENTER_RIGHT" accessibleRole="BUTTON"  maxWidth="150" onMousePressed="#loginClicked" prefWidth="150" text="התחבר/הרשם" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>20</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </Hyperlink>
+        <VBox fx:id="loggedUserBox" alignment="TOP_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
+            <Hyperlink alignment="TOP_RIGHT" maxWidth="150" onAction="#seeProfileClicked" text="אזור אישי">
+                <VBox.margin>
+                    <Insets>
+                        <top>5</top>
+                        <bottom>5</bottom>
+                        <right>5</right>
+                        <left>20</left>
+                    </Insets>
+                </VBox.margin>
+            </Hyperlink>
+            <TextField fx:id="txt_searchUser" alignment="CENTER_RIGHT" maxWidth="150" onKeyPressed="#userSearchPresses" prefWidth="100" promptText="חפש משתמש...">
+                <VBox.margin>
+                    <Insets>
+                        <bottom>5</bottom>
+                        <right>5</right>
+                        <left>20</left>
+                    </Insets>
+                </VBox.margin>
+            </TextField>
+            <Button prefWidth="150" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="טיסה חדשה">
+                <graphic>
+                    <ImageView fx:id="img_add" fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+                <VBox.margin>
+                    <Insets>
+                        <bottom>5</bottom>
+                        <right>5</right>
+                        <left>20</left>
+                    </Insets>
+                </VBox.margin>
+            </Button>
+            <Hyperlink alignment="BOTTOM_RIGHT" maxWidth="150" onAction="#logOutClicked" text="התנתק">
+                <VBox.margin>
+                    <Insets>
+                        <top>5</top>
+                        <bottom>5</bottom>
+                        <right>5</right>
+                        <left>20</left>
+                    </Insets>
+                </VBox.margin>
+            </Hyperlink>
+        </VBox>
+    </VBox>
+
+    <!--flights and advanced search-->
+    <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <VBox fx:id="searchBox">
+            <VBox.margin>
+                <Insets bottom="5" left="5" right="20" top="5" />
+            </VBox.margin>
+            <TextField fx:id="txt_searchDestination" onKeyPressed="#destinationSearchPressed" promptText="הקלד יעד לחיפוש...">
+                <VBox.margin>
+                    <Insets>
+                        <top>5</top>
+                        <bottom>5</bottom>
+                        <right>5</right>
+                        <left>5</left>
+                    </Insets>
+                </VBox.margin>
+            </TextField>
+            <CheckBox fx:id="advanceSearchCheckbox" onAction="#advanceSearchChacked" text="הצג אפשרויות לחיפוש מתקדם">
+                <VBox.margin>
+                    <Insets>
+                        <top>5</top>
+                        <bottom>5</bottom>
+                        <left>5</left>
+                        <right>5</right>
+                    </Insets>
+                </VBox.margin>
+            </CheckBox>
+
+            <GridPane fx:id="advancedSearchBox"  alignment="CENTER_LEFT" managed="false" visible="false">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180"/>
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0"/>
+                    <RowConstraints minHeight="30.0" />
+                </rowConstraints>
+
+                <ComboBox promptText="סינון לפי" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="150">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="מהזול ליקר" />
+                            <String fx:value="מהיקר לזול" />
+                            <String fx:value="הכי חם" />
+                        </FXCollections>
+                    </items>
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <ComboBox promptText="חברת תעופה" GridPane.rowIndex="1" GridPane.columnIndex="0" prefWidth="150">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <HBox GridPane.rowIndex="1" GridPane.columnIndex="1" alignment="CENTER_LEFT">
+                    <Label text="מ " textAlignment="CENTER"/>
+                    <DatePicker prefWidth="150">
+                        <GridPane.margin>
+                            <Insets top="5" bottom="5" right="5" left="5"/>
+                        </GridPane.margin>
+                    </DatePicker>
+                    <Label text=" עד " textAlignment="CENTER"/>
+                    <DatePicker prefWidth="150">
+                        <GridPane.margin>
+                            <Insets top="5" bottom="5" right="5" left="5"/>
+                        </GridPane.margin>
+                    </DatePicker>
+                </HBox>
+                <CheckBox text="ישיר/קונקשיין" GridPane.rowIndex="2" GridPane.columnIndex="0">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </CheckBox>
+                <ComboBox promptText="סוג כבודה" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5"/>
+                    </GridPane.margin>
+                </ComboBox>
+                <CheckBox text="קניית כרטיסים בנפרד" GridPane.rowIndex="3" GridPane.columnIndex="0">
+                    <GridPane.margin>
+                        <Insets top="5" bottom="5" right="5" left="5"/>
+                    </GridPane.margin>
+                </CheckBox>
+            </GridPane>
+
+        </VBox>
+        <TableView nodeOrientation="RIGHT_TO_LEFT">
+            <columns>
+                <TableColumn prefWidth="75.0" text="מספר טיסה" />
+                <TableColumn prefWidth="75.0" text="יעד" />
+                <TableColumn prefWidth="75.0" text="תאריך הלוך" />
+                <TableColumn prefWidth="75.0" text="תאריך חזרה" />
+                <TableColumn prefWidth="75.0" text="מוכר" />
+            </columns>
+            <VBox.margin>
+                <Insets>
+                    <top>5</top>
+                    <bottom>5</bottom>
+                    <right>20</right>
+                    <left>5</left>
+                </Insets>
+            </VBox.margin>
+        </TableView>
+    </VBox>
+
+    <!--hot flights-->
+    <Label alignment="TOP_CENTER" maxWidth="200" prefWidth="200" style="-fx-text-fill: red" styleClass="title" text="5 הטיסות הכי חמות" GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <VBox.margin>
+            <Insets>
+                <top>5</top>
+                <bottom>5</bottom>
+                <right>5</right>
+                <left>5</left>
+            </Insets>
+        </VBox.margin>
+    </Label>
+    <VBox alignment="TOP_CENTER" maxWidth="200" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <TextArea fx:id="textArea_firstFlight" editable="false" minHeight="80" prefWidth="100.0" text="1">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>5</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </TextArea>
+        <TextArea fx:id="textArea_secondFlight" editable="false" minHeight="80" prefWidth="100.0" text="2">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>5</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </TextArea>
+        <TextArea fx:id="textArea_thirdFlight" editable="false" minHeight="80" prefWidth="100.0" text="3">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>5</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </TextArea>
+        <TextArea fx:id="textArea_fourthFlight" editable="false" minHeight="80" prefWidth="100.0" text="4">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>5</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </TextArea>
+        <TextArea fx:id="textArea_fifthFlight" editable="false" minHeight="80" prefWidth="100.0" text="5">
+            <VBox.margin>
+                <Insets>
+                    <bottom>5</bottom>
+                    <right>5</right>
+                    <left>5</left>
+                    <top>5</top>
+                </Insets>
+            </VBox.margin>
+        </TextArea>
+    </VBox>
+
+</GridPane>
