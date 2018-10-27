@@ -15,7 +15,7 @@ public class Query
     private static String Picture;
     public static Connection conn;
 
-    private static Connection connect() throws SQLException {
+    private static Connection connect() {
         // SQLite connection string
       //  DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
         try {
@@ -23,7 +23,7 @@ public class Query
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
+        String url = "jdbc:sqlite:src/main/java/DataBase/Vacation4You-DB";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -74,7 +74,7 @@ public class Query
     }
 
 
-    public static  User search(String username) throws SQLException {
+    public static  User search(String username) {
        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
         String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email,Picture "
@@ -108,7 +108,7 @@ public class Query
     }
 
 
-    public static  User search_by_pass(String password) throws SQLException
+    public static  User search_by_pass(String password)
     {
         // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
@@ -120,7 +120,7 @@ public class Query
 
     // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
 
-    public static int delete(String user) throws SQLException {
+    public static int delete(String user) {
         String sql = "DELETE FROM Users WHERE UserName = ?";
 
         User u = search(user);

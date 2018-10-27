@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -34,6 +35,7 @@ public class UserDetailsScreenController {
     public TextField txt_email;
     public Button updateButton;
     public Button returnMain;
+    public Button close;
     public Button changeProfilePic;
     public Hyperlink makeEdit;
     public Hyperlink changePass;
@@ -66,6 +68,7 @@ public class UserDetailsScreenController {
             changePass.setVisible(true);
             deleteuser.setVisible(true);
             returnMain.setVisible(true);
+            close.setVisible(false);
         }
         else{
             title.setText("פרופיל משתמש");
@@ -81,6 +84,7 @@ public class UserDetailsScreenController {
             changePass.setVisible(false);
             deleteuser.setVisible(false);
             returnMain.setVisible(false);
+            close.setVisible(true);
         }
         updateButton.setVisible(false);
 
@@ -117,12 +121,12 @@ public class UserDetailsScreenController {
             alert.setContentText("האם אתה בטוח שאתה רוצה לחזור למסך הבית ללא שמירה?");
             alert.showAndWait();
             if (alert.getResult() == ButtonType.OK)
-                Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+                Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
             else
                 alert.close();
         }
         else
-            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+            Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
     }
     private boolean isDataNotSaved() {
         if(!txt_firstName.getText().equals(Main.loggedUser.getFirstName()))
@@ -193,7 +197,7 @@ public class UserDetailsScreenController {
                 int result = update(Main.loggedUser);
                 if (result == 0){
                     sucsses();
-                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000,500);
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth,Main.mainHeight);
                 }
                 else
                     errormsg();
@@ -242,7 +246,7 @@ public class UserDetailsScreenController {
             System.gc();
             deleteProfilePic(Main.loggedUser.getProfilePicPath());
             Main.loggedUser = null;
-            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), 1000,500);
+            Main.switchScene("../View/MainScreen.fxml", (Stage) updateButton.getScene().getWindow(), Main.mainWidth,Main.mainHeight);
         }
         else{
             alert.close();
@@ -265,12 +269,12 @@ public class UserDetailsScreenController {
     public void changepass() throws IOException {
         Stage stage=new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("../View/SwitchPassword.fxml"));
-        Scene scene=new Scene(root,550,300);
+        Scene scene=new Scene(root,Main.changePassWidth,Main.changePassHeight);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
         stage.setTitle("Change password");
         stage.setScene(scene);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner((Stage)txt_firstName.getScene().getWindow());
+        stage.initOwner(txt_firstName.getScene().getWindow());
         stage.setResizable(false);
         stage.show();
     }
@@ -280,5 +284,9 @@ public class UserDetailsScreenController {
         if (file!=null) {
             img_profile.setImage(new Image(new FileInputStream(file)));
         }
+    }
+
+    public void close(ActionEvent actionEvent) {
+        ((Stage) close.getScene().getWindow()).close();
     }
 }

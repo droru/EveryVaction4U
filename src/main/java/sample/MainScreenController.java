@@ -1,7 +1,6 @@
 package sample;
 
 import Model.User;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -14,11 +13,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import java.io.IOException;
 import java.sql.SQLException;
-
 import static Model.Query.search;
 
 
@@ -63,9 +59,8 @@ public class MainScreenController {
     public void loginClicked() throws IOException {
         Stage stage=new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("../View/LoginForm.fxml"));
-        StageDetail(stage, root, 400, 300, "Login/register");
+        StageDetail(stage, root, Main.loginWidth, Main.loginHeight, "Login/register");
         LoginRegister.setDisable(true);
-        //Main.switchScene("../View/LoginForm.fxml",(Stage) LoginRegister.getScene().getWindow(), 400,300);
     }
     public void logOutClicked(){
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
@@ -82,7 +77,7 @@ public class MainScreenController {
     }
     public void seeProfileClicked(){
         Main.isProfile=true;
-        Main.switchScene("../View/UserDetailsScreen.fxml", Main.getStage(), 1000,500);
+        Main.switchScene("../View/UserDetailsScreen.fxml", Main.getStage(), Main.mainWidth,Main.mainHeight);
 
     }
     public void destinationSearchPressed(KeyEvent keyEvent){
@@ -91,7 +86,7 @@ public class MainScreenController {
             System.out.println("do search");
         }
     }
-    public void userSearchPresses(KeyEvent keyEvent) throws SQLException, IOException {
+    public void userSearchPresses(KeyEvent keyEvent) throws IOException {
         User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER))
         {
@@ -100,10 +95,9 @@ public class MainScreenController {
                 userSerach.print();
                 Main.setUser(userSerach);
                 Main.isProfile = false;
-                //Main.switchScene("../View/UserDetailsScreen.fxml", (Stage) txt_searchUser.getScene().getWindow(), 720,500);
                 Stage stage=new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserDetailsScreen.fxml"));
-                StageDetail(stage, root, 750, 400, "User profile");
+                StageDetail(stage, root, Main.registerWidth, Main.registerHeight, "User profile");
             }
             else {
                 System.out.println("not found");
@@ -122,14 +116,9 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner((Stage)txt_searchUser.getScene().getWindow());
+        stage.initOwner(txt_searchUser.getScene().getWindow());
         stage.show();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                LoginRegister.setDisable(false);
-            }
-        });
+        stage.setOnCloseRequest(event -> LoginRegister.setDisable(false));
     }
 
 

@@ -27,7 +27,7 @@ public class LoginController {
                     System.out.println("user found");
                     erorm2.setText("");
                     Main.loggedUser = user;
-                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), 1000, 500);
+                    Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
                     ((Stage) LoginButton.getScene().getWindow()).close();
                 } else {
                     erorm2.setText("*שם משתמש או סיסמא לא נכונים");
@@ -42,7 +42,7 @@ public class LoginController {
 
 
     public void openregister() {
-        Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginButton.getScene().getWindow(), 680, 400);
+        Main.switchScene("../View/RegisterForm.fxml", (Stage) LoginButton.getScene().getWindow(), Main.registerWidth, Main.registerHeight);
     }
 
     private boolean isFilednotempty(String user, String Pass) {

@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SQLiteJDBCDriverConnection {
-    public static void connect() throws SQLException {
+    public static void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
@@ -15,7 +15,7 @@ public class SQLiteJDBCDriverConnection {
         Connection conn = null;
         try {
             // db parameters
-            String url = "jdbc:sqlite:src/DataBase/Vacation4You-DB";
+            String url = "jdbc:sqlite:src/main/java/DataBase/Vacation4You-DB";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -38,7 +38,7 @@ public class SQLiteJDBCDriverConnection {
      */
 
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         connect();
     }
 }

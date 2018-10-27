@@ -5,8 +5,6 @@ import Model.User;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -16,15 +14,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-
 
 public class RegisterController {
     public TextField email;
@@ -44,7 +33,6 @@ public class RegisterController {
     public Label erorusername;
     public Label erorname;
     public Label erorlastname;
-    public FlowPane Pane;
     public Button chooseFile;
     public ImageView profilePic;
     //private String cwd = System.getProperty("user.dir");
@@ -59,7 +47,7 @@ public class RegisterController {
         user.setProfilePicPath(file.getPath());
     }
 
-    public void signclicked() throws InterruptedException {
+    public void signclicked() {
         if (!username.getText().isEmpty()) {
             user.setUserName(username.getText());
             erorusername.setVisible(false);
@@ -99,7 +87,7 @@ public class RegisterController {
             user.setPassword(password.getText());
             erorpass.setVisible(false);
         }
-            else
+        else
             erorpass.setVisible(true);
         if (Validation.validateDate(birthdate.getText())) {
             if(Validation.validateAge(birthdate.getText())>17) {
@@ -131,7 +119,7 @@ public class RegisterController {
                     int result = Query.insert((user));
                     if (result == 0) {
                         regmsg();
-                        Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), 400, 300);
+                        Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
                     }
                     else if (result == 1)
                         errorregmsg();
@@ -179,7 +167,6 @@ public class RegisterController {
         file = Main.openFileExplorer();
         if (file!=null) {
             //uploadPic(file,file.toPath());
-            //profilePic.setImage(new Image(new FileInputStream(imageDBPath+file.getName())));//cwd+"/src/"+file.getName())));
             profilePic.setImage(new Image(new FileInputStream(file)));
         }
     }
