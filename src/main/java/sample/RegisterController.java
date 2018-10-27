@@ -165,9 +165,13 @@ public class RegisterController {
     public void OpenfileChoose() throws IOException {
 
         file = Main.openFileExplorer();
-        if (file!=null) {
+        if (file!=null)
             //uploadPic(file,file.toPath());
             profilePic.setImage(new Image(new FileInputStream(file)));
+        else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText("קובץ לא נתמך");
+            alert.showAndWait();
         }
     }
 

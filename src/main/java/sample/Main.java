@@ -126,10 +126,29 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("GIF", "*.gif"),
                 new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                 new FileChooser.ExtensionFilter("PNG", "*.png"));
-        return fileChooser.showOpenDialog(new Stage());
+
+        File file =fileChooser.showOpenDialog(new Stage());
+        String type =Pictype(file);
+        if (type.equals("jpg")||type.equals("gif")||type.equals("bmp")||type.equals("png"))
+            return file ;
+        else
+            return null;
     }
 
-}
+    private static String Pictype(File file ){
+        String ext = null;
+        String s = file.getName();
+        int i = s.lastIndexOf('.');
+
+        if (i > 0 &&  i < s.length() - 1) {
+            ext = s.substring(i+1).toLowerCase();
+        }
+        return ext;
+    }
+
+
+    }
+
 
 
 
