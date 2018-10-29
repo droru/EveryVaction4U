@@ -71,6 +71,10 @@
                     </Insets>
                 </VBox.margin>
             </TextField>
+            <Label text="(הקלד שם משתמש ולחץ אנטר לחיפוש)" alignment="TOP_RIGHT" style="-fx-font-size: 12">
+                <VBox.margin><Insets right="5" left="5"/> </VBox.margin>
+            </Label>
+            <Label text=""/>
             <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150" text="טיסה חדשה">
                 <graphic>
                     <ImageView fx:id="img_add" fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
