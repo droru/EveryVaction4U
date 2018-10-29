@@ -35,7 +35,7 @@ public class Query
 
     // return: 0 if the insert succeed else 1
 
-    public static int insert(User user)
+    public int insert(User user)
     {
         InitUser(user);
 
@@ -74,7 +74,7 @@ public class Query
     }
 
 
-    public static  User search(String username) {
+    public   User search(String username) {
        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
         String sql = "SELECT UserName,FirstName,LastName,Password,BirthDate,City,Email,Picture "
@@ -83,7 +83,7 @@ public class Query
         return SearcByValue(username, sql);
     }
 
-    private static User SearcByValue(String username, String sql) {
+    private  User SearcByValue(String username, String sql) {
         try (Connection conn = connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
@@ -108,7 +108,7 @@ public class Query
     }
 
 
-    public static  User search_by_pass(String password)
+    public  User search_by_pass(String password)
     {
         // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
@@ -120,7 +120,7 @@ public class Query
 
     // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
 
-    public static int delete(String user) {
+    public  int delete(String user) {
         String sql = "DELETE FROM Users WHERE UserName = ?";
 
         User u = search(user);
@@ -146,12 +146,12 @@ public class Query
 
     // return: 0 if the update succeed else 1 (One or more fields are not valid or the connection to db  doesn't succeed )
 
-public static int update(User user) throws SQLException {
+public  int update(User user,String oldUser) throws SQLException {
     {
         InitUser(user);
-        if(search(UserName)!= null )
+        if(search(oldUser)!= null )
         {
-            delete(UserName);
+            delete(oldUser);
             insert(user);
             return 0;
         }

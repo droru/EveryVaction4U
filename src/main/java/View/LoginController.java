@@ -1,27 +1,27 @@
-package sample;
+package View;
 import Model.User;
 
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import sample.Aview;
+import sample.Main;
+
 import java.sql.SQLException;
-import static Model.Query.search;
 
 
-public class LoginController {
+public class LoginController extends Aview {
     public Button LoginButton;
     public TextField Usernamefield;
     public PasswordField Passwordfield;
     public Hyperlink Registerlink;
-    //public Label erorm;
     public Label erorm2;
 
 
 
     public void Loginclicked() throws SQLException {
         User user;
-        //System.out.println("Login clicked");
         if (isFilednotempty(Usernamefield.getText(), Passwordfield.getText())) {
-            user = search(Usernamefield.getText());
+            user= getController().search(Usernamefield.getText());
             if (user != null) {
                 if (user.getPassword().equals(Passwordfield.getText())) {
                     System.out.println("user found");

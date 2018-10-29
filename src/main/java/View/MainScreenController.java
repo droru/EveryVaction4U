@@ -1,4 +1,4 @@
-package sample;
+package View;
 
 import Model.User;
 import javafx.fxml.FXML;
@@ -13,12 +13,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.Aview;
+import sample.Main;
+
 import java.io.IOException;
-import java.sql.SQLException;
-import static Model.Query.search;
 
 
-public class MainScreenController {
+public class MainScreenController extends Aview {
     @FXML
     public TextField txt_searchUser;
     public TextField txt_searchDestination;
@@ -90,7 +91,7 @@ public class MainScreenController {
         User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER))
         {
-            userSerach=search(txt_searchUser.getText());
+            userSerach=getController().search(txt_searchUser.getText());
             if (userSerach!=null) {
                 userSerach.print();
                 Main.setUser(userSerach);

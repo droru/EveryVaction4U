@@ -1,4 +1,4 @@
-package sample;
+package View;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import sample.Aview;
+import sample.Main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,10 +23,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
-import static Model.Query.delete;
-import static Model.Query.update;
 
-public class UserDetailsScreenController {
+public class UserDetailsScreenController extends Aview {
     @FXML
     public ImageView img_profile;
     public TextField txt_userName;
@@ -47,17 +47,15 @@ public class UserDetailsScreenController {
     public Label erormail;
     public Label erorcity;
     private File file;
-    /*
-    public Label lbl_firstName1;
-    public Label lbl_lastName1;
-    public Label lbl_birthDate1;
-    public Label lbl_email1;
-    public Label lbl_city1;
-*/
+    boolean usernamechange=false;
+    private String oldUser;
+
     public void initialize() throws FileNotFoundException {
 
         if(Main.isProfile)
         {
+             oldUser=Main.loggedUser.getUserName();
+
             title.setText("אזור אישי");
             setTextInDetail();
             Cb_city.setValue(Main.loggedUser.getCity());
@@ -91,7 +89,7 @@ public class UserDetailsScreenController {
     }
     public void enableEdit()
     {
-        txt_userName.setDisable(true);
+        txt_userName.setDisable(false);
         txt_firstName.setDisable(false);
         txt_lastName.setDisable(false);
         txt_birthDate.setDisable(true);
@@ -142,7 +140,7 @@ public class UserDetailsScreenController {
         return false;
     }
 
-    public void updateClicked() throws SQLException {
+    public void updateClicked() throws SQLException, FileNotFoundException {
         if (Validation.validateMail(txt_email.getText())) {
             Main.loggedUser.setEmail(txt_email.getText());
             erormail.setVisible(false);
@@ -177,9 +175,14 @@ public class UserDetailsScreenController {
         }
         else
             erorcity.setVisible(true);
+        if(!txt_userName.getText().equals(Main.loggedUser.getUserName()))
+            if (getController().search(txt_userName.getText())==null)
+                usernamechange=true;
 
-        if(!erormail.isVisible()&&!erorlastname.isVisible()&&!erorfirstname.isVisible() && !erorcity.isVisible())
+
+        if(!erormail.isVisible()&&!erorlastname.isVisible()&&!erorfirstname.isVisible() && !erorcity.isVisible()&&usernamechange)
         {
+            Main.loggedUser.setUserName(txt_userName.getText());
             Main.loggedUser.setEmail(txt_email.getText());
             Main.loggedUser.setFirstName(txt_firstName.getText());
             Main.loggedUser.setLastName(txt_lastName.getText());
@@ -194,7 +197,12 @@ public class UserDetailsScreenController {
                     deleteProfilePic(new File(Main.loggedUser.getProfilePicPath()).getPath());
                     uploadPic(file, file.toPath());
                 }
-                int result = update(Main.loggedUser);
+                else
+                    file=new File(Main.loggedUser.getProfilePicPath());
+
+
+                int result = getController().update(Main.loggedUser,oldUser);
+
                 if (result == 0){
                     sucsses();
                     Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth,Main.mainHeight);
@@ -240,7 +248,7 @@ public class UserDetailsScreenController {
         alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
-            delete(Main.loggedUser.getUserName());
+            getController().delete(Main.loggedUser.getUserName());
             img_profile.imageProperty().set(null);
             img_profile.setImage(null);
             System.gc();

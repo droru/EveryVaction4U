@@ -1,11 +1,12 @@
-package sample;
+package View;
 
-import Model.Query;
 import Model.User;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.Aview;
+import sample.Main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class RegisterController {
+public class RegisterController extends Aview {
     public TextField email;
     public TextField firstname;
     public TextField lastname;
@@ -116,7 +117,7 @@ public class RegisterController {
                 user.print();
                 try {
                     uploadPic(file,file.toPath());
-                    int result = Query.insert((user));
+                    int result = getController().insert((user));
                     if (result == 0) {
                         regmsg();
                         Main.switchScene("../View/LoginForm.fxml", (Stage) sign.getScene().getWindow(), Main.loginWidth, Main.loginHeight);

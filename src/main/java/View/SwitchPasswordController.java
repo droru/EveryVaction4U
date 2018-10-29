@@ -1,15 +1,16 @@
-package sample;
+package View;
 
 import Model.User;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import sample.Aview;
+import sample.Main;
+
 import java.sql.SQLException;
-import static Model.Query.search;
-import static Model.Query.update;
 
 
-public class SwitchPasswordController
+public class SwitchPasswordController extends Aview
 {
     public PasswordField curpass;
     public PasswordField newpass;
@@ -26,7 +27,7 @@ public class SwitchPasswordController
         lbl_pass.setVisible(false);
         repat_pass.setVisible(false);
         lbl_newpass.setVisible(false);
-        User u =  search(Main.loggedUser.getUserName());
+        User u =  getController().search(Main.loggedUser.getUserName());
             if(!u.getPassword().equals(curpass.getText())) {
                 lbl_pass.setText("*סיסמא ישנה אינה נכונה");
                 lbl_pass.setVisible(true);
@@ -48,9 +49,9 @@ public class SwitchPasswordController
             }
 
 
-            if (repeat.getText().equals(newpass.getText())&&u.getPassword().equals(curpass.getText())&&changePass) {
+            if (repeat.getText().equals(newpass.getText())&&u.getPassword().equals(curpass.getText())&&changePass && Validation.validatePassword(newpass.getText())) {
                 u.setPassword(newpass.getText());
-                update(u);
+                getController().update(u,u.getUserName());
                 Alert alert=new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("עדכון ססמא בוצע!");
                 alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);

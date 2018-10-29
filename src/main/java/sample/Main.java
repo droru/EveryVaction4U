@@ -128,9 +128,13 @@ public class Main extends Application {
                 new FileChooser.ExtensionFilter("PNG", "*.png"));
 
         File file =fileChooser.showOpenDialog(new Stage());
-        String type =Pictype(file);
-        if (type.equals("jpg")||type.equals("gif")||type.equals("bmp")||type.equals("png"))
-            return file ;
+        if(file !=null) {
+            String type = Pictype(file);
+            if (type.equals("jpg") || type.equals("gif") || type.equals("bmp") || type.equals("png"))
+                return file;
+            else
+                return null;
+        }
         else
             return null;
     }
