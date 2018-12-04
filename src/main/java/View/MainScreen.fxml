@@ -75,10 +75,10 @@
                 <VBox.margin><Insets right="5" left="5"/> </VBox.margin>
             </Label>
             <Label text=""/>
-            <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150" text="טיסה חדשה">
-                <graphic>
+            <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150" text="טיסה חדשה" onAction="#addFlightClicked">
+                <!--<graphic>
                     <ImageView fx:id="img_add" fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
-                </graphic>
+                </graphic>-->
                 <VBox.margin>
                     <Insets>
                         <bottom>5</bottom>
@@ -189,14 +189,7 @@
             </GridPane>
 
         </VBox>
-        <TableView nodeOrientation="RIGHT_TO_LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
-            <columns>
-                <TableColumn prefWidth="100.0" text="מספר טיסה" />
-                <TableColumn prefWidth="100.0" text="יעד" />
-                <TableColumn prefWidth="100.0" text="תאריך הלוך" />
-                <TableColumn prefWidth="100.0" text="תאריך חזרה" />
-                <TableColumn prefWidth="100.0" text="מוכר" />
-            </columns>
+        <TableView fx:id="flightsTable" nodeOrientation="RIGHT_TO_LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets>
                     <top>5</top>

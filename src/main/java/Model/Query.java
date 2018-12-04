@@ -1,6 +1,11 @@
 package Model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Query
@@ -33,8 +38,9 @@ public class Query
         return conn;
     }
 
-    // return: 0 if the insert succeed else 1
 
+    //region User
+    // return: 0 if the insert succeed else 1
     public int insert(User user)
     {
         InitUser(user);
@@ -61,7 +67,6 @@ public class Query
             return 1 ;
         }
     }
-
     private static void InitUser(User user) {
         UserName=user.getUserName();
         FirstName=user.getFirstName();
@@ -72,8 +77,6 @@ public class Query
         Email=user.getEmail();
         Picture=user.getProfilePicPath();
     }
-
-
     public   User search(String username) {
        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 
@@ -82,7 +85,6 @@ public class Query
 
         return SearcByValue(username, sql);
     }
-
     private  User SearcByValue(String username, String sql) {
         try (Connection conn = connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
@@ -106,8 +108,6 @@ public class Query
             return null;
         }
     }
-
-
     public  User search_by_pass(String password)
     {
         // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
@@ -117,9 +117,7 @@ public class Query
 
         return SearcByValue(password, sql);
     }
-
     // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
-
     public  int delete(String user) {
         String sql = "DELETE FROM Users WHERE UserName = ?";
 
@@ -142,11 +140,8 @@ public class Query
             return 1;
         }
     }
-
-
     // return: 0 if the update succeed else 1 (One or more fields are not valid or the connection to db  doesn't succeed )
-
-public  int update(User user,String oldUser) throws SQLException {
+    public  int update(User user,String oldUser) throws SQLException {
     {
         InitUser(user);
         if(search(oldUser)!= null )
@@ -159,5 +154,96 @@ public  int update(User user,String oldUser) throws SQLException {
         return 1;
     }
 }
+    //endregion
+
+    //region Flight
+    // return: 0 if the insert succeed else 1
+    public int insert(Flight flight)
+    {
+        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity) VALUES(?,?,?,?,?,?,?,?)";
+        try (
+                Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setString(1, flight.getDestinationCountry());
+            pstmt.setDate(2, flight.getFromDate());
+            pstmt.setDate(3,flight.getToDate());
+            pstmt.setString(4,flight.getSeller().getUserName());
+            pstmt.setInt(5, flight.getPrice());
+            pstmt.setInt(6, (flight.isConnection() ? 1 : 0));
+            pstmt.setInt(7, (flight.isSeparate() ? 1 : 0));
+            pstmt.setString(8, flight.getCompany());
+            pstmt.setInt(9, flight.getBaggage());
+            pstmt.setString(10, flight.getDestinationCity());
+
+            pstmt.executeUpdate();
+            return 0 ;
+        } catch (SQLException e) {
+            return 1 ;
+        }
+    }
+    public Flight search(int flightID) {
+        String sql = "SELECT *"
+                + "FROM Flights WHERE flightID = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1 , flightID);
+            ResultSet rs  = pstmt.executeQuery();
+            if (rs.next()) {
+                User user = search(rs.getString("seller"));
+                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"));
+            }
+            else {
+                return null;
+            }
+            // loop through the result set
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    // return: 0 if the delete succeed else 1 (The username doesn't exist in the table or the connection to db  doesn't succeed )
+    public int delete(int flightID) {
+        String sql = "DELETE FROM Flights WHERE flightID = ?";
+
+        Flight f = search(flightID);
+        if(f == null)
+            return 1 ;
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, flightID);
+            pstmt.executeUpdate();
+            return 0;
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return 1;
+        }
+    }
+    public ObservableList<Flight> getAllFlights(){
+        String sql = "SELECT * FROM Flights";
+        try (Connection conn = connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            List<Flight> flights = new ArrayList<>();
+            while (rs.next()) {
+                User user = search(rs.getString("seller"));
+                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"));
+                flights.add(f);
+            }
+            ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
+            return observableFlights;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    //endregion
+
 
 }
