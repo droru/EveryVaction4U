@@ -27,6 +27,7 @@ import sample.Main;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 
 public class MainScreenController extends Aview {
@@ -112,7 +113,13 @@ public class MainScreenController extends Aview {
         destinationCountryCol.setCellValueFactory(new PropertyValueFactory<>("destinationCountry"));
         destinationCityCol.setCellValueFactory(new PropertyValueFactory<>("destinationCity"));
         fromDateCol.setCellValueFactory(new PropertyValueFactory<>("fromDate"));
+        fromDateCol.setCellFactory(column -> {
+            return formatDate();
+        });
         toDateCol.setCellValueFactory(new PropertyValueFactory<>("toDate"));
+        toDateCol.setCellFactory(column -> {
+            return formatDate();
+        });
         priseCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         isConnectionCol.setCellValueFactory(new PropertyValueFactory<>("isConnection"));
         isSeparateCol.setCellValueFactory(new PropertyValueFactory<>("isSeparate"));
@@ -144,6 +151,23 @@ public class MainScreenController extends Aview {
         SortedList<Flight> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(flightsTable.comparatorProperty());
         flightsTable.setItems(sortedData);
+    }
+
+    private TableCell<Flight, Date> formatDate() {
+        TableCell<Flight, Date> cell = new TableCell<Flight, Date>() {
+            private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            @Override
+            protected void updateItem(Date item, boolean empty) {
+                super.updateItem(item, empty);
+                if(empty) {
+                    setText(null);
+                }
+                else {
+                    setText(format.format(item));
+                }
+            }
+        };
+        return cell;
     }
 
     public void advanceSearchChacked(){
