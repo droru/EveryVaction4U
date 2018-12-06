@@ -5,10 +5,9 @@ import com.sun.org.apache.bcel.internal.generic.LADD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import sample.Main;
 
 import javax.xml.transform.Result;
 import java.text.DateFormat;
@@ -28,7 +27,12 @@ public class FlightDetailScreenController {
     public Label lbl_isSeparate;
     public Label lbl_price;
     public Label lbl_seller;
+    public Button btn_buy;
 
+    @FXML
+    public void initialize(){
+
+    }
 
     public void setFlight(Flight flight) {
         this.flight = flight;
@@ -45,18 +49,34 @@ public class FlightDetailScreenController {
         lbl_seller.setText(flight.getNameSeller());
     }
 
-
     public void buyFlight(ActionEvent actionEvent) {
-        //create new notification
+        if (Main.loggedUser != null) {
+            //create new notification
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Buy Flight");
-        alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        alert.setHeaderText("בקשת רכישה");
-        alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
-        alert.showAndWait();
-        if(alert.getResult() == ButtonType.OK){
-            alert.close();
-            ((Stage) lbl_seller.getScene().getWindow()).close();        }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Buy Flight");
+            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+            alert.setHeaderText("בקשת רכישה");
+            alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+                ((Stage) lbl_seller.getScene().getWindow()).close();
+            }
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("User Error");
+            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+            alert.setHeaderText("המשתמש אינו מחובר למערכת");
+            alert.setContentText("רק למשתמשים מחוברים יש הרשאות לבצע רכישה של חופשות\nאנא בצע התחברות");
+            ButtonType buttonTypeLogIn = new ButtonType("התחבר");
+            ButtonType buttonTypeCancel = new ButtonType("ביטול");
+            alert.getButtonTypes().setAll(buttonTypeLogIn, buttonTypeCancel);
+            alert.showAndWait();
+            if(alert.getResult() == buttonTypeLogIn){
+                Main.switchScene("../View/LoginForm.fxml", (Stage) lbl_seller.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
+            }
+        }
     }
 }

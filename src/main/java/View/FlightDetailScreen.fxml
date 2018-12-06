@@ -129,7 +129,7 @@
       </BorderPane>
       <BorderPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <center>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" text="רכש" textAlignment="CENTER" onAction="#buyFlight"/>
+            <Button fx:id="btn_buy" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" text="רכש" textAlignment="CENTER" onAction="#buyFlight"/>
          </center>
       </BorderPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
