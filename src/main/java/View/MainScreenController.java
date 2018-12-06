@@ -93,7 +93,11 @@ public class MainScreenController extends Aview {
                             setText(null);
                         } else {
                             btn.setOnAction(event -> {
-                                watchFlight();
+                                try {
+                                    watchFlight(getTableView().getItems().get(getIndex()));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             });
                             setGraphic(btn);
                             setText(null);
@@ -119,7 +123,9 @@ public class MainScreenController extends Aview {
         flightIDCol.setSortType(TableColumn.SortType.ASCENDING);
         flightsTable.setItems(flights);
         destinationCol.getColumns().addAll(destinationCountryCol, destinationCityCol);
-        flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, sellerCol, companyCol, baggageCol, isConnectionCol, isSeparateCol);
+        //flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, sellerCol, companyCol, baggageCol, isConnectionCol, isSeparateCol);
+        flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, companyCol);
+
 
         FilteredList<Flight> filteredData = new FilteredList<>(flights, p -> true);
         txt_searchDestination.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -172,12 +178,6 @@ public class MainScreenController extends Aview {
         Main.switchScene("../View/UserDetailsScreen.fxml", Main.getStage(), Main.mainWidth,Main.mainHeight);
 
     }
-    public void destinationSearchPressed(KeyEvent keyEvent){
-        if (keyEvent.getCode().equals(KeyCode.ENTER))
-        {
-            System.out.println("do search");
-        }
-    }
     public void userSearchPresses(KeyEvent keyEvent) throws IOException {
         User userSerach;
         if(keyEvent.getCode().equals(KeyCode.ENTER))
@@ -201,8 +201,18 @@ public class MainScreenController extends Aview {
         }
     }
 
-    public void watchFlight(){
-        System.out.println("buy!");
+    public void watchFlight(Flight flight) throws IOException {
+        Stage stage=new Stage();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/FlightDetailScreen.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        FlightDetailScreenController controller = fxmlLoader.getController();
+        controller.setFlight(flight);
+
+        StageDetail(stage, root, 825, 364, "Flight details");
+        LoginRegister.setDisable(true);
+
+        //Main.switchScene("../View/FlightDetailScreen.fxml", Main.getStage(), 825,364);
     }
 
     private void StageDetail(Stage stage, Parent root, int width, int height, String title) {

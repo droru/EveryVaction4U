@@ -106,7 +106,7 @@
             <VBox.margin>
                 <Insets bottom="5" left="5" right="20" top="5" />
             </VBox.margin>
-            <TextField fx:id="txt_searchDestination" onKeyPressed="#destinationSearchPressed" promptText="הקלד יעד לחיפוש...">
+            <TextField fx:id="txt_searchDestination" promptText="הקלד יעד לחיפוש...">
                 <VBox.margin>
                     <Insets>
                         <top>5</top>
