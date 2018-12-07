@@ -10,6 +10,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,8 +66,11 @@ public class MainScreenController extends Aview {
             loggedUserBox.setVisible(true);
         }
 
-        ObservableList<Flight> flights = getController().getAllFlights();
-        setTableData(flights);
+        advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
+        if(flightsTable.getColumns().size() == 0) {
+            ObservableList<Flight> flights = getController().getAllFlights();
+            setTableData(flights);
+        }
         if(Main.loggedUser != null) {
             List<Notification> notifications = getController().getNotificationsByUser(Main.loggedUser.getUserName());
             setNotificationPane(notifications);
@@ -84,51 +88,10 @@ public class MainScreenController extends Aview {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Scene scene = new Scene(root, 150, 30);
+            Scene scene = new Scene(root, 250, 50);
             scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
             notificationPane.getChildren().add(scene.getRoot());
         }
-      /*  for(Notification notification : notifications){
-            Pane pane = new Pane();
-            Label text = new Label();
-            Button button1 = new Button();
-            Button button2 = new Button();
-            if(notification.getIsResponsed()==false && notification.getToUser().equals(Main.loggedUser.getUserName())) {
-                text.setText(notification.getFromUser() + " ביקש לרכוש את טיסה מס' " + notification.getFlightID());
-                button1.setText("מאשר");
-                button1.setOnAction(event -> {
-                        System.out.println("accept");
-                });
-                button2.setText("לא מאשר");
-                button1.setOnAction(event -> {
-                    System.out.println("not accept");
-                });
-            }
-            else if(notification.getIsResponsed()==true && notification.getFromUser().equals(Main.loggedUser.getUserName())){
-                String str = "רכישת הטיסה " + notification.getFlightID() + " ";
-                if(notification.getIsAccept()) {
-                    text.setText(str + "אושרה ע\"י המוכר");
-                    button1.setText("עבור לתשלום");
-                    button1.setOnAction(event -> {
-                        System.out.println("buy");
-                    });
-                    button2.setText("וותר");
-                    button1.setOnAction(event -> {
-                        System.out.println("not buy");
-                    });
-                }
-                else{
-                    text.setText(str + "לא אושרה ע\"י המוכר");
-                    button1.setText("קראתי");
-                    button1.setOnAction(event -> {
-                        System.out.println("delete notifi");
-                    });
-                    button2.setVisible(false);
-                }
-            }
-            pane.getChildren().addAll(text, button1, button2);
-            notificationPane.getChildren().add(pane);
-        }*/
     }
 
     private void setTableData(ObservableList<Flight> flights) {
@@ -242,7 +205,7 @@ public class MainScreenController extends Aview {
             advancedSearchBox.setVisible(true);
         else
             advancedSearchBox.setVisible(false);
-        advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
+        //advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
     }
 
     public void loginClicked() throws IOException {

@@ -8,44 +8,52 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" style="-fx-border-color: black; -fx-border-radius: 3; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.NotificationDetailsBoxController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="90" prefWidth="210" style="-fx-border-color: black; -fx-border-radius: 3; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.NotificationDetailsBoxController">
+    <GridPane.padding></GridPane.padding>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox prefHeight="100.0" GridPane.rowIndex="1">
+      <HBox GridPane.rowIndex="2">
          <children>
             <Button fx:id="btn_accept" mnemonicParsing="false" onAction="#accept" text="מאשר" visible="false">
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5" />
                </HBox.margin>
             </Button>
             <Button fx:id="btn_deny" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#deny" text="לא מאשר" visible="false">
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5" />
                </HBox.margin>
             </Button>
 
              <Button fx:id="btn_buy" mnemonicParsing="false" onAction="#buy" text="רכש" visible="false">
                  <HBox.margin>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5" />
                  </HBox.margin>
              </Button>
              <Button fx:id="btn_close" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#close" text="וותר" visible="false">
                  <HBox.margin>
-                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5" />
                  </HBox.margin>
              </Button>
          </children>
       </HBox>
-      <Label fx:id="lbl_msg" text="Label">
+      <Label fx:id="lbl_user" maxWidth="1.7976931348623157E308" text="Label" GridPane.rowIndex="0">
          <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets left="5.0" right="5.0" />
+         </GridPane.margin>
+      </Label>
+      <Label fx:id="lbl_msg" maxWidth="1.7976931348623157E308" text="Label" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" right="5.0" />
          </GridPane.margin>
       </Label>
    </children>
+
 </GridPane>

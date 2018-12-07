@@ -98,12 +98,12 @@
             </Hyperlink>
         </VBox>
     </VBox>
-    <VBox fx:id="notificationPane" GridPane.columnIndex="2" GridPane.rowIndex="2" nodeOrientation="RIGHT_TO_LEFT">
-        <GridPane.margin><Insets top="5" bottom="5" left="5"></Insets> </GridPane.margin>
+    <VBox fx:id="notificationPane" alignment="BOTTOM_CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" nodeOrientation="RIGHT_TO_LEFT">
+        <GridPane.margin><Insets top="5" bottom="5" left="5" right="5"/></GridPane.margin>
     </VBox>
 
     <!--flights and advanced search-->
-    <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+    <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2"  GridPane.vgrow="ALWAYS">
         <VBox fx:id="searchBox">
             <VBox.margin>
                 <Insets bottom="5" left="5" right="20" top="5" />
@@ -129,7 +129,7 @@
                 </VBox.margin>
             </CheckBox>
 
-            <GridPane fx:id="advancedSearchBox" alignment="CENTER_LEFT" managed="false" visible="false">
+            <GridPane fx:id="advancedSearchBox" alignment="CENTER_LEFT" visible="false">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="180" />
                     <ColumnConstraints hgrow="SOMETIMES" />
@@ -191,7 +191,7 @@
             </GridPane>
 
         </VBox>
-        <TableView fx:id="flightsTable" nodeOrientation="RIGHT_TO_LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+        <TableView fx:id="flightsTable" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2" nodeOrientation="RIGHT_TO_LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets>
                     <top>5</top>
@@ -202,6 +202,7 @@
             </VBox.margin>
         </TableView>
     </VBox>
+
 
     <!--hot flights-->
     <Label alignment="TOP_CENTER" maxWidth="200" prefWidth="200" style="-fx-text-fill: red" styleClass="title" text="5 הטיסות הכי חמות" GridPane.columnIndex="0" GridPane.rowIndex="0">
