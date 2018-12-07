@@ -192,7 +192,7 @@ public class Query
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
                 User user = search(rs.getString("seller"));
-                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"));
+                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
             }
             else {
                 return null;
@@ -232,7 +232,7 @@ public class Query
             List<Flight> flights = new ArrayList<>();
             while (rs.next()) {
                 User user = search(rs.getString("seller"));
-                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"));
+                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
                 flights.add(f);
             }
             ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
@@ -245,5 +245,49 @@ public class Query
     }
     //endregion
 
+    //region Notification
+    // return: 0 if the insert succeed else 1
+    public int insert(Notification notification)
+    {
+        String sql = "INSERT INTO Notification(fromUser, toUser, flightID, isResponsed, isAccept) VALUES(?,?,?,?,?)";
+        try (
+                Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setString(1, notification.getFromUser());
+            pstmt.setString(2, notification.getToUser());
+            pstmt.setInt(3,notification.getFlightID());
+            pstmt.setInt(4,notification.getIsResponsed() ? 1 : 0);
+            pstmt.setInt(5, notification.getIsAccept() ? 1 : 0);
+
+            return pstmt.executeUpdate();
+            //return 0 ;
+        } catch (SQLException e) {
+            return 1 ;
+        }
+    }
+    public ObservableList<Notification> getAllNotificationsByUser(String userName){
+        String sql = "SELECT * FROM Notification where (isResponsed = 0 and toUser = ?) or (isResponsed =1 and fromUser = ?)";
+        try (Connection conn = connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+            pstmt.setString(1 , userName);
+            pstmt.setString(2, userName);
+            ResultSet rs    = pstmt.executeQuery();
+
+            List<Notification> notifications = new ArrayList<>();
+            while (rs.next()) {
+                Notification n = new Notification(rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false);
+                notifications.add(n);
+            }
+            ObservableList<Notification> observableNotifications = FXCollections.observableArrayList(notifications);
+            return observableNotifications;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    //endregion
 
 }

@@ -1,11 +1,13 @@
 package Controller;
 
 import Model.Flight;
+import Model.Notification;
 import Model.Query;
 import Model.User;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class Controller {
 
@@ -22,6 +24,15 @@ public class Controller {
     //region Flights
     public ObservableList<Flight> getAllFlights(){
         return query.getAllFlights();
+    }
+    //endregion
+
+    //region Notifications
+    public List<Notification> getNotificationsByUser(String toUser){
+        return query.getAllNotificationsByUser(toUser);
+    }
+    public int insert(Notification notification){
+        return query.insert(notification);
     }
     //endregion
 }

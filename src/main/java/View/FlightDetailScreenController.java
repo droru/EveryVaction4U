@@ -1,19 +1,18 @@
 package View;
 
 import Model.Flight;
-import com.sun.org.apache.bcel.internal.generic.LADD;
+import Model.Notification;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.Main;
-
-import javax.xml.transform.Result;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import sample.Aview;
 
-public class FlightDetailScreenController {
+public class FlightDetailScreenController extends Aview {
     public Flight flight;
 
     @FXML
@@ -51,17 +50,28 @@ public class FlightDetailScreenController {
 
     public void buyFlight(ActionEvent actionEvent) {
         if (Main.loggedUser != null) {
-            //create new notification
+            if(Main.loggedUser.getUserName().equals(flight.getUserNameSeller())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("User Error");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.setHeaderText("רכישת טיסה");
+                alert.setContentText("אינך יכול לרכוש טיסה שהינך מוכר אותה");
+                alert.showAndWait();
+            }
+            else {
+                Notification notification = new Notification(Main.loggedUser.getUserName(), flight.getUserNameSeller(), flight.getFlightID(), false, false);
+                getController().insert(notification);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Buy Flight");
-            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-            alert.setHeaderText("בקשת רכישה");
-            alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-                ((Stage) lbl_seller.getScene().getWindow()).close();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Buy Flight");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.setHeaderText("בקשת רכישה");
+                alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                    ((Stage) lbl_seller.getScene().getWindow()).close();
+                }
             }
         }
         else {

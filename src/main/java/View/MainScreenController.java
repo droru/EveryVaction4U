@@ -1,6 +1,7 @@
 package View;
 
 import Model.Flight;
+import Model.Notification;
 import Model.User;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -17,7 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -28,6 +31,7 @@ import sample.Main;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 public class MainScreenController extends Aview {
@@ -45,6 +49,7 @@ public class MainScreenController extends Aview {
     public TextArea textArea_fifthFlight;
     public Label lbl_welcome;
     public TableView<Flight> flightsTable;
+    public VBox notificationPane;
 
     public  void initialize(){
         if(Main.loggedUser == null) {
@@ -62,6 +67,68 @@ public class MainScreenController extends Aview {
 
         ObservableList<Flight> flights = getController().getAllFlights();
         setTableData(flights);
+        if(Main.loggedUser != null) {
+            List<Notification> notifications = getController().getNotificationsByUser(Main.loggedUser.getUserName());
+            setNotificationPane(notifications);
+        }
+    }
+
+    private void setNotificationPane(List<Notification> notifications) {
+        for(Notification notification : notifications) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/NotificationDetailsBox.fxml"));
+            Parent root = null;
+            try {
+                root = (Parent) fxmlLoader.load();
+                NotificationDetailsBoxController controller = fxmlLoader.getController();
+                controller.setData(notification);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Scene scene = new Scene(root, 150, 30);
+            scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
+            notificationPane.getChildren().add(scene.getRoot());
+        }
+      /*  for(Notification notification : notifications){
+            Pane pane = new Pane();
+            Label text = new Label();
+            Button button1 = new Button();
+            Button button2 = new Button();
+            if(notification.getIsResponsed()==false && notification.getToUser().equals(Main.loggedUser.getUserName())) {
+                text.setText(notification.getFromUser() + " ביקש לרכוש את טיסה מס' " + notification.getFlightID());
+                button1.setText("מאשר");
+                button1.setOnAction(event -> {
+                        System.out.println("accept");
+                });
+                button2.setText("לא מאשר");
+                button1.setOnAction(event -> {
+                    System.out.println("not accept");
+                });
+            }
+            else if(notification.getIsResponsed()==true && notification.getFromUser().equals(Main.loggedUser.getUserName())){
+                String str = "רכישת הטיסה " + notification.getFlightID() + " ";
+                if(notification.getIsAccept()) {
+                    text.setText(str + "אושרה ע\"י המוכר");
+                    button1.setText("עבור לתשלום");
+                    button1.setOnAction(event -> {
+                        System.out.println("buy");
+                    });
+                    button2.setText("וותר");
+                    button1.setOnAction(event -> {
+                        System.out.println("not buy");
+                    });
+                }
+                else{
+                    text.setText(str + "לא אושרה ע\"י המוכר");
+                    button1.setText("קראתי");
+                    button1.setOnAction(event -> {
+                        System.out.println("delete notifi");
+                    });
+                    button2.setVisible(false);
+                }
+            }
+            pane.getChildren().addAll(text, button1, button2);
+            notificationPane.getChildren().add(pane);
+        }*/
     }
 
     private void setTableData(ObservableList<Flight> flights) {

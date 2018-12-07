@@ -10,13 +10,14 @@ public class Flight {
     private Date toDate;
     private User seller;
     private String nameSeller;
+    private String userNameSeller;
     private int price;
     private boolean isConnection;
     private boolean isSeparate;
     private String company;
     private int baggage;
 
-    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, User seller, int price, int isConnection, int isSeparate, String company, int baggage) {
+    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, User seller, int price, int isConnection, int isSeparate, String company, int baggage, String userNameSeller) {
         this.flightID = flightID;
         this.destinationCountry = destinationCountry;
         this.destinationCity = destinationCity;
@@ -29,6 +30,7 @@ public class Flight {
         this.isSeparate = (isSeparate == 1 ? true : false);
         this.company = company;
         this.baggage = baggage;
+        this.userNameSeller = userNameSeller;
     }
 
     public int getFlightID() {
@@ -79,6 +81,10 @@ public class Flight {
         return baggage;
     }
 
+    public String getUserNameSeller() {
+        return userNameSeller;
+    }
+
     public void setFlightID(int flightID) {
         this.flightID = flightID;
     }
@@ -125,5 +131,9 @@ public class Flight {
 
     public void setBaggage(int baggage) {
         this.baggage = baggage;
+    }
+
+    public void setUserNameSeller(String userNameSeller) {
+        this.userNameSeller = userNameSeller;
     }
 }

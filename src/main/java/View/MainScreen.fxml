@@ -9,11 +9,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -22,13 +20,14 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainScreenController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
     </rowConstraints>
     <!--left side bar-->
     <VBox alignment="TOP_RIGHT" GridPane.columnIndex="2" GridPane.rowIndex="0" GridPane.rowSpan="2">
@@ -71,11 +70,11 @@
                     </Insets>
                 </VBox.margin>
             </TextField>
-            <Label text="(הקלד שם משתמש ולחץ אנטר לחיפוש)" alignment="TOP_RIGHT" style="-fx-font-size: 12">
-                <VBox.margin><Insets right="5" left="5"/> </VBox.margin>
+            <Label alignment="TOP_RIGHT" style="-fx-font-size: 12" text="(הקלד שם משתמש ולחץ אנטר לחיפוש)">
+                <VBox.margin><Insets left="5" right="5" /> </VBox.margin>
             </Label>
-            <Label text=""/>
-            <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefWidth="150" text="טיסה חדשה" onAction="#addFlightClicked">
+            <Label text="" />
+            <Button mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#addFlightClicked" prefWidth="150" text="טיסה חדשה">
                 <!--<graphic>
                     <ImageView fx:id="img_add" fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" />
                 </graphic>-->
@@ -99,9 +98,12 @@
             </Hyperlink>
         </VBox>
     </VBox>
+    <VBox fx:id="notificationPane" GridPane.columnIndex="2" GridPane.rowIndex="2" nodeOrientation="RIGHT_TO_LEFT">
+        <GridPane.margin><Insets top="5" bottom="5" left="5"></Insets> </GridPane.margin>
+    </VBox>
 
     <!--flights and advanced search-->
-    <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+    <VBox nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
         <VBox fx:id="searchBox">
             <VBox.margin>
                 <Insets bottom="5" left="5" right="20" top="5" />
@@ -212,7 +214,7 @@
             </Insets>
         </VBox.margin>
     </Label>
-    <VBox alignment="TOP_CENTER" maxWidth="200" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1">
+    <VBox alignment="TOP_CENTER" maxWidth="200" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="2">
         <TextArea fx:id="textArea_firstFlight" editable="false" minHeight="80" prefWidth="100.0" text="1">
             <VBox.margin>
                 <Insets>
