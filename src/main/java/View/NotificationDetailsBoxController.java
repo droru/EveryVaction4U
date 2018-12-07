@@ -4,10 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import sample.Main;
 import Model.Notification;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class NotificationDetailsBoxController {
+    Notification notification;
     @FXML
     public Button btn_accept;
     public Button btn_deny;
@@ -25,6 +25,7 @@ public class NotificationDetailsBoxController {
     }
 
     public void setData(Notification notification){
+        this.notification = notification;
         if(notification.getIsResponsed()==false && notification.getToUser().equals(Main.loggedUser.getUserName())) {
             lbl_user.setText(notification.getFromUser());
             lbl_msg.setText(" ביקש לרכוש את טיסה מס' " + notification.getFlightID());
@@ -47,14 +48,24 @@ public class NotificationDetailsBoxController {
     }
 
     public void accept() {
+        notification.setIsResponsed(true);
+        notification.setIsAccept(true);
+        //update in db
     }
 
     public void deny() {
+        notification.setIsResponsed(true);
+        notification.setIsAccept(false);
+        //update in db
     }
 
     public void buy() {
+        //delete notification
+        //show payment screen
+        //delete flight
     }
 
     public void close() {
+        //delete notification
     }
 }
