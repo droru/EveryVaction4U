@@ -2,8 +2,10 @@ package View;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -75,11 +77,14 @@ public class Validation {
         return true;
     }
 
-    public static boolean isValidDate(String string)
+    public static boolean isValidDate(LocalDate localDate)//String string)
     {
-        Date date=new Date (Integer.parseInt(string.split("/")[2]),Integer.parseInt(string.split("/")[1]),Integer.parseInt(string.split("/")[0]));
-        LocalDateTime now=LocalDateTime.now();
-        if( date.before(new Date(now.getYear(),now.getMonth().getValue(),now.getDayOfWeek().getValue())))
+        //Date date=new Date (Integer.parseInt(string.split("/")[2]),Integer.parseInt(string.split("/")[1]),Integer.parseInt(string.split("/")[0]));
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        //LocalDateTime now=LocalDateTime.now();
+        Date now = new Date();
+        if( date.before(now))//new Date(now.getYear(),now.getMonth().getValue(),now.getDayOfWeek().getValue())))
             return false;
         return true;
     }

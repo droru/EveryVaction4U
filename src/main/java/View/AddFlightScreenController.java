@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import sample.Main;
 import sample.Aview;
+
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class AddFlightScreenController extends Aview {
@@ -116,20 +119,24 @@ public class AddFlightScreenController extends Aview {
 
 
         if (txt_fromDate.getEditor().getText() != null)
-            if (!Validation.isValidDate(txt_fromDate.getEditor().getText())) {
+            if (!Validation.isValidDate(txt_fromDate.getValue())){//txt_fromDate.getEditor().getText())) {
                 saveFlight = false;
                 erorfromDate.setVisible(true);
             } else {
-                fromDate = new Date(Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[2]), Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[1]), Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[0]));
+                //fromDate = new Date(Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[2]), Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[1]), Integer.parseInt(txt_fromDate.getEditor().getText().split("/")[0]));
+                Instant instant = Instant.from(txt_fromDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+                fromDate = Date.from(instant);
                 erorfromDate.setVisible(false);
             }
         if (txt_toDate.getEditor().getText() != null)
-            if (!Validation.isValidDate(txt_toDate.getEditor().getText())) {
+            if (!Validation.isValidDate(txt_toDate.getValue())){//txt_toDate.getEditor().getText())) {
                 saveFlight = false;
                 erortoDate.setVisible(true);
             } else {
-                to_date = new Date(Integer.parseInt(txt_toDate.getEditor().getText().split("/")[2]), Integer.parseInt(txt_toDate.getEditor().getText().split("/")[1]), Integer.parseInt(txt_toDate.getEditor().getText().split("/")[0]));
-                //erortoDate.setVisible(false);
+                //to_date = new Date(Integer.parseInt(txt_toDate.getEditor().getText().split("/")[2]), Integer.parseInt(txt_toDate.getEditor().getText().split("/")[1]), Integer.parseInt(txt_toDate.getEditor().getText().split("/")[0]));
+                Instant instant = Instant.from(txt_toDate.getValue().atStartOfDay(ZoneId.systemDefault()));
+                to_date = Date.from(instant);
+                erortoDate.setVisible(false);
             }
 
         if (txt_baggage.getValue() != null) {
@@ -158,5 +165,4 @@ public class AddFlightScreenController extends Aview {
     public void cancelclicked(MouseEvent mouseEvent) {
         Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
     }
-
 }
