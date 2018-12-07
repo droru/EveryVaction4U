@@ -26,6 +26,7 @@ public class Controller {
         return query.getAllFlights();
     }
     public int insert(Flight flight){ return query.insert(flight);}
+    public ObservableList<String> getAllCompanies(){return query.getAllCompanies();}
     //endregion
 
     //region Notifications

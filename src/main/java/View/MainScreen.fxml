@@ -142,48 +142,56 @@
                     <RowConstraints minHeight="30.0" />
                 </rowConstraints>
 
-                <ComboBox prefWidth="150" promptText="סינון לפי" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <ComboBox fx:id="combo_sort" prefWidth="150" promptText="סינון לפי" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="לפי מס' טיסה" />
                             <String fx:value="מהזול ליקר" />
                             <String fx:value="מהיקר לזול" />
-                            <String fx:value="הכי חם" />
+                            <!--<String fx:value="הכי חם" />-->
                         </FXCollections>
                     </items>
                     <GridPane.margin>
                         <Insets bottom="5" left="5" right="5" top="5" />
                     </GridPane.margin>
                 </ComboBox>
-                <ComboBox prefWidth="150" promptText="חברת תעופה" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <ComboBox fx:id="combo_company" prefWidth="150" promptText="חברת תעופה" GridPane.columnIndex="0" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets bottom="5" left="5" right="5" top="5" />
                     </GridPane.margin>
                 </ComboBox>
                 <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <Label text="מ " textAlignment="CENTER" />
-                    <DatePicker prefWidth="150">
+                    <DatePicker fx:id="dp_fromDate" prefWidth="150">
                         <GridPane.margin>
                             <Insets bottom="5" left="5" right="5" top="5" />
                         </GridPane.margin>
                     </DatePicker>
                     <Label text=" עד " textAlignment="CENTER" />
-                    <DatePicker prefWidth="150">
+                    <DatePicker fx:id="dp_toDate" prefWidth="150">
                         <GridPane.margin>
                             <Insets bottom="5" left="5" right="5" top="5" />
                         </GridPane.margin>
                     </DatePicker>
                 </HBox>
-                <CheckBox text="ישיר/קונקשיין" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                <CheckBox fx:id="cb_isConnection" text="ישיר/קונקשיין" GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets bottom="5" left="5" right="5" top="5" />
                     </GridPane.margin>
                 </CheckBox>
-                <ComboBox promptText="סוג כבודה" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ComboBox fx:id="combo_baggage" promptText="סוג כבודה" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <GridPane.margin>
                         <Insets bottom="5" top="5" />
                     </GridPane.margin>
+                    <items><FXCollections fx:factory="observableArrayList">
+                        <String fx:value="הכל" />
+                        <String fx:value="5" />
+                        <String fx:value="10" />
+                        <String fx:value="20" />
+                        <String fx:value="25" />
+                    </FXCollections></items>
                 </ComboBox>
-                <CheckBox text="קניית כרטיסים בנפרד" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                <CheckBox fx:id="cb_isSeparate" text="קניית כרטיסים בנפרד" GridPane.columnIndex="0" GridPane.rowIndex="3">
                     <GridPane.margin>
                         <Insets bottom="5" left="5" right="5" top="5" />
                     </GridPane.margin>

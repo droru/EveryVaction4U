@@ -244,6 +244,25 @@ public class Query
         }
         return null;
     }
+    public ObservableList<String> getAllCompanies(){
+        String sql = "SELECT company FROM Flights";
+        try (Connection conn = connect();
+             Statement stmt  = conn.createStatement();
+             ResultSet rs    = stmt.executeQuery(sql)){
+
+            List<String> companies = new ArrayList<>();
+            while (rs.next()) {
+                if(!companies.contains(rs.getString("company")))
+                    companies.add(rs.getString("company"));
+            }
+            ObservableList<String> observablStrings = FXCollections.observableArrayList(companies);
+            return observablStrings;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
     //endregion
 
     //region Notification
