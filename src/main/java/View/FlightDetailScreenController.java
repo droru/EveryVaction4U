@@ -45,7 +45,7 @@ public class FlightDetailScreenController extends Aview {
         lbl_isConnection.setText(flight.isConnection() ? "כולל קונקשיין" : "ללא קונקשיין");
         lbl_isSeparate.setText(flight.isSeparate() ? "ניתן לרכוש כרטיסים בנפרד" : "אין אפשרות לרכוש כרטיסים בנפרד");
         lbl_price.setText(flight.getPrice() + "ש\"ח");
-        lbl_seller.setText(flight.getNameSeller());
+        lbl_seller.setText(flight.getSeller());
     }
 
     public void buyFlight(ActionEvent actionEvent) {

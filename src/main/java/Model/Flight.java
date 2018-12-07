@@ -8,8 +8,7 @@ public class Flight {
     private String destinationCity;
     private Date fromDate;
     private Date toDate;
-    private User seller;
-    private String nameSeller;
+    private String seller;
     private String userNameSeller;
     private int price;
     private boolean isConnection;
@@ -17,14 +16,13 @@ public class Flight {
     private String company;
     private int baggage;
 
-    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, User seller, int price, int isConnection, int isSeparate, String company, int baggage, String userNameSeller) {
+    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, String seller, int price, int isConnection, int isSeparate, String company, int baggage, String userNameSeller) {
         this.flightID = flightID;
         this.destinationCountry = destinationCountry;
         this.destinationCity = destinationCity;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.seller = seller;
-        nameSeller = seller.getFirstName() + " " + seller.getLastName();
         this.price = price;
         this.isConnection = (isConnection == 1 ? true : false);
         this.isSeparate = (isSeparate == 1 ? true : false);
@@ -53,12 +51,8 @@ public class Flight {
         return toDate;
     }
 
-    public User getSeller() {
+    public String getSeller() {
         return seller;
-    }
-
-    public String getNameSeller() {
-        return nameSeller;
     }
 
     public int getPrice() {
@@ -105,12 +99,8 @@ public class Flight {
         this.toDate = toDate;
     }
 
-    public void setSeller(User seller) {
+    public void setSeller(String seller) {
         this.seller = seller;
-    }
-
-    public void setNameSeller(String nameSeller) {
-        this.nameSeller = nameSeller;
     }
 
     public void setPrice(int price) {
@@ -135,5 +125,23 @@ public class Flight {
 
     public void setUserNameSeller(String userNameSeller) {
         this.userNameSeller = userNameSeller;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "flightID=" + flightID +
+                ", destinationCountry='" + destinationCountry + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", seller='" + seller + '\'' +
+                ", userNameSeller='" + userNameSeller + '\'' +
+                ", price=" + price +
+                ", isConnection=" + isConnection +
+                ", isSeparate=" + isSeparate +
+                ", company='" + company + '\'' +
+                ", baggage=" + baggage +
+                '}';
     }
 }

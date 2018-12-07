@@ -3,6 +3,7 @@ package View;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -54,5 +55,32 @@ public class Validation {
         long years = ChronoUnit.YEARS.between(start, end);
 
         return (int) years;
+    }
+
+    public static boolean isWord(String string){
+        char [] a=string.toCharArray();
+        for (char ch : a)
+            if(Character.isDigit(ch))
+                return false;
+
+        return true;
+    }
+
+    public static boolean isNumber(String string){
+        char [] a=string.toCharArray();
+        for (char ch : a)
+            if(!Character.isDigit(ch))
+                return false;
+
+        return true;
+    }
+
+    public static boolean isValidDate(String string)
+    {
+        Date date=new Date (Integer.parseInt(string.split("/")[2]),Integer.parseInt(string.split("/")[1]),Integer.parseInt(string.split("/")[0]));
+        LocalDateTime now=LocalDateTime.now();
+        if( date.before(new Date(now.getYear(),now.getMonth().getValue(),now.getDayOfWeek().getValue())))
+            return false;
+        return true;
     }
 }

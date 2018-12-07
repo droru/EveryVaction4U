@@ -160,23 +160,26 @@ public class Query
     // return: 0 if the insert succeed else 1
     public int insert(Flight flight)
     {
-        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity) VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity,sellerUserName) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try (
                 Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql))
         {
+
             pstmt.setString(1, flight.getDestinationCountry());
             pstmt.setDate(2, flight.getFromDate());
             pstmt.setDate(3,flight.getToDate());
-            pstmt.setString(4,flight.getSeller().getUserName());
+            pstmt.setString(4,flight.getSeller());
             pstmt.setInt(5, flight.getPrice());
             pstmt.setInt(6, (flight.isConnection() ? 1 : 0));
             pstmt.setInt(7, (flight.isSeparate() ? 1 : 0));
             pstmt.setString(8, flight.getCompany());
             pstmt.setInt(9, flight.getBaggage());
             pstmt.setString(10, flight.getDestinationCity());
+            pstmt.setString(11,flight.getUserNameSeller());
 
             pstmt.executeUpdate();
+            conn.close();
             return 0 ;
         } catch (SQLException e) {
             return 1 ;
@@ -191,8 +194,7 @@ public class Query
             pstmt.setInt(1 , flightID);
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
-                User user = search(rs.getString("seller"));
-                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
+                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
             }
             else {
                 return null;
@@ -231,8 +233,7 @@ public class Query
 
             List<Flight> flights = new ArrayList<>();
             while (rs.next()) {
-                User user = search(rs.getString("seller"));
-                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), user, rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
+                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
                 flights.add(f);
             }
             ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
