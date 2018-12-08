@@ -27,6 +27,8 @@ public class Controller {
     }
     public int insert(Flight flight){ return query.insert(flight);}
     public ObservableList<String> getAllCompanies(){return query.getAllCompanies();}
+    public int delete(int flight){return query.delete(flight);}
+    public Flight serach(int flightId){return query.search(flightId);}
     //endregion
 
     //region Notifications
@@ -36,5 +38,7 @@ public class Controller {
     public int insert(Notification notification){
         return query.insert(notification);
     }
+    public int update(Notification notification) throws SQLException {return query.update(notification);}
+    public int delete(Notification notification){return query.delete(notification);}
     //endregion
 }

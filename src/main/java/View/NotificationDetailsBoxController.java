@@ -1,12 +1,21 @@
 package View;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import sample.Main;
 import Model.Notification;
 import javafx.fxml.FXML;
+import sample.Aview;
 
-public class NotificationDetailsBoxController {
+import java.io.IOException;
+import java.sql.SQLException;
+
+public class NotificationDetailsBoxController extends Aview {
     Notification notification;
     @FXML
     public Button btn_accept;
@@ -47,25 +56,52 @@ public class NotificationDetailsBoxController {
         }
     }
 
-    public void accept() {
+    public void accept() throws SQLException {
         notification.setIsResponsed(true);
         notification.setIsAccept(true);
         //update in db
+        getController().update(notification);
+       //delete not
+        //getController().delete(this.notification);
+
+
     }
 
-    public void deny() {
+    public void deny() throws SQLException {
         notification.setIsResponsed(true);
         notification.setIsAccept(false);
         //update in db
+        getController().update(notification);
+        //delete not
+        //getController().delete(this.notification);
     }
 
-    public void buy() {
+    public void buy() throws IOException {
         //delete notification
+       // getController().delete(this.notification);
         //show payment screen
-        //delete flight
+        openPaymentChoose();
+        Main.not=this.notification;
+        //delete flight ->after payment
     }
 
-    public void close() {
+    private void openPaymentChoose() throws IOException {
+        Stage stage=new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("../View/PaymentChoose.fxml"));
+        stage.setTitle("Payment");
+        Scene scene=new Scene(root,616 ,400);
+        scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
+        stage.setScene(scene);
+        //stage.setResizable(false);
+        stage.initOwner(btn_buy.getScene().getWindow());
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.show();
+    }
+
+    public void close() throws SQLException {
         //delete notification
+        getController().update(this.notification);
+        //getController().delete(this.notification);
+
     }
 }

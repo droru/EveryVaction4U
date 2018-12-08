@@ -194,7 +194,7 @@ public class Query
             pstmt.setInt(1 , flightID);
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
-                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinatinCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
+                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
             }
             else {
                 return null;
@@ -307,6 +307,58 @@ public class Query
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public  int update(Notification notification) throws SQLException {
+        {
+            if(searchNot(notification)!= null )
+            {
+                delete(notification);
+                insert(notification);
+                return 0;
+            }
+            else
+                return 1;
+        }
+    }
+
+    public Notification searchNot(Notification notification) {
+        String sql = "SELECT *"
+                + "FROM Notification WHERE fromUser = ? and flightID = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setString(1 , notification.getFromUser());
+            pstmt.setInt(2,notification.getFlightID());
+            ResultSet rs  = pstmt.executeQuery();
+            if (rs.next())
+                return new Notification(rs.getString("fromUser"),rs.getString("toUser"),rs.getInt("flightID"),rs.getInt("isResponsed")==1 ?true:false,rs.getInt("isAccept")==1 ?true :false);
+            else
+                return null;
+            // loop through the result set
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    public int delete(Notification notification) {
+        String sql = "DELETE FROM Notification WHERE fromUser = ? and flightID = ?";
+        Notification f = searchNot(notification);
+        if(f == null)
+            return 1 ;
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, notification.getFromUser());
+            pstmt.setInt(2, notification.getFlightID());
+
+            pstmt.executeUpdate();
+            return 0;
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return 1;
+        }
     }
     //endregion
 

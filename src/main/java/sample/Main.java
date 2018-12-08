@@ -1,5 +1,6 @@
 package sample;
 
+import Model.Notification;
 import Model.Query;
 import Model.User;
 import javafx.application.Application;
@@ -24,6 +25,7 @@ public class Main extends Application {
     public static boolean isProfile=false;
     public static final String imageDBPath = "src\\main\\java\\DataBase\\ProfilePics\\";
     public static final String defaultProfilePicPath = Main.imageDBPath + "defaultProfilePic.jpg";
+    public static Notification not;
 
     //screen sizes
     public static final int mainWidth = 1200;

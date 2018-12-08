@@ -341,7 +341,7 @@ public class MainScreenController extends Aview {
         //Main.switchScene("../View/FlightDetailScreen.fxml", Main.getStage(), 825,364);
     }
 
-    private void StageDetail(Stage stage, Parent root, int width, int height, String title) {
+    private void  StageDetail(Stage stage, Parent root, int width, int height, String title) {
         stage.setTitle(title);
         Scene scene=new Scene(root,width,height);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
