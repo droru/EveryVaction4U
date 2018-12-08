@@ -101,7 +101,7 @@ public class MainScreenController extends Aview {
             try {
                 root = (Parent) fxmlLoader.load();
                 NotificationDetailsBoxController controller = fxmlLoader.getController();
-                controller.setData(notification);
+                controller.setData(notification, notificationPane);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -293,6 +293,7 @@ public class MainScreenController extends Aview {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             Main.loggedUser = null;
+            notificationPane.getChildren().clear();
             initialize();
         }
         else{

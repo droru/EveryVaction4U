@@ -1,10 +1,12 @@
 package View;
 
+import com.sun.javafx.scene.control.behavior.PaginationBehavior;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.Main;
@@ -17,6 +19,8 @@ import java.sql.SQLException;
 
 public class NotificationDetailsBoxController extends Aview {
     Notification notification;
+    Pane pane;
+
     @FXML
     public Button btn_accept;
     public Button btn_deny;
@@ -33,8 +37,9 @@ public class NotificationDetailsBoxController extends Aview {
         btn_deny.managedProperty().bind(btn_deny.visibleProperty());
     }
 
-    public void setData(Notification notification){
+    public void setData(Notification notification, Pane pane){
         this.notification = notification;
+        this.pane = pane;
         if(notification.getIsResponsed()==false && notification.getToUser().equals(Main.loggedUser.getUserName())) {
             lbl_user.setText(notification.getFromUser());
             lbl_msg.setText(" ביקש לרכוש את טיסה מס' " + notification.getFlightID());
@@ -63,8 +68,7 @@ public class NotificationDetailsBoxController extends Aview {
         getController().update(notification);
        //delete not
         //getController().delete(this.notification);
-
-
+        pane.getChildren().remove(lbl_user.getParent());
     }
 
     public void deny() throws SQLException {
@@ -74,11 +78,13 @@ public class NotificationDetailsBoxController extends Aview {
         getController().update(notification);
         //delete not
         //getController().delete(this.notification);
+        pane.getChildren().remove(lbl_user.getParent());
     }
 
     public void buy() throws IOException {
         //delete notification
        // getController().delete(this.notification);
+        pane.getChildren().remove(lbl_user.getParent());
         //show payment screen
         openPaymentChoose();
         Main.not=this.notification;
@@ -89,7 +95,7 @@ public class NotificationDetailsBoxController extends Aview {
         Stage stage=new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("../View/PaymentChoose.fxml"));
         stage.setTitle("Payment");
-        Scene scene=new Scene(root,616 ,400);
+        Scene scene=new Scene(root,616 ,430);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
         stage.setScene(scene);
         //stage.setResizable(false);
@@ -102,6 +108,6 @@ public class NotificationDetailsBoxController extends Aview {
         //delete notification
         getController().update(this.notification);
         //getController().delete(this.notification);
-
+        pane.getChildren().remove(lbl_user.getParent());
     }
 }
