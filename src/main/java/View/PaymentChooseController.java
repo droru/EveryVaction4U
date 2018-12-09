@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Parent;
@@ -59,6 +60,9 @@ public class PaymentChooseController extends Aview {
         cbox_credittype.setItems(credittype);
     }
 
+    public boolean isPay() {
+        return isPay;
+    }
 
     private void paypalClicked() throws IOException {
         //getController().delete(Main.not.getFlightID());

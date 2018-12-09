@@ -84,7 +84,6 @@ public class NotificationDetailsBoxController extends Aview {
     public void buy() throws IOException {
         //delete notification
        // getController().delete(this.notification);
-        pane.getChildren().remove(lbl_user.getParent());
         //show payment screen
         openPaymentChoose();
         Main.not=this.notification;
@@ -93,7 +92,8 @@ public class NotificationDetailsBoxController extends Aview {
 
     private void openPaymentChoose() throws IOException {
         Stage stage=new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("../View/PaymentChoose.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/PaymentChoose.fxml"));
+        Parent root = fxmlLoader.load();
         stage.setTitle("Payment");
         Scene scene=new Scene(root,616 ,430);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
@@ -102,6 +102,11 @@ public class NotificationDetailsBoxController extends Aview {
         stage.initOwner(btn_buy.getScene().getWindow());
         stage.initModality(Modality.WINDOW_MODAL);
         stage.show();
+        stage.setOnHiding(e->{
+            boolean isPay = ((PaymentChooseController)fxmlLoader.getController()).isPay();
+            if(isPay)
+                pane.getChildren().remove(lbl_user.getParent());
+        });
     }
 
     public void close() throws SQLException {
