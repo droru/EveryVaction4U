@@ -160,7 +160,7 @@ public class Query
     // return: 0 if the insert succeed else 1
     public int insert(Flight flight)
     {
-        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity,sellerUserName) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity,sellerUserName, isActive) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
         try (
                 Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql))
@@ -225,8 +225,22 @@ public class Query
             return 1;
         }
     }
+    public int updateActiveField(int flightID){
+        String sql = "UPDATE Flights set isActive = 0 where flightID = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, flightID);
+            pstmt.executeUpdate();
+            return 1;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
     public ObservableList<Flight> getAllFlights(){
-        String sql = "SELECT * FROM Flights";
+        String sql = "SELECT * FROM Flights where isActive = 1";
         try (Connection conn = connect();
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){

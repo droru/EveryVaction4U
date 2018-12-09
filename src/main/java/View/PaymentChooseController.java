@@ -125,7 +125,8 @@ public class PaymentChooseController extends Aview {
     }
 
     private void CreditcardClick() throws IOException {
-        if (txt_creditname.getText() == null) {
+        isPay = true;
+        if (txt_creditname.getText().equals("")) {
             eror_name.setText("עליך למלא שדה זה");
             isPay = false;
         } else if (!Validation.validateName(txt_creditname.getText())) {
@@ -135,11 +136,11 @@ public class PaymentChooseController extends Aview {
             eror_name.setText("");
 
 
-        if (txt_creditnum.getText() == null) {
+        if (txt_creditnum.getText().equals("")) {
             eror_creditnumber.setText("עליך למלא שדה זה");
             isPay = false;
-        } else if (!Validation.isNumber(txt_creditnum.getText()) || txt_creditnum.getText().length() > 16){
-            eror_creditnumber.setText("נא להכניס מספר כרטיס אשראי (16 ספרות)");
+        } else if (!Validation.isNumber(txt_creditnum.getText()) || txt_creditnum.getText().length() != 16){
+            eror_creditnumber.setText("נא להכניס מספר בעל 16 ספרות");
         isPay = false;
         }else
             eror_creditnumber.setText("");
@@ -151,7 +152,7 @@ public class PaymentChooseController extends Aview {
         else
             eror_type.setText("");
 
-        if(txt_cvs.getText()==null) {
+        if(txt_cvs.getText().equals("")) {
             eror_cvs.setText("עליך למלא שדה זה");
             isPay=false;
         }
@@ -165,7 +166,7 @@ public class PaymentChooseController extends Aview {
 
 
 
-        if(txt_exp.getText()==null) {
+        if(txt_exp.getText().equals("")) {
             eror_exp.setText("עליך למלא שדה זה");
             isPay = false;
         }else

@@ -20,6 +20,7 @@ import java.sql.SQLException;
 public class NotificationDetailsBoxController extends Aview {
     Notification notification;
     Pane pane;
+    MainScreenController main;
 
     @FXML
     public Button btn_accept;
@@ -37,7 +38,8 @@ public class NotificationDetailsBoxController extends Aview {
         btn_deny.managedProperty().bind(btn_deny.visibleProperty());
     }
 
-    public void setData(Notification notification, Pane pane){
+    public void setData(Notification notification, Pane pane, MainScreenController main){
+        this.main = main;
         this.notification = notification;
         this.pane = pane;
         if(notification.getIsResponsed()==false && notification.getToUser().equals(Main.loggedUser.getUserName())) {
@@ -54,6 +56,7 @@ public class NotificationDetailsBoxController extends Aview {
                 btn_buy.setVisible(true);
                 btn_close.setVisible(true);
             } else {
+                lbl_user.setText(notification.getToUser());
                 lbl_msg.setText("לא אישר " + str);
                 btn_close.setVisible(true);
                 btn_close.setText("קראתי");
@@ -64,30 +67,21 @@ public class NotificationDetailsBoxController extends Aview {
     public void accept() throws SQLException {
         notification.setIsResponsed(true);
         notification.setIsAccept(true);
-        //update in db
         getController().update(notification);
-       //delete not
-        //getController().delete(this.notification);
         pane.getChildren().remove(lbl_user.getParent());
     }
 
     public void deny() throws SQLException {
         notification.setIsResponsed(true);
         notification.setIsAccept(false);
-        //update in db
         getController().update(notification);
-        //delete not
-        //getController().delete(this.notification);
         pane.getChildren().remove(lbl_user.getParent());
     }
 
     public void buy() throws IOException {
-        //delete notification
-       // getController().delete(this.notification);
         //show payment screen
         openPaymentChoose();
         Main.not=this.notification;
-        //delete flight ->after payment
     }
 
     private void openPaymentChoose() throws IOException {
@@ -104,14 +98,18 @@ public class NotificationDetailsBoxController extends Aview {
         stage.show();
         stage.setOnHiding(e->{
             boolean isPay = ((PaymentChooseController)fxmlLoader.getController()).isPay();
-            if(isPay)
+            if(isPay) {
                 pane.getChildren().remove(lbl_user.getParent());
+                main.removeFlight(notification.getFlightID());
+                getController().updateActiveField(notification.getFlightID());
+                getController().delete(notification);
+            }
         });
     }
 
-    public void close() throws SQLException {
+    public void close() {
         //delete notification
-        getController().update(this.notification);
+        getController().delete(notification);
         //getController().delete(this.notification);
         pane.getChildren().remove(lbl_user.getParent());
     }

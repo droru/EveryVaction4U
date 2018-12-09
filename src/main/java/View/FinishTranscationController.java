@@ -43,6 +43,6 @@ public class FinishTranscationController extends Aview {
 
     public void close(MouseEvent mouseEvent) {
         ((Stage)this.link_close.getScene().getWindow()).close();
-        getController().delete(flight.getFlightID());
+        //getController().delete(flight.getFlightID());
     }
 }

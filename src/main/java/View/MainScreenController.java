@@ -6,14 +6,17 @@ import Model.User;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -36,7 +39,9 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -65,7 +70,7 @@ public class MainScreenController extends Aview {
     public TableView<Flight> flightsTable;
     public VBox notificationPane;
 
-    public  void initialize(){
+    public void initialize(){
         if(Main.loggedUser == null) {
             lbl_welcome.setText("שלום אורח");
             LoginRegister.setVisible(true);
@@ -90,8 +95,16 @@ public class MainScreenController extends Aview {
         }
         if(combo_company.getItems().size() == 0){
             ObservableList<String> companies = getController().getAllCompanies();
+            companies.add("הכל");
             combo_company.setItems(companies);
         }
+    }
+
+    public void removeFlight(int flightID){
+        List<Flight> flights = new ArrayList<>(flightsTable.getItems());
+        flights.removeIf(o -> o.getFlightID() == flightID);
+        ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
+        flightsTable.setItems(observableFlights);
     }
 
     private void setNotificationPane(List<Notification> notifications) {
@@ -101,7 +114,7 @@ public class MainScreenController extends Aview {
             try {
                 root = (Parent) fxmlLoader.load();
                 NotificationDetailsBoxController controller = fxmlLoader.getController();
-                controller.setData(notification, notificationPane);
+                controller.setData(notification, notificationPane, this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -337,7 +350,6 @@ public class MainScreenController extends Aview {
         controller.setFlight(flight);
 
         StageDetail(stage, root, 825, 364, "Flight details");
-        LoginRegister.setDisable(true);
 
         //Main.switchScene("../View/FlightDetailScreen.fxml", Main.getStage(), 825,364);
     }
