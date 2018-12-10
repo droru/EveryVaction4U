@@ -3,6 +3,7 @@ package View;
 import Model.Flight;
 import Model.Notification;
 import Model.User;
+import com.sun.istack.internal.localization.NullLocalizable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -290,9 +291,10 @@ public class MainScreenController extends Aview {
             advancedSearchBox.setVisible(true);
 
         }
-        else
+        else {
             advancedSearchBox.setVisible(false);
-        //advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
+            combo_baggage.getSelectionModel().select(null);
+        }  //advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
     }
 
     public void loginClicked() throws IOException {
