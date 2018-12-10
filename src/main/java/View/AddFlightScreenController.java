@@ -118,8 +118,8 @@ public class AddFlightScreenController extends Aview {
             }
 
 
-        if (txt_fromDate.getEditor().getText() != null)
-            if (!Validation.isValidDate(txt_fromDate.getValue())){//txt_fromDate.getEditor().getText())) {
+        if (txt_fromDate.getEditor().getText().compareTo("")!=0) {
+            if (!Validation.isValidDate(txt_fromDate.getValue())) {//txt_fromDate.getEditor().getText())) {
                 saveFlight = false;
                 erorfromDate.setVisible(true);
             } else {
@@ -128,8 +128,13 @@ public class AddFlightScreenController extends Aview {
                 fromDate = Date.from(instant);
                 erorfromDate.setVisible(false);
             }
-        if (txt_toDate.getEditor().getText() != null)
-            if (!Validation.isValidDate(txt_toDate.getValue())){//txt_toDate.getEditor().getText())) {
+        }
+        else
+            saveFlight=false;
+
+
+        if (txt_toDate.getEditor().getText().compareTo("")!=0) {
+            if (!Validation.isValidDate(txt_toDate.getValue())) {//txt_toDate.getEditor().getText())) {
                 saveFlight = false;
                 erortoDate.setVisible(true);
             } else {
@@ -138,6 +143,9 @@ public class AddFlightScreenController extends Aview {
                 to_date = Date.from(instant);
                 erortoDate.setVisible(false);
             }
+        }
+        else
+            saveFlight=false;
 
         if (txt_baggage.getValue() != null) {
             bag = Integer.parseInt(txt_baggage.getValue().toString());
