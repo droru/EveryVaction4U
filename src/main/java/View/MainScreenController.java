@@ -104,6 +104,7 @@ public class MainScreenController extends Aview {
         flights.removeIf(o -> o.getFlightID() == flightID);
         ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
         flightsTable.setItems(observableFlights);
+        setFilters(observableFlights);
     }
 
     private void setNotificationPane(List<Notification> notifications) {

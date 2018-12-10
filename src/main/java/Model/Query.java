@@ -250,8 +250,11 @@ public class Query
                 Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
                 flights.add(f);
             }
-            ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
-            return observableFlights;
+            if(flights != null) {
+                ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
+                return observableFlights;
+            }
+            return null;
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
