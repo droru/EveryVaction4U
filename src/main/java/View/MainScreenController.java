@@ -226,9 +226,9 @@ public class MainScreenController extends Aview {
 
     public boolean filter(Flight flight, String newValue){
         //text destination
-        if (newValue != null && !newValue.isEmpty()) {
+        /*if (newValue != null && !newValue.isEmpty()) {
             return false;
-        }
+        }*/
         String lowerCaseFilter = newValue.toLowerCase();
         if (!flight.getDestinationCountry().toLowerCase().contains(lowerCaseFilter) &&
                 !flight.getDestinationCity().toLowerCase().contains(lowerCaseFilter)) {
@@ -286,8 +286,10 @@ public class MainScreenController extends Aview {
     }
 
     public void advanceSearchChacked(){
-        if(advanceSearchCheckbox.isSelected())
+        if(advanceSearchCheckbox.isSelected()) {
             advancedSearchBox.setVisible(true);
+
+        }
         else
             advancedSearchBox.setVisible(false);
         //advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());

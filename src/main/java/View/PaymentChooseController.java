@@ -49,7 +49,7 @@ public class PaymentChooseController extends Aview {
 
     private final String[] list ={"Visa","MasterCard","DinersCard"};
 
-    private boolean isPay=true;
+    private boolean isPay=false;
 
     public void initialize(){
 
@@ -66,6 +66,7 @@ public class PaymentChooseController extends Aview {
 
     private void paypalClicked() throws IOException {
         //getController().delete(Main.not.getFlightID());
+        isPay = true;
         ((Stage)this.eror_type.getScene().getWindow()).close();
         openNewStage("אישור תשלום",472,400,"../View/FinishTranscation.fxml");
     }
