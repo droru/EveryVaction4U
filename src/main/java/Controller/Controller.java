@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Flight;
-import Model.Notification;
-import Model.Query;
-import Model.User;
+import Model.*;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
@@ -41,5 +38,12 @@ public class Controller {
     }
     public int update(Notification notification) throws SQLException {return query.update(notification);}
     public int delete(Notification notification){return query.delete(notification);}
+    //endregion
+
+
+    //region Vecations
+    public int insert(Vecation vecation){ return query.insert(vecation); }
+    public Vecation search(int flightID){return  query.searchVec(flightID); }
+    public int delete(Vecation vecation){return query.delete(vecation);}
     //endregion
 }

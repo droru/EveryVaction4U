@@ -4,6 +4,7 @@
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -13,85 +14,107 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddFlightScreenController">
+<GridPane nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddFlightScreenController">
     <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" />
+        <ColumnConstraints hgrow="ALWAYS" />
         <ColumnConstraints hgrow="NEVER" />
-        <ColumnConstraints hgrow="NEVER" maxWidth="210.0" minWidth="192.0" prefWidth="210.0" />
+      <ColumnConstraints hgrow="SOMETIMES" />
+      <ColumnConstraints hgrow="ALWAYS" />
+      <ColumnConstraints hgrow="ALWAYS" />
+      <ColumnConstraints hgrow="ALWAYS" />
       <ColumnConstraints hgrow="ALWAYS" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
 
-    <Label fx:id="title" alignment="CENTER" styleClass="title" text="הוספת טיסה חדשה" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-    <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="תיאור היעד:" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <Label fx:id="title" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="title" text="הוספת טיסה חדשה" textAlignment="CENTER" GridPane.columnSpan="6" GridPane.halignment="CENTER" />
+    <Label alignment="BOTTOM_RIGHT" maxWidth="1.7976931348623157E308" text="תיאור היעד:" underline="true" GridPane.rowIndex="2">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מדינה:" GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מדינה:" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="עיר:" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="עיר:" GridPane.columnIndex="3" GridPane.rowIndex="3">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="פרטי הטיסה:" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <Label alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="פרטי הטיסה:" underline="true" GridPane.rowIndex="4">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
     <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מתאריך:" GridPane.columnIndex="1" GridPane.rowIndex="5">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="עד תאריך:" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="עד תאריך:" GridPane.columnIndex="3" GridPane.rowIndex="5">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
     <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מחיר:" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="חברה:" GridPane.columnIndex="1" GridPane.rowIndex="8">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="חברה:" GridPane.columnIndex="3" GridPane.rowIndex="7">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
     <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="סוג כבודה:" GridPane.columnIndex="1" GridPane.rowIndex="9">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="האם הטיסה כוללת קונקשיין?" GridPane.columnIndex="1" GridPane.rowIndex="10">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="האם הטיסה כוללת קונקשיין?" GridPane.columnIndex="1" GridPane.rowIndex="11">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="האם ניתן לקנות כרטיסים בנפרד?" GridPane.columnIndex="1" GridPane.rowIndex="11">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="האם ניתן לקנות כרטיסים בנפרד?" GridPane.columnIndex="1" GridPane.rowIndex="13">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
-    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="שם המוכר:" GridPane.columnIndex="1" GridPane.rowIndex="12">
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="שם המוכר:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+    </Label>
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מספר כרטיסי טיסה:" GridPane.columnIndex="3" GridPane.rowIndex="9">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+    </Label>
+    <Label alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="כולל טיסת חזור:" GridPane.columnIndex="3" GridPane.rowIndex="11">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </Label>
 
 
-    <TextField fx:id="txt_destinationCountry" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="2">
+
+    <TextField fx:id="txt_destinationCountry" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="3">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </TextField>
-    <TextField fx:id="txt_destinationCity" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="3">
+    <TextField fx:id="txt_destinationCity" alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="3">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </TextField>
-    <DatePicker fx:id="txt_fromDate" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+    <DatePicker fx:id="txt_fromDate" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </DatePicker>
-    <DatePicker fx:id="txt_toDate" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+    <DatePicker fx:id="txt_toDate" maxWidth="1.7976931348623157E308" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </DatePicker>
-    <TextField fx:id="txt_price" promptText="ש&quot;ח" alignment="CENTER_LEFT" GridPane.columnIndex="2" GridPane.rowIndex="7">
+    <TextField fx:id="txt_price" alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="186.0" promptText="ש&quot;ח" GridPane.columnIndex="2" GridPane.rowIndex="7">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </TextField>
-    <TextField fx:id="txt_company" prefHeight="31.0" prefWidth="202.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="8">
+    <TextField fx:id="txt_company" prefHeight="31.0" prefWidth="202.0" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="7">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </TextField>
     <ComboBox fx:id="txt_baggage" prefHeight="31.0" prefWidth="202.0" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="9">
@@ -103,40 +126,114 @@
             <String fx:value="25" />
         </FXCollections></items>
     </ComboBox>
-    <ComboBox fx:id="txt_isConnection" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="10">
+    <ComboBox fx:id="txt_isConnection" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="11">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
         <items><FXCollections fx:factory="observableArrayList">
             <String fx:value="כן" />
             <String fx:value="לא" />
         </FXCollections></items>
     </ComboBox>
-    <ComboBox fx:id="txt_isSeparate" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+    <ComboBox fx:id="txt_isSeparate" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="13">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
         <items><FXCollections fx:factory="observableArrayList">
             <String fx:value="כן" />
             <String fx:value="לא" />
         </FXCollections></items>    </ComboBox>
-    <TextField fx:id="txt_seller" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="12">
+    <TextField fx:id="txt_seller" alignment="CENTER_LEFT" disable="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
     </TextField>
-    <HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="13">
-        <Button fx:id="save" alignment="CENTER" onMouseClicked="#saveclicked" text="שמירה" GridPane.halignment="RIGHT">
-            <HBox.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></HBox.margin>
-        </Button>
+    <TextField fx:id="txt_numTicket" alignment="CENTER_LEFT" GridPane.columnIndex="4" GridPane.rowIndex="9">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+    </TextField>
+    <ComboBox fx:id="txt_isReturn" promptText="בחר" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="11">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+        <items><FXCollections fx:factory="observableArrayList">
+            <String fx:value="כן" />
+            <String fx:value="לא" />
+        </FXCollections></items>    </ComboBox>
+
+    <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.halignment="CENTER" GridPane.rowIndex="23">
+        <Button fx:id="save" alignment="CENTER" onMouseClicked="#saveclicked" text="שמירה" />
         <Button fx:id="cancel" alignment="CENTER" onMouseClicked="#cancelclicked" text="ביטול" GridPane.halignment="RIGHT">
             <HBox.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></HBox.margin>
         </Button>
     </HBox>
 
 
-    <Label fx:id="erordestinatin" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-    <Label fx:id="erorcity" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-    <Label fx:id="erorfromDate" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-    <Label fx:id="erortoDate" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-    <Label fx:id="erorprice" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-    <Label fx:id="erorcompany" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-    <Label fx:id="erorbaggage" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-    <Label fx:id="erorisConnection" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-    <Label fx:id="erorisSeparate" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+    <Label fx:id="erordestinatin" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+    <Label fx:id="erorcity" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+    <Label fx:id="erorfromDate" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+    <Label fx:id="erortoDate" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+    <Label fx:id="erorprice" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+    <Label fx:id="erorcompany" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+    <Label fx:id="erorbaggage" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+    <Label fx:id="erorisConnection" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" textFill="RED" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+    <Label fx:id="erorisSeparate" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" styleClass="erorMes" text="*עליך למלא שדה זה" textFill="RED" visible="true" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+   <Label alignment="TOP_RIGHT" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="מלון כלול:" textAlignment="RIGHT" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="13">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <CheckBox fx:id="checkbox_hotelInc" mnemonicParsing="false" onMouseClicked="#includeHotel" text="כן/לא" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+   <Label fx:id="lbl_detailvec" alignment="TOP_RIGHT" contentDisplay="BOTTOM" nodeOrientation="RIGHT_TO_LEFT" text="פרטי מלון:" textAlignment="CENTER" underline="true" GridPane.halignment="RIGHT" GridPane.rowIndex="16" />
+   <Label fx:id="lbl_typelbl" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="סוג החופשה:" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="17">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <Label fx:id="lbl_kindlbl" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="סוג המלון:" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="19">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <Label fx:id="lbl_ranklbl" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="דירוג המלון:" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="17">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <Label fx:id="lbl_priclbl" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="מחיר כלול :" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="19">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <CheckBox fx:id="checkbox_priceInc" mnemonicParsing="false" text="כן/לא" GridPane.columnIndex="4" GridPane.rowIndex="19" />
+   <TextField fx:id="txt_vecRank" GridPane.columnIndex="4" GridPane.rowIndex="17">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></TextField>
+   <Label fx:id="eror_numTicket" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+   <Label fx:id="eror_isReturn" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+   <Label fx:id="eror_vecKind" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+   <Label fx:id="eror_vecHotel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="20" />
+   <Label fx:id="eror_vecRank" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="4" GridPane.rowIndex="18" />
+
+    <ComboBox fx:id="combox_vecKind" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="17">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+        <items><FXCollections fx:factory="observableArrayList">
+            <String fx:value="אורבנית" />
+            <String fx:value="אקזוטית" />
+            <String fx:value="משפחתית" />
+            <String fx:value="רומנטית" />
+        </FXCollections></items>    </ComboBox>
+    <ComboBox fx:id="combox_vecHotel" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="19">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+        <items><FXCollections fx:factory="observableArrayList">
+            <String fx:value="מלון" />
+            <String fx:value="צימר" />
+            <String fx:value="חדר שכור" />
+            <String fx:value="ביקתה" />
+        </FXCollections></items>    </ComboBox>
+   <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="סוג הכרטיס:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="15">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <Label fx:id="eror_cardType" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefHeight="62.0" prefWidth="102.0" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+    <ComboBox fx:id="combox_cardType" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="15">
+        <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
+        <items><FXCollections fx:factory="observableArrayList">
+            <String fx:value="מבוגר" />
+            <String fx:value="ילד" />
+        </FXCollections></items>    </ComboBox>
+   <Label fx:id="lbl_hotelName" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="שם המלון:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="21">
+      <GridPane.margin>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </GridPane.margin></Label>
+   <TextField fx:id="txt_hotelName" prefHeight="26.0" prefWidth="86.0" GridPane.columnIndex="2" GridPane.rowIndex="21" />
+   <Label fx:id="eror_hotelName" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="22" />
 
 </GridPane>

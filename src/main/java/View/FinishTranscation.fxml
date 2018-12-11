@@ -8,42 +8,74 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FinishTranscationController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FinishTranscationController">
    <children>
       <Label fx:id="lbl_date" layoutX="15.0" layoutY="37.0" text="Label" />
       <Separator layoutY="63.0" prefHeight="3.0" prefWidth="600.0" />
       <Label layoutX="15.0" layoutY="19.0" prefHeight="18.0" prefWidth="118.0" text="Vacation4You" />
-      <Hyperlink fx:id="link_close" layoutX="223.0" layoutY="314.0" onMouseClicked="#close" text="סגור" />
-      <GridPane layoutX="15.0" layoutY="63.0" prefHeight="222.0" prefWidth="455.0">
+      <Hyperlink fx:id="link_close" layoutX="282.0" layoutY="374.0" onMouseClicked="#close" text="סגור" />
+      <GridPane layoutX="15.0" layoutY="63.0" prefHeight="172.0" prefWidth="506.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints />
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="lbl_flightId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="89.0" text="קוד חופשה: " GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_resFlightid" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Label" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_dates" alignment="CENTER_RIGHT" prefWidth="89.0" text="תאריכים: " GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_resDate" text="Label" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_comp" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="89.0" text="חברה: " GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label fx:id="lbl_resCom" text="Label" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="lbl_dset" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="89.0" text="יעד: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_resDest" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" text="מחיר הטיסה: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_price" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label prefHeight="18.0" prefWidth="111.0" text="פרטי כרטיסי טיסה" GridPane.columnIndex="5" />
+            <Label text="מספר כרטיסים:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="lbl_numTicket" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label text="סוג הכרטיס:" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label fx:id="lbl_ticketType" text="Label" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <Label alignment="CENTER_RIGHT" layoutX="284.0" layoutY="335.0" prefWidth="89.0" text="שם המוכר: " />
+      <Label fx:id="lbl_seller" layoutX="234.0" layoutY="335.0" text="Label" />
+      <Label alignment="CENTER_RIGHT" layoutX="314.0" layoutY="25.0" prefHeight="21.0" prefWidth="209.0" text="מספר אסמכתא : " />
+      <Label fx:id="PaymentNumber" layoutX="160.0" layoutY="22.0" prefHeight="18.0" prefWidth="203.0" text="Label" />
+      <GridPane fx:id="pane_hotel" layoutX="65.0" layoutY="235.0" prefHeight="91.0" prefWidth="438.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="60.7999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.99999999999999" minWidth="10.0" prefWidth="89.59999999999998" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="77.20001220703124" minWidth="6.400000000000006" prefWidth="22.400000000000006" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="lbl_flightId" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="21.0" prefWidth="89.0" text="קוד חופשה: " GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_resFlightid" alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label fx:id="lbl_dates" alignment="CENTER_RIGHT" prefWidth="89.0" text="תאריכים: " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="lbl_resDate" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label fx:id="lbl_comp" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="89.0" text="חברה: " GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="lbl_resCom" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label fx:id="lbl_dset" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="89.0" text="יעד: " GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="lbl_resDest" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Label alignment="CENTER_RIGHT" text="מחיר הטיסה: " GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="lbl_price" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label alignment="CENTER_RIGHT" prefWidth="89.0" text="שם המוכר: " GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label fx:id="lbl_seller" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label fx:id="PaymentNumber" prefHeight="18.0" prefWidth="203.0" text="Label" />
-            <Label alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="209.0" text="מספר אסמכתא : " GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Label prefHeight="18.0" prefWidth="59.0" text="פרטי מלון:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" />
+            <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="שם המלון:" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="סוג המלון:" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="סוג החופשה:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="דירוג המלון:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_hotelName" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_hotelType" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="lbl_hotelRank" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="lbl_hotelKind" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

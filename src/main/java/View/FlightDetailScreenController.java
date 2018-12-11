@@ -2,6 +2,7 @@ package View;
 
 import Model.Flight;
 import Model.Notification;
+import Model.Vecation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
@@ -14,6 +15,7 @@ import sample.Aview;
 
 public class FlightDetailScreenController extends Aview {
     public Flight flight;
+    public Vecation vecation;
 
     @FXML
     public Label lbl_destinationCountry;
@@ -28,9 +30,24 @@ public class FlightDetailScreenController extends Aview {
     public Label lbl_seller;
     public Button btn_buy;
 
+
+    public Label lbl_hotelName;
+    public Label lbl_hotelKind;
+    public Label lbl_hotelprice;
+    public Label lbl_hotelType;
+    public Label lbl_hotelRank;
+
+    public Label hotelname_lbl;
+    public Label kind_lbl;
+    public Label rank_lbl;
+    public Label vecKind_lbl;
+
     @FXML
     public void initialize(){
-
+        hotelname_lbl.setVisible(false);
+        kind_lbl.setVisible(false);
+        rank_lbl.setVisible(false);
+        vecKind_lbl.setVisible(false);
     }
 
     public void setFlight(Flight flight) {
@@ -46,6 +63,18 @@ public class FlightDetailScreenController extends Aview {
         lbl_isSeparate.setText(flight.isSeparate() ? "ניתן לרכוש כרטיסים בנפרד" : "אין אפשרות לרכוש כרטיסים בנפרד");
         lbl_price.setText(flight.getPrice() + "ש\"ח");
         lbl_seller.setText(flight.getSeller());
+
+        vecation=getController().search(flight.getFlightID());
+        if(vecation!=null) {
+            hotelname_lbl.setVisible(true);
+            kind_lbl.setVisible(true);
+            rank_lbl.setVisible(true);
+            vecKind_lbl.setVisible(true);
+            lbl_hotelName.setText(vecation.getHotel_name());
+            lbl_hotelKind.setText(vecation.getVec_Kind());
+            lbl_hotelType.setText(vecation.getVec_Hotel());
+            lbl_hotelRank.setText(vecation.getRate());
+        }
     }
 
     public void buyFlight(ActionEvent actionEvent) {

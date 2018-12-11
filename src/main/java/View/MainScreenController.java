@@ -71,14 +71,13 @@ public class MainScreenController extends Aview {
     public TableView<Flight> flightsTable;
     public VBox notificationPane;
 
-    public void initialize(){
-        if(Main.loggedUser == null) {
+    public void initialize() {
+        if (Main.loggedUser == null) {
             lbl_welcome.setText("שלום אורח");
             LoginRegister.setVisible(true);
             LoginRegister.managedProperty().bind(LoginRegister.visibleProperty());
             loggedUserBox.setVisible(false);
-        }
-        else {
+        } else {
             lbl_welcome.setText("שלום " + Main.loggedUser.getUserName());
             LoginRegister.setVisible(false);
             LoginRegister.managedProperty().bind(LoginRegister.visibleProperty());
@@ -86,30 +85,31 @@ public class MainScreenController extends Aview {
         }
 
         advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
-        if(flightsTable.getColumns().size() == 0) {
+        if (flightsTable.getColumns().size() == 0) {
             ObservableList<Flight> flights = getController().getAllFlights();
             setTableData(flights);
         }
-        if(Main.loggedUser != null) {
+        if (Main.loggedUser != null) {
             List<Notification> notifications = getController().getNotificationsByUser(Main.loggedUser.getUserName());
             setNotificationPane(notifications);
         }
-        if(combo_company.getItems().size() == 0){
+        if (combo_company.getItems().size() == 0) {
             ObservableList<String> companies = getController().getAllCompanies();
             companies.add("הכל");
             combo_company.setItems(companies);
         }
     }
 
-    public void removeFlight(int flightID){
+    public void removeFlight(int flightID) {
         List<Flight> flights = new ArrayList<>(flightsTable.getItems());
         flights.removeIf(o -> o.getFlightID() == flightID);
         ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
         flightsTable.setItems(observableFlights);
+        setFilters(observableFlights);
     }
 
     private void setNotificationPane(List<Notification> notifications) {
-        for(Notification notification : notifications) {
+        for (Notification notification : notifications) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/NotificationDetailsBox.fxml"));
             Parent root = null;
             try {
@@ -140,6 +140,11 @@ public class MainScreenController extends Aview {
         TableColumn<Flight, Integer> baggageCol = new TableColumn<Flight, Integer>("משקל כבודה");
         TableColumn<Flight, String> sellerCol = new TableColumn<Flight, String>("מוכר");//first name+last name
 
+        TableColumn<Flight, String> isReturnCol = new TableColumn<Flight, String>("כולל טיסת חזור");
+        TableColumn<Flight, Integer> numofTicketCol = new TableColumn<Flight, Integer>("מספר כרטיסים");//first name+last name
+        TableColumn<Flight, String> vecIncCol = new TableColumn<Flight, String>("כולל מלון");
+        TableColumn<Flight, String> cardTypecol = new TableColumn<Flight, String>("סוג כרטיס");
+
         actionCol.setCellValueFactory(new PropertyValueFactory<>("DUMMY"));
         Callback<TableColumn<Flight, String>, TableCell<Flight, String>> cellFactory
                 = new Callback<TableColumn<Flight, String>, TableCell<Flight, String>>() {
@@ -147,6 +152,7 @@ public class MainScreenController extends Aview {
             public TableCell call(final TableColumn<Flight, String> param) {
                 final TableCell<Flight, String> cell = new TableCell<Flight, String>() {
                     final Button btn = new Button("לצפייה");
+
                     @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
@@ -187,24 +193,26 @@ public class MainScreenController extends Aview {
         companyCol.setCellValueFactory(new PropertyValueFactory<>("company"));
         baggageCol.setCellValueFactory(new PropertyValueFactory<>("baggage"));
         sellerCol.setCellValueFactory(new PropertyValueFactory<>("seller.FirstName"));
-
+        isReturnCol.setCellValueFactory(new PropertyValueFactory<>("isReturn"));
+        numofTicketCol.setCellValueFactory(new PropertyValueFactory<>("numTicket"));
+        vecIncCol.setCellValueFactory(new PropertyValueFactory<>("vecInc"));
+        cardTypecol.setCellValueFactory(new PropertyValueFactory<>("cardType"));
         flightIDCol.setSortType(TableColumn.SortType.ASCENDING);
         flightsTable.setItems(flights);
         destinationCol.getColumns().addAll(destinationCountryCol, destinationCityCol);
         //flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, sellerCol, companyCol, baggageCol, isConnectionCol, isSeparateCol);
-        flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, companyCol);
+        flightsTable.getColumns().addAll(actionCol, flightIDCol, destinationCol, fromDateCol, toDateCol, priseCol, companyCol,isReturnCol,numofTicketCol,vecIncCol,cardTypecol);
 
         setFilters(flights);
     }
 
     private void setFilters(ObservableList<Flight> flights) {
         combo_sort.valueProperty().addListener((observable -> {
-            if(combo_sort.getSelectionModel().getSelectedItem().equals("לפי מס' טיסה")) {
+            if (combo_sort.getSelectionModel().getSelectedItem() == null || combo_sort.getSelectionModel().getSelectedItem().equals("לפי מס' טיסה")) {
                 FXCollections.sort(flights, Comparator.comparingInt(Flight::getFlightID));
-            }
-            else {
+            } else {
                 Comparator<Flight> priceComparator = Comparator.comparingInt(Flight::getPrice);
-                if(combo_sort.getSelectionModel().getSelectedItem().equals("מהיקר לזול"))
+                if (combo_sort.getSelectionModel().getSelectedItem().equals("מהיקר לזול"))
                     priceComparator = priceComparator.reversed();
                 FXCollections.sort(flights, priceComparator);
             }
@@ -213,7 +221,7 @@ public class MainScreenController extends Aview {
         FilteredList<Flight> filteredData = new FilteredList<>(flights, p -> true);
 
         txt_searchDestination.textProperty().addListener((observable, oldValue, newValue) -> filteredData.setPredicate(flight -> filter(flight, newValue)));
-        cb_isSeparate.selectedProperty().addListener((observable)-> filteredData.setPredicate(flight -> filter(flight, "")));
+        cb_isSeparate.selectedProperty().addListener((observable) -> filteredData.setPredicate(flight -> filter(flight, "")));
         combo_baggage.valueProperty().addListener((obs) -> filteredData.setPredicate(flight -> filter(flight, "")));
         cb_isConnection.selectedProperty().addListener((observable -> filteredData.setPredicate(flight -> filter(flight, ""))));
         dp_fromDate.valueProperty().addListener((observable -> filteredData.setPredicate(flight -> filter(flight, ""))));
@@ -225,7 +233,7 @@ public class MainScreenController extends Aview {
         flightsTable.setItems(sortedData);
     }
 
-    public boolean filter(Flight flight, String newValue){
+    public boolean filter(Flight flight, String newValue) {
         //text destination
         /*if (newValue != null && !newValue.isEmpty()) {
             return false;
@@ -237,17 +245,17 @@ public class MainScreenController extends Aview {
         }
 
         //company
-        if(combo_company.getSelectionModel().getSelectedItem() != null && !combo_company.getSelectionModel().getSelectedItem().equals("הכל") && !combo_company.getSelectionModel().getSelectedItem().equals(flight.getCompany()))
+        if (combo_company.getSelectionModel().getSelectedItem() != null && !combo_company.getSelectionModel().getSelectedItem().equals("הכל") && !combo_company.getSelectionModel().getSelectedItem().equals(flight.getCompany()))
             return false;
 
         //date
-        if(dp_fromDate.getValue() !=null) {
+        if (dp_fromDate.getValue() != null) {
             Instant instant = Instant.from(dp_fromDate.getValue().atStartOfDay(ZoneId.systemDefault()));
             java.util.Date from = java.util.Date.from(instant);
-            if(flight.getFromDate().before(from))
+            if (flight.getFromDate().before(from))
                 return false;
         }
-        if(dp_toDate.getValue() != null) {
+        if (dp_toDate.getValue() != null) {
             Instant instant = Instant.from(dp_toDate.getValue().atStartOfDay(ZoneId.systemDefault()));
             java.util.Date to = java.util.Date.from(instant);
             if (flight.getToDate().after(to))
@@ -255,15 +263,15 @@ public class MainScreenController extends Aview {
         }
 
         //is connection
-        if(cb_isConnection.isSelected() && !flight.isConnection())
+        if (cb_isConnection.isSelected() && !flight.isConnection())
             return false;
 
         //baggage
-        if(combo_baggage.getSelectionModel().getSelectedItem() != null && !combo_baggage.getSelectionModel().getSelectedItem().equals("הכל") && !combo_baggage.getSelectionModel().getSelectedItem().equals(String.valueOf(flight.getBaggage())))
+        if (combo_baggage.getSelectionModel().getSelectedItem() != null && !combo_baggage.getSelectionModel().getSelectedItem().equals("הכל") && !combo_baggage.getSelectionModel().getSelectedItem().equals(String.valueOf(flight.getBaggage())))
             return false;
 
         //is separate
-        if(cb_isSeparate.isSelected() && !flight.isSeparate())
+        if (cb_isSeparate.isSelected() && !flight.isSeparate())
             return false;
 
         return true;
@@ -272,13 +280,13 @@ public class MainScreenController extends Aview {
     private TableCell<Flight, Date> formatDate() {
         TableCell<Flight, Date> cell = new TableCell<Flight, Date>() {
             private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
             @Override
             protected void updateItem(Date item, boolean empty) {
                 super.updateItem(item, empty);
-                if(empty) {
+                if (empty) {
                     setText(null);
-                }
-                else {
+                } else {
                     setText(format.format(item));
                 }
             }
@@ -286,16 +294,21 @@ public class MainScreenController extends Aview {
         return cell;
     }
 
-    public void advanceSearchChacked(){
-        if(advanceSearchCheckbox.isSelected()) {
+    public void advanceSearchChacked() {
+        if (advanceSearchCheckbox.isSelected())
             advancedSearchBox.setVisible(true);
-
-        }
         else {
             advancedSearchBox.setVisible(false);
+
+            combo_sort.getSelectionModel().select(null);
+            combo_company.getSelectionModel().select(null);
+            dp_fromDate.setValue(null);
+            dp_toDate.setValue(null);
+            cb_isConnection.setSelected(false);
             combo_baggage.getSelectionModel().select(null);
-        }  //advancedSearchBox.managedProperty().bind(advancedSearchBox.visibleProperty());
-    }
+            cb_isSeparate.setSelected(false);
+        }
+ }
 
     public void loginClicked() throws IOException {
         Stage stage=new Stage();
@@ -353,7 +366,7 @@ public class MainScreenController extends Aview {
         FlightDetailScreenController controller = fxmlLoader.getController();
         controller.setFlight(flight);
 
-        StageDetail(stage, root, 825, 364, "Flight details");
+        StageDetail(stage, root, 825, 500, "Flight details");//364
 
         //Main.switchScene("../View/FlightDetailScreen.fxml", Main.getStage(), 825,364);
     }
@@ -372,7 +385,7 @@ public class MainScreenController extends Aview {
 
 
     public void addFlightClicked(ActionEvent actionEvent) {
-        Main.switchScene("../View/AddFlightScreen.fxml", Main.getStage(), Main.registerWidth,Main.registerHeight);
+        Main.switchScene("../View/AddFlightScreen.fxml", Main.getStage(), 950,750);
     }
 }
 

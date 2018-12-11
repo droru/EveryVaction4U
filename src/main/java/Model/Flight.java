@@ -15,8 +15,12 @@ public class Flight {
     private boolean isSeparate;
     private String company;
     private int baggage;
+    private String isReturn;
+    private int numTicket;
+    private String cardType;
+    private String vecInc;
 
-    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, String seller, int price, int isConnection, int isSeparate, String company, int baggage, String userNameSeller) {
+    public Flight(int flightID, String destinationCountry, String destinationCity, Date fromDate, Date toDate, String seller, int price, int isConnection, int isSeparate, String company, int baggage, String userNameSeller,String isReturn,int numTicket,String vecInc,String cardType) {
         this.flightID = flightID;
         this.destinationCountry = destinationCountry;
         this.destinationCity = destinationCity;
@@ -29,6 +33,26 @@ public class Flight {
         this.company = company;
         this.baggage = baggage;
         this.userNameSeller = userNameSeller;
+        this.isReturn=(isReturn);
+        this.numTicket=numTicket;
+        this.vecInc=vecInc;
+        this.cardType=cardType;
+    }
+
+    public void setNumTicket(int numTicket) {
+        this.numTicket = numTicket;
+    }
+
+    public int getNumTicket() {
+        return numTicket;
+    }
+
+    public String isReturn() {
+        return isReturn;
+    }
+
+    public void setReturn(String aReturn) {
+        isReturn = aReturn;
     }
 
     public int getFlightID() {
@@ -126,6 +150,29 @@ public class Flight {
     public void setUserNameSeller(String userNameSeller) {
         this.userNameSeller = userNameSeller;
     }
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getVecInc() {
+        return vecInc;
+    }
+
+    public void setVecInc(String vecInc) {
+        this.vecInc = vecInc;
+    }
+
+    public String getIsReturn() {
+        return isReturn;
+    }
+
+    public void setIsReturn(String isReturn) {
+        this.isReturn = isReturn;
+    }
 
     @Override
     public String toString() {
@@ -142,6 +189,10 @@ public class Flight {
                 ", isSeparate=" + isSeparate +
                 ", company='" + company + '\'' +
                 ", baggage=" + baggage +
+                ", isReturn='" + isReturn + '\'' +
+                ", numTicket=" + numTicket +
+                ", cardType='" + cardType + '\'' +
+                ", vecInc='" + vecInc + '\'' +
                 '}';
     }
 }

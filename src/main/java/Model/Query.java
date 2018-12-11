@@ -160,7 +160,7 @@ public class Query
     // return: 0 if the insert succeed else 1
     public int insert(Flight flight)
     {
-        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity,sellerUserName, isActive) VALUES(?,?,?,?,?,?,?,?,?,?,?,1)";
+        String sql = "INSERT INTO Flights(destinationCountry, fromDate, toDate, seller, price, isConnection, isSeparate, company, baggage, destinationCity,sellerUserName, isActive,isReturn,numTicket,vecInc,cardType) VALUES(?,?,?,?,?,?,?,?,?,?,?,1,?,?,?,?)";
         try (
                 Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql))
@@ -177,6 +177,10 @@ public class Query
             pstmt.setInt(9, flight.getBaggage());
             pstmt.setString(10, flight.getDestinationCity());
             pstmt.setString(11,flight.getUserNameSeller());
+            pstmt.setString(12,flight.getIsReturn());
+            pstmt.setInt(13,flight.getNumTicket());
+            pstmt.setString(14,flight.getVecInc());
+            pstmt.setString(15,flight.getCardType());
 
             pstmt.executeUpdate();
             conn.close();
@@ -194,7 +198,7 @@ public class Query
             pstmt.setInt(1 , flightID);
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next()) {
-                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
+                return new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"),rs.getString("isReturn"),rs.getInt("numTicket"),rs.getString("vecInc"),rs.getString("cardType"));
             }
             else {
                 return null;
@@ -247,11 +251,14 @@ public class Query
 
             List<Flight> flights = new ArrayList<>();
             while (rs.next()) {
-                Flight f = new Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"));
+                Flight f=new  Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"),rs.getString("isReturn"),rs.getInt("numTicket"),rs.getString("vecInc"),rs.getString("cardType"));
                 flights.add(f);
             }
-            ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
-            return observableFlights;
+            if(flights != null) {
+                ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
+                return observableFlights;
+            }
+            return null;
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -376,4 +383,63 @@ public class Query
     }
     //endregion
 
+
+    public int insert(Vecation vecation)
+    {
+        String sql = "INSERT INTO Vecation(flightID, Kind, Type , Rate, priceInc,hotelName) VALUES(?,?,?,?,?,?)";
+        try (
+                Connection conn = connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql))
+        {
+            pstmt.setInt(1, vecation.getFlightID());
+            pstmt.setString(2, vecation.getVec_Kind());
+            pstmt.setString(3,vecation.getVec_Hotel());
+            pstmt.setString(4,vecation.getRate() );
+            pstmt.setString(5, vecation.getPriceInc());
+            pstmt.setString(6,vecation.getHotel_name());
+
+            return pstmt.executeUpdate();
+            //return 0 ;
+        } catch (SQLException e) {
+            return 1 ;
+        }
+    }
+
+    public Vecation searchVec(int flightID) {
+        String sql = "SELECT *"
+                + "FROM Vecation WHERE flightID = ?";
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+            pstmt.setInt(1 , flightID);
+            ResultSet rs  = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Vecation(rs.getString("priceInc"), rs.getString("Kind"), rs.getString("Type"),rs.getString("Rate"),rs.getInt("flightID"), rs.getString("hotelName"));
+
+            }  else {
+                return null;
+            }
+            // loop through the result set
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+    public int delete(Vecation vecation) {
+        String sql = "DELETE FROM Vecation WHERE flightID = ?";
+        Vecation f = searchVec(vecation.getFlightID());
+        if(f == null)
+            return 1 ;
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, vecation.getFlightID());
+            pstmt.executeUpdate();
+            return 0;
+        } catch (SQLException e)
+        {
+            System.out.println(e.getMessage());
+            return 1;
+        }
+    }
 }

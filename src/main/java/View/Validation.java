@@ -22,6 +22,11 @@ public class Validation {
     public static final Pattern VALID_Date =
             Pattern.compile("^([0-2][0-9]|3[0-1])/(0[0-9]|1[0-2])/([0-9][0-9][0-9][0-9])$",Pattern.CASE_INSENSITIVE);
 
+    private static final Pattern DOUBLE_PATTERN = Pattern.compile(
+            "[\\x00-\\x20]*[+-]?(NaN|Infinity|((((\\p{Digit}+)(\\.)?((\\p{Digit}+)?)" +
+                    "([eE][+-]?(\\p{Digit}+))?)|(\\.((\\p{Digit}+))([eE][+-]?(\\p{Digit}+))?)|" +
+                    "(((0[xX](\\p{XDigit}+)(\\.)?)|(0[xX](\\p{XDigit}+)?(\\.)(\\p{XDigit}+)))" +
+                    "[pP][+-]?(\\p{Digit}+)))[fFdD]?))[\\x00-\\x20]*");
 
     public static boolean validateDate(String emailStr) {
         Matcher matcher = VALID_Date .matcher(emailStr);
@@ -87,5 +92,10 @@ public class Validation {
         if( date.before(now))//new Date(now.getYear(),now.getMonth().getValue(),now.getDayOfWeek().getValue())))
             return false;
         return true;
+    }
+
+    public static boolean isDouble(String text) {
+        return DOUBLE_PATTERN.matcher(text).matches();
+
     }
 }

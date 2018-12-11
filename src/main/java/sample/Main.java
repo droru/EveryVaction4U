@@ -28,7 +28,7 @@ public class Main extends Application {
     public static Notification not;
 
     //screen sizes
-    public static final int mainWidth = 1200;
+    public static final int mainWidth = 1450;
     public static final int mainHeight = 650;
     public static final int registerWidth = 880;
     public static final int registerHeight = 550;

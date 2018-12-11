@@ -1,9 +1,11 @@
 package View;
 
 import Model.Flight;
+import Model.Vecation;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import sample.Main;
 
@@ -23,9 +25,18 @@ public class FinishTranscationController extends Aview {
     public Label lbl_resDate;
     public Label lbl_price;
     public Label lbl_seller;
+    public Label lbl_ticketType;
     public Hyperlink link_close;
 
     Flight flight;
+
+    Vecation vecation;
+    public GridPane pane_hotel;
+    public Label lbl_hotelName;
+    public Label lbl_hotelRank;
+    public Label lbl_hotelType;
+    public Label lbl_hotelKind;
+
 
     public void initialize(){
         flight=getController().serach(Main.not.getFlightID());
@@ -39,6 +50,19 @@ public class FinishTranscationController extends Aview {
         lbl_resDest.setText(flight.getDestinationCountry()+","+flight.getDestinationCity());
         lbl_seller.setText(flight.getSeller());
         lbl_price.setText(String.valueOf(flight.getPrice())+" "+ "שקלים");
+        lbl_ticketType.setText(flight.getCardType());
+        vecation=getController().search(flight.getFlightID());
+        if(vecation!=null)
+            initVec();
+        else
+            pane_hotel.setVisible(false);
+    }
+
+    private void initVec() {
+        lbl_hotelName.setText(vecation.getHotel_name());
+         lbl_hotelRank.setText(vecation.getRate());
+        lbl_hotelType.setText(vecation.getVec_Hotel());
+        lbl_hotelKind.setText(vecation.getVec_Kind());
     }
 
     public void close(MouseEvent mouseEvent) {
