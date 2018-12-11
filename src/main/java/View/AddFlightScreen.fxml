@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddFlightScreenController">
+<GridPane nodeOrientation="RIGHT_TO_LEFT" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddFlightScreenController">
     <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" />
         <ColumnConstraints hgrow="ALWAYS" />
@@ -222,7 +222,7 @@
       <GridPane.margin>
          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
       </GridPane.margin></Label>
-   <Label fx:id="eror_cardType" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefHeight="62.0" prefWidth="102.0" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="16" />
+   <Label fx:id="eror_cardType" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefHeight="30.0" prefWidth="139.0" text="*עליך למלא שדה זה" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="16" />
     <ComboBox fx:id="combox_cardType" promptText="בחר" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="15">
         <GridPane.margin><Insets bottom="5.0" left="5.0" right="5.0" top="5.0" /></GridPane.margin>
         <items><FXCollections fx:factory="observableArrayList">

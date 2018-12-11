@@ -68,13 +68,13 @@ public class PaymentChooseController extends Aview {
         //getController().delete(Main.not.getFlightID());
         isPay = true;
         ((Stage)this.eror_type.getScene().getWindow()).close();
-        openNewStage("אישור תשלום",500,450,"../View/FinishTranscation.fxml");
+        openNewStage("אישור תשלום",500,600,"../View/FinishTranscation.fxml");
     }
 
     private void openNewStage(String title ,int Height,int Width,String Fxml) throws IOException {
         Stage stage=new Stage();
         Parent root = FXMLLoader.load(getClass().getResource(Fxml));
-        Scene scene=new Scene(root,Height ,Width);
+        Scene scene=new Scene(root,Width, Height);
         stage.setTitle(title);
         scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
         stage.setScene(scene);
@@ -196,7 +196,7 @@ public class PaymentChooseController extends Aview {
 
         if(isPay) {
             ((Stage)this.eror_type.getScene().getWindow()).close();
-            openNewStage("אישור תשלום", 500, 450, "../View/FinishTranscation.fxml");
+            openNewStage("אישור תשלום", 500, 500, "../View/FinishTranscation.fxml");
             }
         }
 

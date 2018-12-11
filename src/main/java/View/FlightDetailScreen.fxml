@@ -14,14 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.192" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FlightDetailScreenController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="705.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.FlightDetailScreenController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="295.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="300.0" minHeight="12.0" prefHeight="300.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="49.599999999999966" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="118.39999999999998" vgrow="SOMETIMES" />
   </rowConstraints>
@@ -52,7 +52,7 @@
             <Pane maxWidth="1.7976931348623157E308" prefHeight="33.0" BorderPane.alignment="CENTER" />
          </top>
       </BorderPane>
-      <BorderPane GridPane.columnIndex="1">
+      <BorderPane GridPane.columnIndex="1" GridPane.rowSpan="2">
          <center>
             <VBox BorderPane.alignment="CENTER">
                <children>
@@ -127,7 +127,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="24.0">
+                  <HBox fx:id="hbox_hotel" alignment="CENTER" prefHeight="24.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="(" />
                         <Label fx:id="lbl_hotelKind" alignment="CENTER" contentDisplay="CENTER" text="1">
@@ -183,12 +183,12 @@
             <Pane maxWidth="1.7976931348623157E308" prefHeight="33.0" BorderPane.alignment="CENTER" />
          </top>
       </BorderPane>
-      <BorderPane prefHeight="50.0" prefWidth="235.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+      <BorderPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <center>
             <Button fx:id="btn_buy" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buyFlight" prefHeight="31.0" prefWidth="117.0" text="רכש" textAlignment="CENTER" />
          </center>
       </BorderPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+      <BorderPane GridPane.columnIndex="2">
          <center>
             <VBox BorderPane.alignment="CENTER">
                <children>
@@ -211,20 +211,8 @@
             </VBox>
          </center>
          <top>
-            <Pane maxWidth="1.7976931348623157E308" prefHeight="33.0" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="33.0" BorderPane.alignment="CENTER" />
          </top>
       </BorderPane>
-      <!--<Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <children>
-            <Label fx:id="hotelname_lbl" layoutX="186.0" layoutY="14.0" text="שם המלון" />
-            <Label fx:id="kind_lbl" layoutX="186.0" layoutY="37.0" text="סוג המלון" />
-            <Label fx:id="rank_lbl" layoutX="186.0" layoutY="63.0" text="דירוג המלון" />
-            <Label fx:id="vecKind_lbl"  layoutX="186.0" layoutY="88.0" text="סוג חופשה" />
-            <Label fx:id="lbl_hotelName" layoutX="104.0" layoutY="14.0" />
-            <Label fx:id="lbl_hotelKind" layoutX="104.0" layoutY="37.0" />
-            <Label fx:id="lbl_hotelRank" layoutX="104.0" layoutY="63.0" />
-            <Label fx:id="lbl_hotelType" layoutX="104.0" layoutY="88.0" />
-         </children>
-      </Pane>-->
    </children>
 </GridPane>

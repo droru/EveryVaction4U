@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import sample.Main;
 import java.text.DateFormat;
@@ -33,7 +34,7 @@ public class FlightDetailScreenController extends Aview {
 
     public Label lbl_hotelName;
     public Label lbl_hotelKind;
-    public Label lbl_hotelprice;
+    //public Label lbl_hotelprice;
     public Label lbl_hotelType;
     public Label lbl_hotelRank;
 
@@ -41,13 +42,34 @@ public class FlightDetailScreenController extends Aview {
     public Label kind_lbl;
     public Label rank_lbl;
     public Label vecKind_lbl;
+    public HBox hbox_hotel;
 
     @FXML
     public void initialize(){
-        hotelname_lbl.setVisible(false);
-        kind_lbl.setVisible(false);
-        rank_lbl.setVisible(false);
-        vecKind_lbl.setVisible(false);
+        showVec(false);
+
+    }
+
+    private void showVec(boolean var) {
+        hotelname_lbl.setVisible(var);
+        kind_lbl.setVisible(var);
+        rank_lbl.setVisible(var);
+        vecKind_lbl.setVisible(var);
+        lbl_hotelRank.setVisible(var);
+        lbl_hotelType.setVisible(var);
+        lbl_hotelKind.setVisible(var);
+        lbl_hotelName.setVisible(var);
+        hbox_hotel.setVisible(var);
+
+        hotelname_lbl.managedProperty().bind(hotelname_lbl.visibleProperty());
+        kind_lbl.managedProperty().bind(kind_lbl.visibleProperty());
+        rank_lbl.managedProperty().bind(rank_lbl.visibleProperty());
+        vecKind_lbl.managedProperty().bind(vecKind_lbl.visibleProperty());
+        lbl_hotelRank.managedProperty().bind(lbl_hotelRank.visibleProperty());
+        lbl_hotelType.managedProperty().bind(lbl_hotelType.visibleProperty());
+        lbl_hotelKind.managedProperty().bind(lbl_hotelKind.visibleProperty());
+        lbl_hotelName.managedProperty().bind(lbl_hotelName.visibleProperty());
+        hbox_hotel.managedProperty().bind(hbox_hotel.visibleProperty());
     }
 
     public void setFlight(Flight flight) {
@@ -66,10 +88,7 @@ public class FlightDetailScreenController extends Aview {
 
         vecation=getController().search(flight.getFlightID());
         if(vecation!=null) {
-            hotelname_lbl.setVisible(true);
-            kind_lbl.setVisible(true);
-            rank_lbl.setVisible(true);
-            vecKind_lbl.setVisible(true);
+            showVec(true);
             lbl_hotelName.setText(vecation.getHotel_name());
             lbl_hotelKind.setText(vecation.getVec_Kind());
             lbl_hotelType.setText(vecation.getVec_Hotel());
@@ -112,7 +131,9 @@ public class FlightDetailScreenController extends Aview {
             ButtonType buttonTypeLogIn = new ButtonType("התחבר");
             ButtonType buttonTypeCancel = new ButtonType("ביטול");
             alert.getButtonTypes().setAll(buttonTypeLogIn, buttonTypeCancel);
+
             alert.showAndWait();
+
             if(alert.getResult() == buttonTypeLogIn){
                 Main.switchScene("../View/LoginForm.fxml", (Stage) lbl_seller.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
             }
