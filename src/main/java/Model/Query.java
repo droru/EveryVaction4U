@@ -290,7 +290,7 @@ public class Query
     // return: 0 if the insert succeed else 1
     public int insert(Notification notification)
     {
-        String sql = "INSERT INTO Notification(fromUser, toUser, flightID, isResponsed, isAccept) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO Notification(fromUser, toUser, flightID, isResponsed, isAccept, isPayProcess) VALUES(?,?,?,?,?,?)";
         try (
                 Connection conn = connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql))
@@ -300,6 +300,7 @@ public class Query
             pstmt.setInt(3,notification.getFlightID());
             pstmt.setInt(4,notification.getIsResponsed() ? 1 : 0);
             pstmt.setInt(5, notification.getIsAccept() ? 1 : 0);
+            pstmt.setInt(6, notification.isPayProcess() ? 1 : 0);
 
             return pstmt.executeUpdate();
             //return 0 ;
@@ -308,17 +309,18 @@ public class Query
         }
     }
     public ObservableList<Notification> getAllNotificationsByUser(String userName){
-        String sql = "SELECT * FROM Notification where (isResponsed = 0 and toUser = ?) or (isResponsed =1 and fromUser = ?)";
+        String sql = "SELECT * FROM Notification where (isResponsed = 0 and toUser = ?) or (isResponsed =1 and fromUser = ?) or (isPayProcess = 1 and toUser = ?)";
         try (Connection conn = connect();
              PreparedStatement pstmt  = conn.prepareStatement(sql)){
 
-            pstmt.setString(1 , userName);
+            pstmt.setString(1, userName);
             pstmt.setString(2, userName);
+            pstmt.setString(3, userName);
             ResultSet rs    = pstmt.executeQuery();
 
             List<Notification> notifications = new ArrayList<>();
             while (rs.next()) {
-                Notification n = new Notification(rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false);
+                Notification n = new Notification(rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false, rs.getInt("isPayProcess") == 1 ? true : false);
                 notifications.add(n);
             }
             ObservableList<Notification> observableNotifications = FXCollections.observableArrayList(notifications);
@@ -342,7 +344,6 @@ public class Query
                 return 1;
         }
     }
-
     public Notification searchNot(Notification notification) {
         String sql = "SELECT *"
                 + "FROM Notification WHERE fromUser = ? and flightID = ?";
@@ -353,7 +354,7 @@ public class Query
             pstmt.setInt(2,notification.getFlightID());
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next())
-                return new Notification(rs.getString("fromUser"),rs.getString("toUser"),rs.getInt("flightID"),rs.getInt("isResponsed")==1 ?true:false,rs.getInt("isAccept")==1 ?true :false);
+                return new Notification(rs.getString("fromUser"),rs.getString("toUser"),rs.getInt("flightID"),rs.getInt("isResponsed")==1 ?true:false,rs.getInt("isAccept")==1 ?true :false, rs.getInt("isPayProcess") == 1 ? true : false);
             else
                 return null;
             // loop through the result set

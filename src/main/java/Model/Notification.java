@@ -6,13 +6,15 @@ public class Notification {
     private int flightID;
     private boolean isResponsed;
     private boolean isAccept;
+    private boolean isPayProcess;
 
-    public Notification(String fromUser, String toUser, int flightID, boolean isResponsed, boolean isAccept) {
+    public Notification(String fromUser, String toUser, int flightID, boolean isResponsed, boolean isAccept, boolean isPayProcess) {
         this.fromUser = fromUser;
         this.toUser = toUser;
         this.flightID = flightID;
         this.isResponsed = isResponsed;
         this.isAccept = isAccept;
+        this.isPayProcess = isPayProcess;
     }
 
     public String getToUser() {
@@ -35,6 +37,10 @@ public class Notification {
         return isAccept;
     }
 
+    public boolean isPayProcess() {
+        return isPayProcess;
+    }
+
     public void setToUser(String toUser) {
         this.toUser = toUser;
     }
@@ -53,5 +59,9 @@ public class Notification {
 
     public void setIsAccept(boolean isAccept) {
         this.isAccept = isAccept;
+    }
+
+    public void setPayProcess(boolean payProcess) {
+        isPayProcess = payProcess;
     }
 }

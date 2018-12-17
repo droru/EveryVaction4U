@@ -107,7 +107,7 @@ public class FlightDetailScreenController extends Aview {
                 alert.showAndWait();
             }
             else {
-                Notification notification = new Notification(Main.loggedUser.getUserName(), flight.getUserNameSeller(), flight.getFlightID(), false, false);
+                Notification notification = new Notification(Main.loggedUser.getUserName(), flight.getUserNameSeller(), flight.getFlightID(), false, false, false);
                 getController().insert(notification);
 
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -138,5 +138,8 @@ public class FlightDetailScreenController extends Aview {
                 Main.switchScene("../View/LoginForm.fxml", (Stage) lbl_seller.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
             }
         }
+    }
+
+    public void switchFlight(ActionEvent actionEvent) {
     }
 }

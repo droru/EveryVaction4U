@@ -185,7 +185,18 @@
       </BorderPane>
       <BorderPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <center>
-            <Button fx:id="btn_buy" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buyFlight" prefHeight="31.0" prefWidth="117.0" text="רכש" textAlignment="CENTER" />
+            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308">
+               <Button fx:id="btn_switch" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#switchFlight" prefHeight="31.0" prefWidth="117.0" text="הצע החלפה" textAlignment="CENTER">
+                  <HBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </HBox.margin></Button>
+               <Button fx:id="btn_buy" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#buyFlight" prefHeight="31.0" prefWidth="117.0" text="רכש" textAlignment="CENTER">
+                  <GridPane.margin><Insets left="5" right="5" /></GridPane.margin>
+                  <HBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </HBox.margin>
+               </Button>
+            </HBox>
          </center>
       </BorderPane>
       <BorderPane GridPane.columnIndex="2">
