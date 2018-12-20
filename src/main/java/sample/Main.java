@@ -8,7 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -102,6 +105,27 @@ public class Main extends Application {
 
 
         }
+    }
+
+    /**
+     * @param root
+     * @param title
+     * @param width
+     * @param height
+     * @param window e.x. kind_lbl.getScene().getWindow()
+     */
+    public static Stage newStage(Parent root, String title, int width, int height, Window window){
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        Scene scene = new Scene(root, width, height);
+        scene.getStylesheets().add(Main.class.getResource("../View/Style.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(window);
+        stage.show();
+
+        return stage;
     }
 
     public static void  setUser(User u){

@@ -111,15 +111,7 @@ public class NotificationDetailsBoxController extends Aview {
                 Main.setUser(userSerach);
                 Main.isProfile = false;
                 Parent root = FXMLLoader.load(getClass().getResource("../View/UserDetailsScreen.fxml"));
-                Stage stage = new Stage();
-                stage.setTitle("User profile");
-                Scene scene=new Scene(root,Main.registerWidth,Main.registerHeight);
-                scene.getStylesheets().add(getClass().getResource("../View/Style.css").toExternalForm());
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.initModality(Modality.WINDOW_MODAL);
-                stage.initOwner(btn_close.getScene().getWindow());
-                stage.show();
+                Main.newStage(root, "User profile", Main.registerWidth,Main.registerHeight, btn_close.getScene().getWindow());
 
                 /*stage.setOnHidden(ex->{
                     //stage.close();

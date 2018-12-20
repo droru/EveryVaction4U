@@ -27,6 +27,7 @@ public class Controller {
     public int delete(int flight){return query.delete(flight);}
     public Flight serach(int flightId){return query.search(flightId);}
     public int updateActiveField(int flightId){return query.updateActiveField(flightId);}
+    public ObservableList<Flight> getFlightsByUserName(String userName){return query.getFlightsByUserName(userName);}
     //endregion
 
     //region Notifications

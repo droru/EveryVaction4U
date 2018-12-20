@@ -249,16 +249,7 @@ public class Query
              Statement stmt  = conn.createStatement();
              ResultSet rs    = stmt.executeQuery(sql)){
 
-            List<Flight> flights = new ArrayList<>();
-            while (rs.next()) {
-                Flight f=new  Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"),rs.getString("isReturn"),rs.getInt("numTicket"),rs.getString("vecInc"),rs.getString("cardType"));
-                flights.add(f);
-            }
-            if(flights != null) {
-                ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
-                return observableFlights;
-            }
-            return null;
+            return flightResultSetToObservable(rs);
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -281,6 +272,34 @@ public class Query
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+        return null;
+    }
+    public ObservableList<Flight> getFlightsByUserName(String userName){
+        String sql = "SELECT * FROM Flights where sellerUserName like ?";
+        try(Connection conn = connect();
+            PreparedStatement psmt = conn.prepareStatement(sql);){
+
+            psmt.setString(1, userName);
+            ResultSet rs = psmt.executeQuery();
+
+            return flightResultSetToObservable(rs);
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private ObservableList<Flight> flightResultSetToObservable(ResultSet rs) throws SQLException {
+        List<Flight> flights = new ArrayList<>();
+        while (rs.next()) {
+            Flight f=new  Flight(rs.getInt("flightID"), rs.getString("destinationCountry"), rs.getString("destinationCity"), rs.getDate("fromDate"), rs.getDate("toDate"), rs.getString("seller"), rs.getInt("price"), rs.getInt("isConnection"), rs.getInt("isSeparate"), rs.getString("company"), rs.getInt("baggage"), rs.getString("sellerUserName"),rs.getString("isReturn"),rs.getInt("numTicket"),rs.getString("vecInc"),rs.getString("cardType"));
+            flights.add(f);
+        }
+        if(flights != null) {
+            ObservableList<Flight> observableFlights = FXCollections.observableArrayList(flights);
+            return observableFlights;
         }
         return null;
     }

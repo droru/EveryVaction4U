@@ -3,13 +3,20 @@ package View;
 import Model.Flight;
 import Model.Notification;
 import Model.Vecation;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.Main;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import sample.Aview;
@@ -30,6 +37,7 @@ public class FlightDetailScreenController extends Aview {
     public Label lbl_price;
     public Label lbl_seller;
     public Button btn_buy;
+    public Button btn_switch;
 
 
     public Label lbl_hotelName;
@@ -70,6 +78,16 @@ public class FlightDetailScreenController extends Aview {
         lbl_hotelKind.managedProperty().bind(lbl_hotelKind.visibleProperty());
         lbl_hotelName.managedProperty().bind(lbl_hotelName.visibleProperty());
         hbox_hotel.managedProperty().bind(hbox_hotel.visibleProperty());
+    }
+
+    public void setFlight(Flight flight, boolean isCanBuy){
+        if(!isCanBuy){
+            btn_buy.setVisible(false);
+            btn_buy.setManaged(false);
+            btn_switch.setVisible(false);
+            btn_switch.setManaged(false);
+        }
+        setFlight(flight);
     }
 
     public void setFlight(Flight flight) {
@@ -123,23 +141,50 @@ public class FlightDetailScreenController extends Aview {
             }
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("User Error");
-            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-            alert.setHeaderText("המשתמש אינו מחובר למערכת");
-            alert.setContentText("רק למשתמשים מחוברים יש הרשאות לבצע רכישה של חופשות\nאנא בצע התחברות");
-            ButtonType buttonTypeLogIn = new ButtonType("התחבר");
-            ButtonType buttonTypeCancel = new ButtonType("ביטול");
-            alert.getButtonTypes().setAll(buttonTypeLogIn, buttonTypeCancel);
-
-            alert.showAndWait();
-
-            if(alert.getResult() == buttonTypeLogIn){
-                Main.switchScene("../View/LoginForm.fxml", (Stage) lbl_seller.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
-            }
+            logInValidationBeforeBuyOrSwitchFlight("רק למשתמשים מחוברים יש הרשאות לבצע רכישה של חופשות\nאנא בצע התחברות");
         }
     }
 
-    public void switchFlight(ActionEvent actionEvent) {
+    public void switchFlight(ActionEvent actionEvent) throws IOException {
+        //open switch flight screen
+        if(Main.loggedUser != null) {
+            if(Main.loggedUser.getUserName().equals(flight.getUserNameSeller())){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("User Error");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.setHeaderText("החלפת טיסה");
+                alert.setContentText("אינך יכול להציע החלפה לטיסה שהינך מוכר אותה");
+                alert.showAndWait();
+            }
+            else {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/SwitchFlightScreen.fxml"));
+                Parent root = (Parent)fxmlLoader.load();
+                SwitchFlightScreenController controller = fxmlLoader.getController();
+                ObservableList<Flight> flights = getController().getFlightsByUserName(Main.loggedUser.getUserName());
+                controller.setData(flights);
+
+                Main.newStage(root, "ChooseFlight", 450, 350, kind_lbl.getScene().getWindow());
+            }
+        }
+        else{
+            logInValidationBeforeBuyOrSwitchFlight("רק למשתמשים מחוברים יש הרשאות הציע החלפה של חופשות\nאנא בצע התחברות");
+        }
+    }
+
+    private void logInValidationBeforeBuyOrSwitchFlight(String s) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("User Error");
+        alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        alert.setHeaderText("המשתמש אינו מחובר למערכת");
+        alert.setContentText(s);
+        ButtonType buttonTypeLogIn = new ButtonType("התחבר");
+        ButtonType buttonTypeCancel = new ButtonType("ביטול");
+        alert.getButtonTypes().setAll(buttonTypeLogIn, buttonTypeCancel);
+
+        alert.showAndWait();
+
+        if(alert.getResult() == buttonTypeLogIn){
+            Main.switchScene("../View/LoginForm.fxml", (Stage) lbl_seller.getScene().getWindow(), Main.loginWidth, Main.loginHeight);
+        }
     }
 }
