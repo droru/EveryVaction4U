@@ -3,8 +3,10 @@ package View;
 import Model.Flight;
 import Model.Notification;
 import Model.Vecation;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
@@ -14,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import sample.Main;
 
 import java.io.IOException;
@@ -159,11 +162,9 @@ public class FlightDetailScreenController extends Aview {
             else {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../View/SwitchFlightScreen.fxml"));
                 Parent root = (Parent)fxmlLoader.load();
-                SwitchFlightScreenController controller = fxmlLoader.getController();
-                ObservableList<Flight> flights = getController().getFlightsByUserName(Main.loggedUser.getUserName());
-                controller.setData(flights);
-
-                Main.newStage(root, "ChooseFlight", 450, 350, kind_lbl.getScene().getWindow());
+                SwitchFlightScreenController switchFlightScreenController = fxmlLoader.getController();
+                switchFlightScreenController.setData(flight);
+                Stage stage = Main.newStage(root, "ChooseFlight", Main.switchFlightWidth, Main.switchFlightHeight, kind_lbl.getScene().getWindow());
             }
         }
         else{

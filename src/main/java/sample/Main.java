@@ -39,6 +39,8 @@ public class Main extends Application {
     public static final int loginHeight = 300;
     public static final int changePassWidth = 550;
     public static final int changePassHeight = 300;
+    public static final int switchFlightWidth = 450;
+    public static final int switchFlightHeight = 350;
 
     public static String getExtention(File file) {
             String fileName = file.getName();

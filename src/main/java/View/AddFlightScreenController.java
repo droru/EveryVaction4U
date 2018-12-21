@@ -295,7 +295,11 @@ public class AddFlightScreenController extends Aview {
         flight = new Flight(0, dest, city, sqlFromDate, sqltoDate, Main.loggedUser.getFirstName() + " " + Main.loggedUser.getLastName(), price, conInclude, isSeparte, company, bag, Main.loggedUser.getUserName(),isReturn,numTicket,vecInc==1 ? "כן":"לא",card_type);
         System.out.println(flight.toString());
         getController().insert(flight);
-        Main.switchScene("../View/MainScreen.fxml", Main.getStage(), Main.mainWidth, Main.mainHeight);
+
+        if(((Stage) lbl_detailvec.getScene().getWindow()).equals(Main.getStage()))
+            Main.switchScene("../View/MainScreen.fxml", ((Stage) lbl_detailvec.getScene().getWindow()), Main.mainWidth, Main.mainHeight);//Main.getStage()
+        else
+            Main.switchScene("../View/SwitchFlightScreen.fxml", ((Stage) lbl_detailvec.getScene().getWindow()), Main.switchFlightWidth, Main.switchFlightHeight);
     }
 
     private boolean checkhotelDetials() {
