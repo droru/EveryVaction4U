@@ -2,6 +2,7 @@ package View;
 
 import Model.Flight;
 import Model.Notification;
+import Model.SwitchNotification;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,9 +58,12 @@ public class SwitchFlightScreenController extends Aview {
 
     public void sendSwitchRequest(ActionEvent actionEvent) {
         if(flightsListView.getSelectionModel().getSelectedItem() != null) {
-        /*Notification notification = new Notification(Main.loggedUser.getUserName(), flight.getUserNameSeller(), flight.getFlightID(), false, false, false);
-        getController().insert(notification);
-*/
+            Notification notification = new Notification(Main.loggedUser.getUserName(), firstFlight.getUserNameSeller(), firstFlight.getFlightID(), false, false, false);
+            int id = flightsListView.getSelectionModel().selectedIndexProperty().get();
+            int secondFlightID = flights.get(id).getFlightID();
+            SwitchNotification switchNotification = new SwitchNotification(notification, secondFlightID);
+            getController().insert(switchNotification);
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Switch Flight");
             alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);

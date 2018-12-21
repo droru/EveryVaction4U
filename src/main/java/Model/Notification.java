@@ -1,12 +1,22 @@
 package Model;
 
 public class Notification {
+    private int notificationID;
     private String toUser;
     private String fromUser;
     private int flightID;
     private boolean isResponsed;
     private boolean isAccept;
     private boolean isPayProcess;
+
+    public Notification(int notificationID, String fromUser, String toUser, int flightID, boolean isResponsed, boolean isAccept, boolean isPayProcess) {
+        this.notificationID = notificationID;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
+        this.flightID = flightID;
+        this.isResponsed = isResponsed;
+        this.isAccept = isAccept;
+        this.isPayProcess = isPayProcess;    }
 
     public Notification(String fromUser, String toUser, int flightID, boolean isResponsed, boolean isAccept, boolean isPayProcess) {
         this.fromUser = fromUser;
@@ -63,5 +73,9 @@ public class Notification {
 
     public void setPayProcess(boolean payProcess) {
         isPayProcess = payProcess;
+    }
+
+    public int getNotificationID() {
+        return notificationID;
     }
 }

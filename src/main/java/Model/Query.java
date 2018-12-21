@@ -324,6 +324,7 @@ public class Query
             return pstmt.executeUpdate();
             //return 0 ;
         } catch (SQLException e) {
+            e.printStackTrace();
             return 1 ;
         }
     }
@@ -373,7 +374,7 @@ public class Query
             pstmt.setInt(2,notification.getFlightID());
             ResultSet rs  = pstmt.executeQuery();
             if (rs.next())
-                return new Notification(rs.getString("fromUser"),rs.getString("toUser"),rs.getInt("flightID"),rs.getInt("isResponsed")==1 ?true:false,rs.getInt("isAccept")==1 ?true :false, rs.getInt("isPayProcess") == 1 ? true : false);
+                return new Notification(rs.getInt("notificationID"), rs.getString("fromUser"),rs.getString("toUser"),rs.getInt("flightID"),rs.getInt("isResponsed")==1 ?true:false,rs.getInt("isAccept")==1 ?true :false, rs.getInt("isPayProcess") == 1 ? true : false);
             else
                 return null;
             // loop through the result set
@@ -403,7 +404,7 @@ public class Query
     }
     //endregion
 
-
+    //region Vecation
     public int insert(Vecation vecation)
     {
         String sql = "INSERT INTO Vecation(flightID, Kind, Type , Rate, priceInc,hotelName) VALUES(?,?,?,?,?,?)";
@@ -462,4 +463,48 @@ public class Query
             return 1;
         }
     }
+    //endregion
+
+    //region SwitchNotification
+    public int insert(SwitchNotification switchNotification){
+        String sql = "Insert into SwitchNotification(NotificationID, SecondFlightID) values (?,?)";
+        try(Connection conn = connect();
+            PreparedStatement psmt = conn.prepareStatement(sql)){
+            insert((Notification) switchNotification);
+            Notification notification = searchNot(switchNotification);
+            switchNotification.setNotificationID(notification.getNotificationID());
+
+            psmt.setInt(1, switchNotification.getNotificationID());
+            psmt.setInt(2, switchNotification.getSecondFlightID());
+            return psmt.executeUpdate();
+        }
+        catch (SQLException e){
+            return 1;
+        }
+    }
+    public int delete(SwitchNotification switchNotification){
+        String sql = "delete from SwitchNotification where NotificationID = ? and SecondFlightID = ?";
+        try (Connection conn = connect();
+            PreparedStatement pamt = conn.prepareStatement(sql)){
+
+            delete((Notification) switchNotification);
+            pamt.setInt(1, switchNotification.getNotificationID());
+            pamt.setInt(2, switchNotification.getSecondFlightID());
+            return pamt.executeUpdate();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+    public int update(SwitchNotification switchNotification){
+        try {
+            return update((Notification) switchNotification);
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return 1;
+        }
+    }
+    //endregion
 }

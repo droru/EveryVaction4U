@@ -47,4 +47,11 @@ public class Controller {
     public Vecation search(int flightID){return  query.searchVec(flightID); }
     public int delete(Vecation vecation){return query.delete(vecation);}
     //endregion
+
+    //region SwitchNotification
+    public int insert(SwitchNotification switchNotification){return query.insert(switchNotification);}
+    public int delete(SwitchNotification switchNotification){return query.delete(switchNotification);}
+    public int update(SwitchNotification switchNotification){return query.update(switchNotification);}
+    //endregion
 }
+
