@@ -64,7 +64,7 @@ public class SwitchFlightScreenController extends Aview {
             SwitchNotification switchNotification = new SwitchNotification(notification, secondFlightID);
             getController().insert(switchNotification);
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Switch Flight");
             alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
             alert.setHeaderText("בקשת החלפה");

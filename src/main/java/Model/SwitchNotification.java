@@ -7,6 +7,7 @@ public class SwitchNotification extends Notification {
     public SwitchNotification(String fromUser, String toUser, int flightID, boolean isResponsed, boolean isAccept, boolean isPayProcess, int secondFlightID, int notificationID) {
         super(notificationID, fromUser, toUser, flightID, isResponsed, isAccept, isPayProcess);
         this.secondFlightID = secondFlightID;
+        this.notificationID = notificationID;
     }
 
     public SwitchNotification(Notification notification, int secondFlightID) {
