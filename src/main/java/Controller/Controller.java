@@ -39,6 +39,7 @@ public class Controller {
     }
     public int update(Notification notification) throws SQLException {return query.update(notification);}
     public int delete(Notification notification){return query.delete(notification);}
+    public Notification search(Notification notification){return query.searchNot(notification);}
     //endregion
 
 

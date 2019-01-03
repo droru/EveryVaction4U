@@ -348,7 +348,7 @@ public class Query
                 if(r != null)
                     n = new SwitchNotification(rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false, rs.getInt("isPayProcess") == 1 ? true : false, r.getInt("SecondFlightID"), rs.getInt("notificationID"));
                 else
-                    n = new Notification(rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false, rs.getInt("isPayProcess") == 1 ? true : false);
+                    n = new Notification(rs.getInt("notificationID"), rs.getString("fromUser"), rs.getString("toUser"), rs.getInt("flightID"), rs.getInt("isResponsed")==1 ? true : false, rs.getInt("isAccept") == 1 ? true : false, rs.getInt("isPayProcess") == 1 ? true : false);
                 notifications.add(n);
             }
             ObservableList<Notification> observableNotifications = FXCollections.observableArrayList(notifications);

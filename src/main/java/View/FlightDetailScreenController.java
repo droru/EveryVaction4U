@@ -129,17 +129,30 @@ public class FlightDetailScreenController extends Aview {
             }
             else {
                 Notification notification = new Notification(Main.loggedUser.getUserName(), flight.getUserNameSeller(), flight.getFlightID(), false, false, false);
-                getController().insert(notification);
+                if(getController().search(notification) != null){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Buy Flight");
+                    alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                    alert.setHeaderText("בקשת רכישה");
+                    alert.setContentText("כבר קיימת עבורך בקשה לרכישת הטיסה הזו");
+                    alert.showAndWait();
+                }
+                else {
+                    getController().insert(notification);
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Buy Flight");
-                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-                alert.setHeaderText("בקשת רכישה");
-                alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
-                alert.showAndWait();
-                if (alert.getResult() == ButtonType.OK) {
-                    alert.close();
-                    ((Stage) lbl_seller.getScene().getWindow()).close();
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Buy Flight");
+                    alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                    alert.setHeaderText("בקשת רכישה");
+                    alert.setContentText("בקשת הרכישה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את הרכישה");
+                    //ButtonType ok = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+                    alert.getButtonTypes().clear();
+                    alert.getButtonTypes().addAll(ButtonType.OK);
+                    alert.showAndWait();
+                    if (alert.getResult() == ButtonType.OK) {
+                        alert.close();
+                        ((Stage) lbl_seller.getScene().getWindow()).close();
+                    }
                 }
             }
         }

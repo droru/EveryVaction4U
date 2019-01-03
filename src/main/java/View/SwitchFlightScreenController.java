@@ -59,20 +59,30 @@ public class SwitchFlightScreenController extends Aview {
     public void sendSwitchRequest(ActionEvent actionEvent) {
         if(flightsListView.getSelectionModel().getSelectedItem() != null) {
             Notification notification = new Notification(Main.loggedUser.getUserName(), firstFlight.getUserNameSeller(), firstFlight.getFlightID(), false, false, false);
-            int id = flightsListView.getSelectionModel().selectedIndexProperty().get();
-            int secondFlightID = flights.get(id).getFlightID();
-            SwitchNotification switchNotification = new SwitchNotification(notification, secondFlightID);
-            getController().insert(switchNotification);
+            if(getController().search(notification) != null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Switch Flight");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.setHeaderText("בקשת החלפה");
+                alert.setContentText("כבר קיימת עבורך בקשה להחלפת הטיסה הזו");
+                alert.showAndWait();
+            }
+            else {
+                int id = flightsListView.getSelectionModel().selectedIndexProperty().get();
+                int secondFlightID = flights.get(id).getFlightID();
+                SwitchNotification switchNotification = new SwitchNotification(notification, secondFlightID);
+                getController().insert(switchNotification);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Switch Flight");
-            alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-            alert.setHeaderText("בקשת החלפה");
-            alert.setContentText("בקשת ההחלפה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את ההחלפה");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                alert.close();
-                ((Stage)((Stage)flightsListView.getScene().getWindow()).getOwner()).close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Switch Flight");
+                alert.getDialogPane().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+                alert.setHeaderText("בקשת החלפה");
+                alert.setContentText("בקשת ההחלפה הועברה למוכר הטיסה\nתתיקבל התראה כאשר המוכר יאשר את ההחלפה");
+                alert.showAndWait();
+                if (alert.getResult() == ButtonType.OK) {
+                    alert.close();
+                    ((Stage) ((Stage) flightsListView.getScene().getWindow()).getOwner()).close();
+                }
             }
         }
         else{

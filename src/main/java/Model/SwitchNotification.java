@@ -11,7 +11,7 @@ public class SwitchNotification extends Notification {
     }
 
     public SwitchNotification(Notification notification, int secondFlightID) {
-        super(notification.getFromUser(), notification.getToUser(), notification.getFlightID(), notification.getIsResponsed(), notification.getIsAccept(), notification.isPayProcess());
+        super(notification.getNotificationID(), notification.getFromUser(), notification.getToUser(), notification.getFlightID(), notification.getIsResponsed(), notification.getIsAccept(), notification.isPayProcess());
         this.secondFlightID = secondFlightID;
     }
 
