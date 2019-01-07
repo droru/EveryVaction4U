@@ -16,7 +16,7 @@ import sample.Aview;
 
 public class FinishTranscationController extends Aview {
 
-
+    
     public Label PaymentNumber;
     public Label lbl_date;
     public Label lbl_resFlightid;
