@@ -51,7 +51,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Vacation4You");
+        primaryStage.setTitle("EveryVaction4U");
         FXMLLoader fxmlLoader = new FXMLLoader();
         Parent root = fxmlLoader.load(getClass().getResource("../View/MainScreen.fxml").openStream());
         Scene scene = new Scene(root, mainWidth, mainHeight);//main screen
