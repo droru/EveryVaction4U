@@ -77,6 +77,7 @@ public class Query
         Email=user.getEmail();
         Picture=user.getProfilePicPath();
     }
+
     public   User search(String username) {
        // DriverManager.getConnection("jdbc:sqlite:D:\\db\\my-db.sqlite");
 

@@ -25,7 +25,7 @@
       </libraries>
     </data-source>
     <data-source source="LOCAL" name="Vacation4You-DB [2]" uuid="01a37031-ad7f-458a-ab62-8270a9346eb1">
-      <driver-ref>sqlite.xerial</driver-ref>
+      <driver-ref>d23a8796-dcde-4a09-8f03-b6a4884b30ce</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\alina\IdeaProjects\Vacation4You\src\main\java\DataBase\Vacation4You-DB</jdbc-url>
@@ -41,6 +41,29 @@
         </library>
         <library>
           <url>file://$PROJECT_DIR$/sqlite-jdbc-3.23.1.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Vacation4You-DB [3]" uuid="8bd8dc63-504f-407a-a0c6-2f8e1d1e627f">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Dror\IdeaProjects\EveryVaction4U\src\main\java\DataBase\Vacation4You-DB</jdbc-url>
+      <driver-properties>
+        <property name="enable_load_extension" value="true" />
+      </driver-properties>
+      <libraries>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/license.txt</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/sqlite-jdbc-3.25.1.jar</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/license.txt</url>
+        </library>
+        <library>
+          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/sqlite-jdbc-3.25.1.jar</url>
         </library>
       </libraries>
     </data-source>
